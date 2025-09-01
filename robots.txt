@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rkdwlgns12.github.io/sitemap.xml
