@@ -2,16 +2,11 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <title>rkdwlgns12.github.io</title>
-  <!-- 네이버 소유확인 토큰 그대로 -->
-  <meta name="naver-site-verification" content="81e6defa960bed1c7d7be6c98818a8e4d84e5a3b" />
-  <meta http-equiv="refresh" content="0; url=https://rkdwlgns12.github.io/coinfeecalc7/">
-</head>
-<body>
-  <p>이동 중... <a href="https://rkdwlgns12.github.io/coinfeecalc7/">여기를 클릭</a></p>
-</body>
-</html>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <title>코인 수수료 계산기 | Bitget·Bybit·OKX·MEXC·Binance·BingX</title>
+  <meta name="description" content="거래소별 지정가·시장가 수수료와 페이백까지 한 번에 계산하세요. 모바일 지원, 레퍼럴 링크 바로가기.">
+  <link rel="canonical" href="https://rkdwlgns12.github.io/coinfeecalc7/" />
 
   <!-- OG / Twitter -->
   <meta property="og:type" content="website">
@@ -29,16 +24,18 @@
     .wrap{max-width:1120px;margin:0 auto;padding:24px}
     h1{margin:0 0 10px}.lead{margin:0 0 18px;color:#374151}
 
-    /* 배너 */
+    /* ── 진한 배너(텍스트 아웃라인) ─────────────────────────── */
     .banner{display:flex;gap:12px;align-items:center;color:#fff;border-radius:16px;padding:14px 16px;margin:0 0 12px;border:1px solid rgba(255,255,255,.12)}
     .banner img{width:48px;height:48px;object-fit:contain;background:rgba(255,255,255,.12);border-radius:12px;padding:6px}
-    .banner h3,.banner p,.badge{ text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000; }
+    .banner h3,.banner p,.badge{
+      text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    }
     .banner h3{margin:0;font-size:18px}
     .banner p{margin:4px 0 0;font-size:14px}
     .badge{display:inline-block;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);font-weight:800}
     .cta{margin-left:auto;padding:10px 14px;border-radius:12px;background:#fff;color:#000;font-weight:800;text-decoration:none}
 
-    /* 레이아웃 */
+    /* 레이아웃/카드 */
     .grid{display:grid;grid-template-columns:1fr;gap:16px}
     @media(min-width:900px){.grid{grid-template-columns:2fr 1fr}}
     .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
@@ -66,9 +63,7 @@
 <body>
 <div class="wrap">
   <h1>코인 수수료 계산기</h1>
-  <p class="lead">거래소 수수료와 페이백을 계산해 보세요.
-    <b style="color:#ef4444">※ 예시 수수료율은 참고용이며, 실제 적용은 각 거래소 공식 페이지/VIP 등급/토큰 할인 조건을 확인하세요.</b>
-  </p>
+  <p class="lead">거래소 수수료와 페이백을 계산해 보세요. <b style="color:#ef4444">※ 예시 수수료율은 참고용이며, 실제 적용은 각 거래소 공식 페이지/VIP 등급/토큰 할인 조건을 확인하세요.</b></p>
 
   <!-- 배너(각 거래소) -->
   <div id="banners"></div>
@@ -143,9 +138,8 @@
   <div style="margin-top:18px" class="card">
     <h3 class="section-title">거래소 선택 가이드</h3>
     <p style="line-height:1.6;margin:0">
-      초보자라면 수수료가 낮고 UI가 쉬운 거래소부터 시작하세요. 퍼프(선물) 거래는 리스크가 크니
-      <b>무조건 소액</b>으로 연습 후 진입하세요. 자세한 가이드는
-      <a href="https://cafe.naver.com/bitupg?iframe_url_utf8=%2FArticleRead.nhn%253Fclubid%3D31418638%2526articleid%3D82%2526menuid%3D2%2526boardtype%3DL" target="_blank" rel="noopener">네이버 카페 글</a> 참고.
+      초보자라면 수수료가 낮고 UI가 쉬운 거래소부터 시작하세요. 퍼프(선물) 거래는 리스크가 크니 <b>무조건 소액</b>으로 연습 후 진입하세요.
+      상세 가이드는 <a href="https://cafe.naver.com/bitupg?iframe_url_utf8=%2FArticleRead.nhn%253Fclubid%3D31418638%2526articleid%3D82%2526menuid%3D2%2526boardtype%3DL" target="_blank" rel="noopener">네이버 카페 글</a> 참고.
     </p>
   </div>
 </div>
@@ -204,7 +198,7 @@ const toggle=(on,off)=>{on.classList.add('active');off.classList.remove('active'
 const toPerc=x=>(x*100).toFixed(6).replace(/0+$/,'').replace(/\.$/,'')+'%';
 const nf=x=>(Math.round(x*1e8)/1e8).toLocaleString();
 
-/* 배너 텍스트 */
+/* 배너 텍스트 (진한 뱃지 라인) */
 const bannerLine=p=>`
   <span class="badge">적용 전: 지정가 <b>${p.before.maker}%</b> / 시장가 <b>${p.before.taker}%</b></span>
   &nbsp;<span class="badge">적용 후: 지정가 <b>${p.after.maker}%</b> / 시장가 <b>${p.after.taker}%</b></span>
@@ -264,11 +258,10 @@ function update(){
     b.appendChild(a);banners.appendChild(b);
   });
 
-  // 로고 그리드
+  // 로고 카드
   const logos=document.getElementById('logos');
   PROMOS.forEach(p=>{
-    const a=document.createElement('a');
-    a.className='logo';a.href=p.link;a.target='_blank';a.rel='noopener';
+    const a=document.createElement('a');a.className='logo';a.href=p.link;a.target='_blank';a.rel='noopener';
     a.innerHTML=`<div class="img"><img src="${p.logo}"
       onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'font-weight:700;font-size:13px\\'>${p.name}</span>';"></div>
       <div style="font-weight:800">${p.name}</div>
@@ -289,4 +282,3 @@ function update(){
 </script>
 </body>
 </html>
-
