@@ -6,23 +6,19 @@
 
   <title>코인 수수료 계산기 | Bitget·Bybit·OKX·MEXC·Binance·BingX</title>
   <meta name="description" content="거래소별 지정가·시장가 수수료와 페이백까지 한 번에 계산하세요. 모바일 지원, 레퍼럴 링크 바로가기.">
-  <link rel="canonical" href="https://rkdwlgns12.github.io/">
+  <link rel="canonical" href="https://rkdwlgns12.github.io/coinfeecalc7/">
 
-  <!-- 네이버 소유확인: content 값을 네이버가 준 토큰으로 교체 -->
-  <meta name="naver-site-verification" content="여기에_네이버_토큰" />
+  <!-- 네이버 소유확인(토큰 교체) -->
+  <meta name="naver-site-verification" content="81e6defa960bed1c7d7be6c98818a8e4d84e5a3b" />
 
-  <!-- Open Graph / SNS -->
+  <!-- OG / Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="코인 수수료 계산기">
   <meta property="og:title" content="코인 수수료 계산기">
   <meta property="og:description" content="주요 거래소 수수료/페이백 계산, 모바일 지원">
-  <meta property="og:url" content="https://rkdwlgns12.github.io/">
-  <meta property="og:image" content="https://rkdwlgns12.github.io/og-cover.png">
-
+  <meta property="og:url" content="https://rkdwlgns12.github.io/coinfeecalc7/">
+  <meta property="og:image" content="https://rkdwlgns12.github.io/coinfeecalc7/og-cover.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="코인 수수료 계산기">
-  <meta name="twitter:description" content="거래소 수수료와 페이백을 한 번에 계산하세요.">
-  <meta name="twitter:image" content="https://rkdwlgns12.github.io/og-cover.png">
 
   <style>
     :root{--bg:#f7f7fb;--fg:#111;--line:#e5e7eb;--radius:16px}
@@ -31,12 +27,10 @@
     .wrap{max-width:1120px;margin:0 auto;padding:24px}
     h1{margin:0 0 10px}.lead{margin:0 0 18px;color:#374151}
 
-    /* 배너 + 텍스트 아웃라인 */
+    /* 배너 */
     .banner{display:flex;gap:12px;align-items:center;color:#fff;border-radius:16px;padding:14px 16px;margin:0 0 12px;border:1px solid rgba(255,255,255,.12)}
     .banner img{width:48px;height:48px;object-fit:contain;background:rgba(255,255,255,.12);border-radius:12px;padding:6px}
-    .banner h3,.banner p,.badge{
-      text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
-    }
+    .banner h3,.banner p,.badge{ text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000; }
     .banner h3{margin:0;font-size:18px}
     .banner p{margin:4px 0 0;font-size:14px}
     .badge{display:inline-block;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);font-weight:800}
@@ -58,7 +52,7 @@
     .cta-main{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:12px;padding:12px 14px;font-weight:800;color:#fff;text-decoration:none;width:100%}
     .footnote{font-size:12px;color:#ef4444;margin-top:8px}
 
-    /* 로고 카드 */
+    /* 로고 그리드 */
     .logos{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
     @media(min-width:600px){.logos{grid-template-columns:repeat(3,1fr)}}
     @media(min-width:900px){.logos{grid-template-columns:repeat(6,1fr)}}
@@ -70,9 +64,11 @@
 <body>
 <div class="wrap">
   <h1>코인 수수료 계산기</h1>
-  <p class="lead">거래소 수수료와 페이백을 계산해 보세요. <b style="color:#ef4444">※ 예시 수수료율은 참고용이며, 실제 적용은 각 거래소 공식 페이지/VIP 등급/토큰 할인 조건을 확인하세요.</b></p>
+  <p class="lead">거래소 수수료와 페이백을 계산해 보세요.
+    <b style="color:#ef4444">※ 예시 수수료율은 참고용이며, 실제 적용은 각 거래소 공식 페이지/VIP 등급/토큰 할인 조건을 확인하세요.</b>
+  </p>
 
-  <!-- 배너 -->
+  <!-- 배너(각 거래소) -->
   <div id="banners"></div>
 
   <!-- 계산기 -->
@@ -145,14 +141,15 @@
   <div style="margin-top:18px" class="card">
     <h3 class="section-title">거래소 선택 가이드</h3>
     <p style="line-height:1.6;margin:0">
-      초보자라면 수수료가 낮고 UI가 쉬운 거래소부터 시작하세요. 퍼프(선물) 거래는 리스크가 크니 <b>무조건 소액</b>으로 연습 후 진입하세요.
-      상세 가이드는 <a href="https://cafe.naver.com/bitupg?iframe_url_utf8=%2FArticleRead.nhn%253Fclubid%3D31418638%2526articleid%3D82%2526menuid%3D2%2526boardtype%3DL" target="_blank" rel="noopener">네이버 카페 글</a>을 참고하세요.
+      초보자라면 수수료가 낮고 UI가 쉬운 거래소부터 시작하세요. 퍼프(선물) 거래는 리스크가 크니
+      <b>무조건 소액</b>으로 연습 후 진입하세요. 자세한 가이드는
+      <a href="https://cafe.naver.com/bitupg?iframe_url_utf8=%2FArticleRead.nhn%253Fclubid%3D31418638%2526articleid%3D82%2526menuid%3D2%2526boardtype%3DL" target="_blank" rel="noopener">네이버 카페 글</a> 참고.
     </p>
   </div>
 </div>
 
 <script>
-/* ===== 데이터 ===== */
+/* ===== 거래소 데이터 ===== */
 const PROMOS = [
   {name:'Bitget', logo:'https://logo.clearbit.com/bitget.com', grad:['#22d3ee','#2563eb'],
    before:{maker:0.04,taker:0.06}, after:{maker:0.016,taker:0.032}, note:'수수료 할인 + 페이백 20%', link:'https://partner.bitget.com/bg/Jihoon7'},
@@ -168,7 +165,7 @@ const PROMOS = [
    before:{maker:0.02,taker:0.05}, after:{maker:0.011,taker:0.0275}, note:'페이백 42~45% (변동)', link:'https://bingx.com/invite/2N30XH/'},
 ];
 
-/* 프리셋: 퍼프는 할인 없으면 before, 있으면 after */
+/* 프리셋(수수료율) */
 const PRESETS = {};
 PROMOS.forEach(p=>{
   const eff = p.noDiscount ? p.before : p.after;
@@ -190,7 +187,6 @@ const elCustom=document.getElementById('customFee');
 const elTrades=document.getElementById('trades');
 const elPayback=document.getElementById('payback');
 const elNote=document.getElementById('preset-note');
-
 const vRate=document.getElementById('v-rate');
 const vFee1=document.getElementById('v-fee1');
 const vFeeN=document.getElementById('v-feeN');
@@ -202,30 +198,28 @@ const elCTA=document.getElementById('cta');
 let state={exchange:'Bitget',market:'perp',order:'taker'};
 
 /* 유틸 */
-function toggle(on,off){on.classList.add('active');off.classList.remove('active');}
-function toPerc(x){return (x*100).toFixed(6).replace(/0+$/,'').replace(/\.$/,'')+'%'}
-function nf(x){return (Math.round(x*1e8)/1e8).toLocaleString()}
+const toggle=(on,off)=>{on.classList.add('active');off.classList.remove('active');};
+const toPerc=x=>(x*100).toFixed(6).replace(/0+$/,'').replace(/\.$/,'')+'%';
+const nf=x=>(Math.round(x*1e8)/1e8).toLocaleString();
 
-/* 배너 라인 */
-function bannerLine(p){
-  return `
-    <span class="badge">적용 전: 지정가 <b>${p.before.maker}%</b> / 시장가 <b>${p.before.taker}%</b></span>
-    &nbsp;<span class="badge">적용 후: 지정가 <b>${p.after.maker}%</b> / 시장가 <b>${p.after.taker}%</b></span>
-    &nbsp;<span class="badge">${p.note}</span>`;
-}
+/* 배너 텍스트 */
+const bannerLine=p=>`
+  <span class="badge">적용 전: 지정가 <b>${p.before.maker}%</b> / 시장가 <b>${p.before.taker}%</b></span>
+  &nbsp;<span class="badge">적용 후: 지정가 <b>${p.after.maker}%</b> / 시장가 <b>${p.after.taker}%</b></span>
+  &nbsp;<span class="badge">${p.note}</span>`;
 
-/* 업데이트 */
+/* 계산 업데이트 */
 function update(){
   const ex=state.exchange, market=state.market, order=state.order;
-  const preset=PRESETS[ex][market][order];
-  const custom=parseFloat(elCustom.value||'');
-  const rate=isNaN(custom)? preset : custom/100;
+  const preset = PRESETS[ex][market][order];
+  const custom = parseFloat(elCustom.value||'');
+  const rate = isNaN(custom)? preset : custom/100;
 
-  const N=Math.max(0, parseFloat(elNotional.value||'0'));
-  const t=Math.max(1, parseInt(elTrades.value||'1',10));
-  const fee1=N*rate, feeN=fee1*t;
-  const pbRate=Math.max(0, Math.min(1, (parseFloat(elPayback.value)||0)/100));
-  const pb=feeN*pbRate, net=feeN-pb, eff=N>0? net/(N*t):0;
+  const N = Math.max(0, parseFloat(elNotional.value||'0'));
+  const t = Math.max(1, parseInt(elTrades.value||'1',10));
+  const fee1 = N*rate, feeN = fee1*t;
+  const pbRate = Math.max(0, Math.min(1, (parseFloat(elPayback.value)||0)/100));
+  const pb = feeN*pbRate, net = feeN-pb, eff = N>0? net/(N*t):0;
 
   elNote.textContent=`프리셋: ${ex} / ${market==='spot'?'스팟':'선물'} / ${order.toUpperCase()} = ${toPerc(preset)} · ${PRESETS[ex][market].note}`;
   vRate.textContent=toPerc(rate);
@@ -244,7 +238,11 @@ function update(){
 /* 초기화 */
 (function init(){
   // 드롭다운
-  PROMOS.forEach(p=>{const o=document.createElement('option');o.value=p.name;o.textContent=p.name;elExchange.appendChild(o);});
+  PROMOS.forEach(p=>{
+    const o=document.createElement('option');
+    o.value=p.name;o.textContent=p.name;
+    elExchange.appendChild(o);
+  });
   elExchange.value=state.exchange;
 
   // 배너
@@ -258,17 +256,21 @@ function update(){
         <h3>${p.name} 수수료 안내</h3>
         <p>${bannerLine(p)}</p>
       </div>`;
-    const a=document.createElement('a');a.className='cta';a.textContent='적용하고 바로가기';a.href=p.link;a.target='_blank';a.rel='noopener';
+    const a=document.createElement('a');
+    a.className='cta';a.textContent='적용하고 바로가기';
+    a.href=p.link;a.target='_blank';a.rel='noopener';
     b.appendChild(a);banners.appendChild(b);
   });
 
-  // 로고 카드
+  // 로고 그리드
   const logos=document.getElementById('logos');
   PROMOS.forEach(p=>{
-    const a=document.createElement('a');a.className='logo';a.href=p.link;a.target='_blank';a.rel='noopener';
-    a.innerHTML=`<div class="img"><img src="${p.logo}" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'font-weight:700;font-size:13px\\'>${p.name}</span>';"></div>
-                 <div style="font-weight:800">${p.name}</div>
-                 <div style="font-size:12px;color:#2563eb">레퍼럴로 이동</div>`;
+    const a=document.createElement('a');
+    a.className='logo';a.href=p.link;a.target='_blank';a.rel='noopener';
+    a.innerHTML=`<div class="img"><img src="${p.logo}"
+      onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'font-weight:700;font-size:13px\\'>${p.name}</span>';"></div>
+      <div style="font-weight:800">${p.name}</div>
+      <div style="font-size:12px;color:#2563eb">레퍼럴로 이동</div>`;
     logos.appendChild(a);
   });
 
