@@ -27,11 +27,15 @@
       --accent:#2563eb; --accent2:#0ea5e9; --ok:#059669; --warn:#f59e0b; --danger:#ef4444;
     }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto}
+    body{
+      margin:0;background:var(--bg);color:var(--fg);
+      font-family:"Pretendard",system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",sans-serif;
+      line-height:1.55; letter-spacing:.1px; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
     a{color:#2563eb;text-decoration:none}
     .wrap{max-width:1120px;margin:0 auto;padding:24px 24px 32px}
     h1{margin:0 0 8px}
-    .lead{margin:0 0 18px;color:var(--muted)}
+    .lead{margin:0 0 18px;color:var(--muted);font-size:15px}
     .topbar{display:flex;align-items:center;gap:10px}
     .spacer{flex:1}
 
@@ -42,43 +46,48 @@
     .grid{display:grid;grid-template-columns:1fr;gap:16px}
     @media(min-width:900px){.grid{grid-template-columns:2fr 1fr}}
 
-    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
-    .section-title{margin:0 0 12px;font-weight:800}
+    .card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 20px}
+    .section-title{margin:0 0 12px;font-weight:900;letter-spacing:-.2px}
 
-    label{display:block;font-size:13px;color:#374151;margin:8px 0 6px}
-    input,select,button{font-size:14px}
-    input,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff}
-    .row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1 1 200px}
+    label{display:block;font-size:13px;color:#374151;margin:8px 0 6px;font-weight:700}
+    input,select,button{font-size:15px}
+    input,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}
+    .row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1 1 200px}
 
     .seg{display:flex;gap:8px}
-    .seg button{flex:1;padding:10px 12px;border:1px solid var(--line);background:#fff;border-radius:12px;cursor:pointer}
+    .seg button{flex:1;padding:12px;border:1px solid var(--line);background:#fff;border-radius:14px;cursor:pointer;font-weight:800}
     .seg button.active{background:#111827;color:#fff;border-color:#111827}
 
-    .kv{display:flex;justify-content:space-between;align-items:center;padding:6px 0}
-    .kv .k{color:#374151;font-weight:600;display:flex;align-items:center;gap:6px}
-    .kv .v{font-weight:900}
+    .kv{display:flex;justify-content:space-between;align-items:center;padding:8px 0}
+    .kv .k{color:#111827;font-weight:800}
+    .kv .v{font-weight:900;font-variant-numeric:tabular-nums}
 
-    .result-box{border:1px dashed var(--line);border-radius:12px;padding:10px 12px;background:#fafafa}
+    .result-box{border:1px dashed var(--line);border-radius:14px;padding:12px;background:#fafafa}
     .hr{height:1px;background:var(--line);margin:6px 0}
 
-    .cta-main{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:12px;padding:12px 14px;font-weight:900;color:#fff;text-decoration:none;width:100%}
-    .trust{font-size:12px;color:#374151;background:#fff7ed;border:1px solid #fde68a;border-radius:12px;padding:10px 12px;margin-top:8px}
+    .cta-main{
+      display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:14px;
+      padding:14px 16px;font-weight:900;color:#fff;text-decoration:none;width:100%;
+      background:linear-gradient(90deg,#0ea5e9,#6366f1); box-shadow:0 10px 22px rgba(14,165,233,.24), 0 4px 10px rgba(99,102,241,.16);
+    }
+
+    .trust{font-size:12px;color:#374151;background:#fff7ed;border:1px solid #fde68a;border-radius:14px;padding:10px 12px;margin-top:8px}
     .trust b{color:#b45309}
 
     /* 배너(그라디언트) */
-    .banner{display:flex;gap:12px;align-items:center;color:#fff;border-radius:16px;padding:14px 16px;margin:0 0 12px;border:1px solid rgba(255,255,255,.12);transform:translateZ(0);will-change:transform;transition:transform 120ms ease}
+    .banner{display:flex;gap:12px;align-items:center;color:#fff;border-radius:22px;padding:18px 20px;margin:0 0 12px;border:1px solid rgba(255,255,255,.12);transform:translateZ(0);will-change:transform;transition:transform 120ms ease; box-shadow:0 10px 22px rgba(2,8,20,.06);}
     .banner img{width:48px;height:48px;object-fit:contain;background:rgba(255,255,255,.12);border-radius:12px;padding:6px}
     .banner h3{margin:0;font-size:18px;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;}
     .banner p{margin:4px 0 0;font-size:14px;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;}
     .badge{display:inline-block;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);font-weight:800;
       text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;}
-    .cta{margin-left:auto;padding:10px 14px;border-radius:12px;background:#fff;color:#000;font-weight:800;text-decoration:none}
+    .cta{margin-left:auto;padding:12px 14px;border-radius:14px;background:#fff;color:#000;font-weight:900;text-decoration:none;border:1px solid rgba(0,0,0,.06)}
 
     /* 로고 그리드 */
     .logos{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
     @media(min-width:600px){.logos{grid-template-columns:repeat(3,1fr)}}
     @media(min-width:900px){.logos{grid-template-columns:repeat(6,1fr)}}
-    .logo{display:flex;flex-direction:column;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center;text-decoration:none;color:inherit;transition:transform .1s ease, box-shadow .1s ease}
+    .logo{display:flex;flex-direction:column;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 10px;text-align:center;text-decoration:none;color:inherit;transition:transform .1s ease, box-shadow .1s ease}
     .logo:hover{transform:translateY(-2px);box-shadow:0 6px 12px rgba(0,0,0,.06)}
     .logo .img{width:56px;height:56px;border-radius:12px;border:1px solid var(--line);background:#f8fafc;display:flex;align-items:center;justify-content:center;overflow:hidden}
     .logo img{width:100%;height:100%;object-fit:contain}
@@ -93,59 +102,8 @@
     .table tr:last-child td{border-bottom:0}
     .pill{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:700;font-size:12px;border:1px solid #c7d2fe}
 
-    /* ====== Luxe Skin overrides ====== */
-    .theme-luxe { font-family: "Pretendard", system-ui, -apple-system, Segoe UI, Roboto; letter-spacing: .1px; }
-    .theme-luxe body { background: var(--bg); }
-    .theme-luxe .wrap { position: relative; }
-    .theme-luxe .wrap::after {
-      content:""; position:absolute; inset:-40px;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='2' stitchTiles='stitch' type='fractalNoise'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .02 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-      pointer-events:none; opacity:.8;
-    }
-    .theme-luxe .card{
-      backdrop-filter:saturate(140%) blur(8px);
-      background:linear-gradient(#ffffffcc, #ffffffcc);
-      border:1px solid rgba(0,0,0,.06);
-      box-shadow:0 12px 28px rgba(2,8,20,.06), 0 2px 6px rgba(2,8,20,.06);
-      border-radius:20px;
-    }
-    .theme-luxe .result-box{
-      background:linear-gradient(180deg, rgba(248,250,252,.8), rgba(255,255,255,.85));
-      border:1px solid rgba(2,8,20,.06);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
-      border-radius:14px;
-    }
-    .theme-luxe .cta-main{
-      background:linear-gradient(90deg, #0ea5e9, #6366f1);
-      border:0; color:#fff; font-weight:900; letter-spacing:.2px;
-      box-shadow:0 10px 22px rgba(14,165,233,.24), 0 4px 10px rgba(99,102,241,.16);
-      position:relative; overflow:hidden; transition:transform .12s ease, box-shadow .2s ease;
-    }
-    .theme-luxe .cta-main::after{
-      content:""; position:absolute; inset:-40% -10%;
-      background:linear-gradient(120deg, transparent 20%, rgba(255,255,255,.38) 40%, transparent 60%);
-      transform:translateX(-60%); filter:blur(8px); pointer-events:none;
-      animation:ctaShine 3.5s infinite;
-    }
-    @keyframes ctaShine{ 0%{ transform:translateX(-60%) } 60%{ transform:translateX(120%) } 100%{ transform:translateX(120%) } }
-    .theme-luxe .cta-main:hover{ transform:translateY(-1px); box-shadow:0 14px 28px rgba(14,165,233,.32), 0 6px 16px rgba(99,102,241,.22) }
-    .theme-luxe .banner{ border-radius:22px; padding:18px 20px; box-shadow:0 10px 22px rgba(2,8,20,.06); position:relative; overflow:hidden; }
-    .theme-luxe .banner::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,255,255,.12), transparent 60%); pointer-events:none; }
-    .theme-luxe .banner .badge{ background:rgba(255,255,255,.2); border-color:rgba(255,255,255,.45) }
-    .theme-luxe .logo{ border-radius:18px; background:linear-gradient(#ffffff,#ffffff); border:1px solid rgba(2,8,20,.06); box-shadow:0 8px 18px rgba(2,8,20,.06); }
-    .theme-luxe .logo:hover{ transform:translateY(-3px); box-shadow:0 14px 28px rgba(2,8,20,.10) }
-    .theme-luxe .logo .img{ background:linear-gradient(#f8fafc,#ffffff) }
-    .theme-luxe input, .theme-luxe select{ border-radius:14px; border:1px solid rgba(2,8,20,.08); background:#fff }
-    .theme-luxe .seg button{ border-radius:14px; border:1px solid rgba(2,8,20,.08); background:#fff; font-weight:700 }
-    .theme-luxe .seg button.active{ background:#111827; border-color:#111827; color:#fff; box-shadow:inset 0 1px 0 rgba(255,255,255,.18) }
-    .theme-luxe .table{ border-radius:16px; border-color:rgba(2,8,20,.08); box-shadow:0 6px 14px rgba(2,8,20,.04) }
-    .theme-luxe .table th{ background:#f3f4f6; font-weight:800 }
-    .theme-luxe .tip{ background:linear-gradient(180deg,#eff6ff,#ffffff); border-color:#bfdbfe; border-radius:16px }
-    .theme-luxe .trust{ border-radius:14px; background:linear-gradient(#fff7ed,#fff); border-color:#fde68a }
-
-    /* 다크 모드 강제 토글 */
-    body.is-dark { color-scheme: dark; }
-    body.is-dark { --bg:#0b1220; --fg:#e2e8f0; --muted:#94a3b8; --line:rgba(255,255,255,.1); }
+    /* 다크 모드 */
+    body.is-dark { color-scheme: dark; --bg:#0b1220; --fg:#e2e8f0; --muted:#94a3b8; --line:rgba(255,255,255,.1); }
     body.is-dark .lead{ color:#94a3b8 }
     body.is-dark .card{ background:rgba(16,23,42,.75); border-color:rgba(255,255,255,.06) }
     body.is-dark .result-box{ background:rgba(17,24,39,.6); border-color:rgba(255,255,255,.06) }
@@ -154,39 +112,46 @@
     body.is-dark input, body.is-dark select{ background:#0f172a; color:#e2e8f0; border-color:rgba(255,255,255,.12) }
     body.is-dark .seg button{ background:#0f172a; color:#e2e8f0; border-color:rgba(255,255,255,.12) }
     body.is-dark .seg button.active{ background:#e2e8f0; color:#0b1220; border-color:#e2e8f0 }
-    body.is-dark .tip{ background:linear-gradient(180deg,#0b1220,#0f172a); border-color:#1d4ed8; color:#c7d2fe }
-    body.is-dark .trust{ background:linear-gradient(180deg,#0b1220,#0f172a); color:#fde68a; border-color:#f59e0b }
 
-    /* ── Ripple 효과 (빗방울) ───────────────────────── */
+    /* ── Ripple 효과 ───────────────────────── */
     .ripple-host { position: relative; overflow: hidden; }
     .ripple {
-      position: absolute; left: 0; top: 0; width: 20px; height: 20px;
-      transform: translate(-50%,-50%) scale(0);
-      border-radius: 50%;
-      pointer-events: none;
-      background: radial-gradient(circle,
-        rgba(255,255,255,0.65) 0%,
-        rgba(255,255,255,0.45) 30%,
-        rgba(255,255,255,0.22) 55%,
-        rgba(255,255,255,0.00) 70%);
-      mix-blend-mode: screen;
-      filter: blur(0.3px);
-      animation: rippleExpand 720ms cubic-bezier(.2,.7,.2,1) forwards;
+      position: absolute; left: 0; top: 0; width: 22px; height: 22px;
+      transform: translate(-50%,-50%) scale(0); border-radius: 50%; pointer-events: none;
+      background: radial-gradient(circle, rgba(255,255,255,.65) 0%, rgba(255,255,255,.45) 30%, rgba(255,255,255,.22) 55%, rgba(255,255,255,0) 70%);
+      mix-blend-mode: screen; filter: blur(.3px); animation: rippleExpand 720ms cubic-bezier(.2,.7,.2,1) forwards;
     }
-    @keyframes rippleExpand {
-      to { transform: translate(-50%,-50%) scale(18); opacity: 0; }
-    }
+    @keyframes rippleExpand { to { transform: translate(-50%,-50%) scale(18); opacity: 0; } }
     body.is-dark .ripple{
-      background: radial-gradient(circle,
-        rgba(255,255,255,0.85) 0%,
-        rgba(255,255,255,0.55) 30%,
-        rgba(255,255,255,0.30) 55%,
-        rgba(255,255,255,0.00) 70%);
+      background: radial-gradient(circle, rgba(255,255,255,.85) 0%, rgba(255,255,255,.55) 30%, rgba(255,255,255,.30) 55%, rgba(255,255,255,0) 70%);
     }
+  
+    /* ── 모바일 최적화 ───────────────────────── */
+    @media(max-width:600px){
+      .banner {
+        flex-direction: column;       /* 가로 → 세로 배치 */
+        align-items: flex-start;
+        padding:14px 16px;
+      }
+      .banner img {
+        width:40px; height:40px;      /* 로고 크기 축소 */
+      }
+      .banner h3 {
+        font-size:16px;               /* 제목 크기 줄임 */
+      }
+      .banner p {
+        font-size:13px;               /* 본문 크기 줄임 */
+      }
+      .banner .cta {
+        margin:10px 0 0;
+        width:100%; text-align:center; /* 버튼은 100% */
+      }
+    }
+
   </style>
 </head>
 
-<body class="theme-luxe">
+<body>
 <div class="wrap">
   <div class="topbar">
     <h1 style="margin-right:8px">코인 수수료 계산기</h1>
@@ -196,8 +161,12 @@
       <span id="themeLabel">라이트</span>
     </button>
   </div>
+
+  <!-- (가독성 향상) 상단 안내에 페이백 구조 한 줄 추가 -->
   <p class="lead">
-    거래소 수수료와 페이백을 계산해 보세요. <b style="color:#ef4444">※ 예시 수수료율은 참고용이며, 실제 적용은 각 거래소 공식 페이지/VIP 등급/토큰 할인 조건을 확인하세요.</b>
+    거래소 수수료와 페이백을 계산해 보세요.
+    <b style="color:#ef4444">※ 예시 수수료율은 참고용이며, 실제 적용은 각 거래소 공식 페이지/VIP 등급/토큰 할인 조건을 확인하세요.</b><br>
+    <b style="color:#ef4444">※ 페이백 적용 거래소는 기본 수수료율을 먼저 납부하고, 이후 해당 비율만큼 환급(캐시백)을 받는 구조입니다.</b>
   </p>
 
   <!-- 계산기 + 결과 -->
@@ -264,13 +233,13 @@
         <div class="kv"><div class="k">체감 수수료율(평균)</div><div class="v" id="v-eff">-</div></div>
       </div>
 
-      <!-- 혜택 중심 CTA -->
-      <a id="cta" class="cta-main" href="#" target="_blank" rel="noopener">혜택 적용 후 이동</a>
+      <a id="cta" class="cta-main ripple-host" href="#" target="_blank" rel="noopener">혜택 적용 후 이동</a>
 
-      <!-- 신뢰성/안내 -->
+      <!-- (가독성 향상) 결과 하단 안내에도 페이백 구조 명시 -->
       <div class="trust">
         <b>안내</b> · 본 계산기는 참고용이며, 실제 혜택은 각 거래소의 정책/VIP 등급 및 토큰 할인에 따라 달라질 수 있습니다.
         일부 거래소는 제 파트너(공식 파트너/레퍼럴) 전용 혜택 기준이 적용됩니다. 상세 조건은 링크 이동 후 꼭 확인해 주세요.
+        <br>※ <b>페이백 적용 거래소는 기본 수수료율을 먼저 납부</b>하고, 이후 설정한 페이백 비율만큼 <b>환급(캐시백)</b> 받는 구조입니다.
       </div>
     </div>
   </div>
@@ -315,7 +284,7 @@
 
 <!-- ===== 데이터 & 로직 ===== -->
 <script>
-/* 거래소 데이터 (혜택 중심 CTA 포함) */
+/* 거래소 데이터 (✅ 배너 뱃지에 ‘기본 수수료 납부 후 환급’ 문구 반영) */
 const PROMOS = [
   {
     name:'Bitget',
@@ -324,7 +293,7 @@ const PROMOS = [
     before:{maker:0.04,taker:0.06},
     after:{maker:0.016,taker:0.032},
     payback:'20%',
-    note:'수수료 할인 + 페이백 20%',
+    note:'페이백 20% (기본 수수료 납부 후 환급)',
     link:'https://partner.bitget.com/bg/Jihoon7',
     cta:'🎁 지금 가입하고 수수료 50%↓ + 페이백 20% 받기'
   },
@@ -335,7 +304,7 @@ const PROMOS = [
     before:{maker:0.02,taker:0.055},
     after:{maker:0.02,taker:0.055},
     payback:'20%',
-    note:'페이백 20% 적용',
+    note:'페이백 20% (기본 수수료 납부 후 환급)',
     link:'https://partner.bybit.com/b/JIHOON',
     cta:'🚀 Bybit 신규 혜택 받고 거래 시작'
   },
@@ -346,7 +315,7 @@ const PROMOS = [
     before:{maker:0.02,taker:0.05},
     after:{maker:0.02,taker:0.045},
     payback:'20%',
-    note:'페이백 20% 적용',
+    note:'페이백 20% (기본 수수료 납부 후 환급)',
     link:'https://www.okx.com/join/KANGJIHOON',
     cta:'✅ OKX 혜택 적용 후 바로 이동'
   },
@@ -357,7 +326,7 @@ const PROMOS = [
     before:{maker:0.0,taker:0.02},
     after:{maker:0.0,taker:0.018},
     payback:'20%',
-    note:'페이백 20% 적용',
+    note:'페이백 20% (기본 수수료 납부 후 환급)',
     link:'https://www.mexc.com/ko-KR/acquisition/custom-sign-up?shareCode=mexc-Jihoon',
     cta:'🎯 MEXC 0% / 0.018% 혜택 받고 시작'
   },
@@ -379,13 +348,13 @@ const PROMOS = [
     before:{maker:0.02,taker:0.05},
     after:{maker:0.011,taker:0.0275},
     payback:'42~45%',
-    note:'페이백 42~45% (변동)',
+    note:'페이백 42~45% (기본 수수료 납부 후 환급)',
     link:'https://bingx.com/invite/2N30XH/',
     cta:'🔥 BingX 최대 45% 페이백 받고 시작'
   },
 ];
 
-/* 계산 프리셋 */
+/* 계산 프리셋 (UI는 ‘적용 후’ 프리셋을 보여주되, 실제 청구는 각 거래소 정책에 따름) */
 const PRESETS = {};
 PROMOS.forEach(p=>{
   const eff = p.after;
@@ -418,7 +387,6 @@ const themeLabel=document.getElementById('themeLabel');
 
 let state={exchange:'Bitget',market:'perp',order:'taker'};
 
-/* 유틸 */
 const toggle=(on,off)=>{on.classList.add('active');off.classList.remove('active');};
 const toPerc=x=>(x*100).toFixed(6).replace(/0+$/,'').replace(/\.$/,'')+'%';
 const nf=x=>(Math.round(x*1e8)/1e8).toLocaleString();
@@ -438,7 +406,7 @@ function animateNumber(el, target, fmt=(x)=>x, duration=450){
   requestAnimationFrame(step);
 }
 
-/* ===== Ripple 유틸 ===== */
+/* Ripple */
 function spawnRipple(host, x, y) {
   if (!host.classList.contains('ripple-host')) host.classList.add('ripple-host');
   const r = document.createElement('span');
@@ -449,7 +417,7 @@ function spawnRipple(host, x, y) {
   r.addEventListener('animationend', () => r.remove());
 }
 
-/* 결과 업데이트 */
+/* 계산 */
 function update(){
   const ex=state.exchange, market=state.market, order=state.order;
   const preset=PRESETS[ex][market][order];
@@ -467,11 +435,10 @@ function update(){
   animateNumber(vRate, rate, (x)=>toPerc(x));
   animateNumber(vFee1, fee1, (x)=>nf(x)+' USDT');
   animateNumber(vFeeN, feeN, (x)=>nf(x)+' USDT');
-  animateNumber(vPB, pb, (x)=>nf(x)+' USDT');
+  animateNumber(vPB, pb,   (x)=>nf(x)+' USDT');
   animateNumber(vNet, net, (x)=>nf(x)+' USDT');
   animateNumber(vEff, eff, (x)=>toPerc(x));
 
-  // CTA 스타일/문구
   const promo=PROMOS.find(p=>p.name===ex);
   elCTA.href=promo.link;
   elCTA.style.background=`linear-gradient(90deg, ${promo.grad[0]}, ${promo.grad[1]})`;
@@ -480,16 +447,12 @@ function update(){
 
 /* 초기 렌더링 */
 (function init(){
-  // 거래소 드롭다운
   PROMOS.forEach(p=>{
     const o=document.createElement('option');o.value=p.name;o.textContent=p.name;elExchange.appendChild(o);
   });
   elExchange.value=state.exchange;
 
-  // 배너 컨테이너
   const banners=document.getElementById('banners');
-
-  // 배너 (✅ 카드별 패럴랙스 + 호버시 빗방울)
   PROMOS.forEach(p=>{
     const b=document.createElement('div');
     b.className='banner';
@@ -506,11 +469,10 @@ function update(){
         </p>
       </div>`;
     const a=document.createElement('a');
-    a.className='cta';a.textContent=p.cta;a.href=p.link;a.target='_blank';a.rel='noopener';
+    a.className='cta ripple-host'; a.textContent=p.cta; a.href=p.link; a.target='_blank'; a.rel='noopener';
     b.appendChild(a);
     banners.appendChild(b);
 
-    // 패럴랙스: 해당 카드만 미세 이동
     b.addEventListener('mousemove',(e)=>{
       const r=b.getBoundingClientRect();
       const x=(e.clientX-r.left)/r.width - 0.5;
@@ -518,42 +480,31 @@ function update(){
       const d=parseFloat(b.dataset.depth||6);
       b.style.transform=`translate3d(${x*d}px, ${y*d}px, 0)`;
     });
-    b.addEventListener('mouseleave',()=>{
-      b.style.transform='translate3d(0,0,0)';
-    });
-
-    // 호버 시작 지점에서 '빗방울' 퍼짐
-    b.addEventListener('mouseenter',(e)=>{
-      const rect = b.getBoundingClientRect();
-      spawnRipple(b, e.clientX - rect.left, e.clientY - rect.top);
-    });
+    b.addEventListener('mouseleave',()=>{ b.style.transform='translate3d(0,0,0)'; });
+    b.addEventListener('mouseenter',(e)=>{ const rect=b.getBoundingClientRect(); spawnRipple(b, e.clientX-rect.left, e.clientY-rect.top); });
+    a.addEventListener('click',(e)=>{ const rect=a.getBoundingClientRect(); spawnRipple(a, e.clientX-rect.left, e.clientY-rect.top); });
   });
 
-  // 로고
   const logos=document.getElementById('logos');
   PROMOS.forEach(p=>{
-    const a=document.createElement('a');a.className='logo';a.href=p.link;a.target='_blank';a.rel='noopener';
+    const a=document.createElement('a');a.className='logo ripple-host';a.href=p.link;a.target='_blank';a.rel='noopener';
     a.innerHTML=`<div class="img"><img src="${p.logo}"
       onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'font-weight:700;font-size:13px\\'>${p.name}</span>';"></div>
-      <div style="font-weight:800">${p.name}</div>
-      <div style="font-size:12px;color:#2563eb">혜택 페이지 이동</div>`;
+      <div style="font-weight:900">${p.name}</div>
+      <div style="font-size:12px;color:#2563eb;font-weight:800">혜택 페이지 이동</div>`;
     logos.appendChild(a);
+    a.addEventListener('click',(e)=>{ const r=a.getBoundingClientRect(); spawnRipple(a, e.clientX-r.left, e.clientY-r.top); });
   });
 
-  // 비교표
   const body=document.getElementById('cmp-body');
   PROMOS.forEach(p=>{
     const tr=document.createElement('tr');
-    tr.innerHTML=`
-      <td style="font-weight:800">${p.name}</td>
-      <td>${p.after.maker}%</td>
-      <td>${p.after.taker}%</td>
-      <td><span class="pill">${p.payback}</span></td>
-      <td>${p.note}</td>`;
+    tr.innerHTML=`<td style="font-weight:800">${p.name}</td>
+      <td>${p.after.maker}%</td><td>${p.after.taker}%</td>
+      <td><span class="pill">${p.payback}</span></td><td>${p.note}</td>`;
     body.appendChild(tr);
   });
 
-  // 이벤트 바인딩
   elExchange.addEventListener('change',()=>{state.exchange=elExchange.value;update()});
   elSpot.addEventListener('click',()=>{state.market='spot';toggle(elSpot,elPerp);update()});
   elPerp.addEventListener('click',()=>{state.market='perp';toggle(elPerp,elSpot);update()});
@@ -561,30 +512,19 @@ function update(){
   elTaker.addEventListener('click',()=>{state.order='taker';toggle(elTaker,elMaker);update()});
   [elNotional,elCustom,elTrades,elPayback].forEach(el=>el.addEventListener('input',update));
 
-  // 테마 초기화(로컬 저장)
+  // 테마
   const saved=localStorage.getItem('calc-theme');
   if(saved==='dark') document.body.classList.add('is-dark');
-  themeLabel.textContent = document.body.classList.contains('is-dark') ? '다크' : '라이트';
+  document.getElementById('themeLabel').textContent = document.body.classList.contains('is-dark') ? '다크' : '라이트';
+  themeBtn.addEventListener('click',()=>{
+    document.body.classList.toggle('is-dark');
+    const dark=document.body.classList.contains('is-dark');
+    document.getElementById('themeLabel').textContent=dark?'다크':'라이트';
+    localStorage.setItem('calc-theme', dark?'dark':'light');
+  });
 
   update();
-
-  // CTA 버튼: 클릭 시 물방울 파동
-  if (elCTA) {
-    elCTA.classList.add('ripple-host');
-    elCTA.addEventListener('click', (e)=>{
-      const rect = elCTA.getBoundingClientRect();
-      spawnRipple(elCTA, e.clientX - rect.left, e.clientY - rect.top);
-    });
-  }
 })();
-
-/* 테마 토글 */
-themeBtn.addEventListener('click',()=>{
-  document.body.classList.toggle('is-dark');
-  const dark=document.body.classList.contains('is-dark');
-  themeLabel.textContent=dark?'다크':'라이트';
-  localStorage.setItem('calc-theme', dark?'dark':'light');
-});
 </script>
 
 <!-- FAQ 구조화 데이터 (SEO) -->
