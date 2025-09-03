@@ -1,215 +1,181 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-  <title>코인 수수료 계산기 | Bitget·Bybit·OKX·MEXC·Binance·BingX</title>
-  <meta name="description" content="거래소별 지정가/시장가 수수료와 페이백을 한번에 계산. 혜택 적용 CTA와 비교표, FAQ까지 제공. 모바일 완전 지원.">
-  <link rel="canonical" href="https://rkdwlgns12.github.io/coinfeecalc7/" />
+  <title>암호화폐 올인원 계산기 | Bitget·Bybit·OKX·MEXC·Binance·BingX</title>
+  <meta name="description" content="거래소별 기본 수수료율(페이백 이전) 기준으로 수수료·페이백, 레버리지 PNL, 평단가, 김프, 환율 변환까지 한 번에 계산. 모바일 완전 지원.">
+  <link rel="canonical" href="https://rkdwlgns12.github.io/"/>
 
   <!-- OG / Twitter -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="코인 수수료 계산기">
-  <meta property="og:title" content="코인 수수료 계산기">
-  <meta property="og:description" content="거래소별 수수료/페이백 계산, 혜택 적용 CTA, 비교/FAQ 제공">
-  <meta property="og:url" content="https://rkdwlgns12.github.io/coinfeecalc7/">
+  <meta property="og:site_name" content="암호화폐 올인원 계산기">
+  <meta property="og:title" content="암호화폐 올인원 계산기">
+  <meta property="og:description" content="수수료/페이백 계산 + 레버리지 PnL + 평단 + 김프 + 환율 변환을 한 페이지에서.">
+  <meta property="og:url" content="https://rkdwlgns12.github.io/">
   <meta property="og:image" content="https://rkdwlgns12.github.io/coinfeecalc7/og-cover.png">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Premium font -->
+  <!-- Font -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#f7f7fb; --fg:#111827; --muted:#6b7280; --line:#e5e7eb; --radius:16px;
-      --accent:#2563eb; --accent2:#0ea5e9; --ok:#059669; --warn:#f59e0b; --danger:#ef4444;
+      --bg:#f7f7fb; --fg:#111827; --muted:#374151; --line:#e5e7eb;
+      --accent:#2563eb; --accent2:#0ea5e9;
+      font-size:17px; /* 기본 가독성 업 */
     }
+    @media (min-width:900px){ :root{ font-size:18px; } }
     *{box-sizing:border-box}
     body{
       margin:0;background:var(--bg);color:var(--fg);
       font-family:"Pretendard",system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",sans-serif;
-      line-height:1.55; letter-spacing:.1px; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.65
     }
-    a{color:#2563eb;text-decoration:none}
+    a{color:var(--accent);text-decoration:none}
     .wrap{max-width:1120px;margin:0 auto;padding:24px 24px 32px}
     h1{margin:0 0 8px}
-    .lead{margin:0 0 18px;color:var(--muted);font-size:15px}
-    .topbar{display:flex;align-items:center;gap:10px}
-    .spacer{flex:1}
-
-    /* theme toggle */
-    .theme-toggle{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:700}
+    .lead{margin:0 0 18px;color:var(--muted);font-size:1rem}
+    .topbar{display:flex;align-items:center;gap:10px}.spacer{flex:1}
+    .theme-toggle{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:700}
     .theme-toggle svg{width:18px;height:18px}
 
-    .grid{display:grid;grid-template-columns:1fr;gap:16px}
-    @media(min-width:900px){.grid{grid-template-columns:2fr 1fr}}
-
-    .card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 20px}
-    .section-title{margin:0 0 12px;font-weight:900;letter-spacing:-.2px}
-
-    label{display:block;font-size:13px;color:#374151;margin:8px 0 6px;font-weight:700}
-    input,select,button{font-size:15px}
-    input,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}
+    .card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px 20px;margin-top:16px}
+    .section-title{margin:0 0 12px;font-weight:900;font-size:1.125rem}
+    @media (min-width:900px){ .section-title{font-size:1.25rem} }
+    label{display:block;font-size:0.95rem;margin:8px 0 6px;font-weight:700}
+    input,select,button{font-size:1rem}
+    input,select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#fff;min-height:44px}
     .row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1 1 200px}
+    .hidden{display:none !important;}
 
+    /* Tabs */
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+    .tab-btn{padding:12px 16px;border:1px solid var(--line);border-radius:14px;background:#fff;font-weight:800;cursor:pointer;min-height:44px}
+    .tab-btn.active{background:#111827;color:#fff}
+    /* << 강제 토글(모든 패널이 한 번에 보이는 문제 해결) >> */
+    .tab-panel{display:none !important;}
+    .tab-panel.active{display:block !important;}
+
+    /* Segmented buttons */
     .seg{display:flex;gap:8px}
-    .seg button{flex:1;padding:12px;border:1px solid var(--line);background:#fff;border-radius:14px;cursor:pointer;font-weight:800}
+    .seg button{flex:1;padding:12px;border:1px solid var(--line);background:#fff;border-radius:14px;cursor:pointer;font-weight:800;min-height:44px}
     .seg button.active{background:#111827;color:#fff;border-color:#111827}
 
     .kv{display:flex;justify-content:space-between;align-items:center;padding:8px 0}
-    .kv .k{color:#111827;font-weight:800}
-    .kv .v{font-weight:900;font-variant-numeric:tabular-nums}
-
+    .kv .k{font-weight:800}.kv .v{font-weight:900;font-variant-numeric:tabular-nums}
     .result-box{border:1px dashed var(--line);border-radius:14px;padding:12px;background:#fafafa}
     .hr{height:1px;background:var(--line);margin:6px 0}
 
-    .cta-main{
-      display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:14px;
-      padding:14px 16px;font-weight:900;color:#fff;text-decoration:none;width:100%;
-      background:linear-gradient(90deg,#0ea5e9,#6366f1); box-shadow:0 10px 22px rgba(14,165,233,.24), 0 4px 10px rgba(99,102,241,.16);
-    }
+    .cta-main{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:14px;padding:14px 16px;font-weight:900;color:#fff;text-decoration:none;width:100%;min-height:48px;background:linear-gradient(90deg,#0ea5e9,#6366f1)}
+    .trust{font-size:0.95rem;background:#fff7ed;border:1px solid #fde68a;border-radius:14px;padding:10px 12px;margin-top:8px}
 
-    .trust{font-size:12px;color:#374151;background:#fff7ed;border:1px solid #fde68a;border-radius:14px;padding:10px 12px;margin-top:8px}
-    .trust b{color:#b45309}
-
-    /* 배너(그라디언트) */
-    .banner{display:flex;gap:12px;align-items:center;color:#fff;border-radius:22px;padding:18px 20px;margin:0 0 12px;border:1px solid rgba(255,255,255,.12);transform:translateZ(0);will-change:transform;transition:transform 120ms ease; box-shadow:0 10px 22px rgba(2,8,20,.06);}
+    /* Banners */
+    .banner{display:flex;gap:12px;align-items:center;color:#fff;border-radius:22px;padding:18px 20px;margin:0 0 12px;border:1px solid rgba(255,255,255,.12);flex-wrap:wrap;box-shadow:0 10px 22px rgba(2,8,20,.06)}
     .banner img{width:48px;height:48px;object-fit:contain;background:rgba(255,255,255,.12);border-radius:12px;padding:6px}
-    .banner h3{margin:0;font-size:18px;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;}
-    .banner p{margin:4px 0 0;font-size:14px;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;}
-    .badge{display:inline-block;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);font-weight:800;
-      text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;}
-    .cta{margin-left:auto;padding:12px 14px;border-radius:14px;background:#fff;color:#000;font-weight:900;text-decoration:none;border:1px solid rgba(0,0,0,.06)}
+    .banner h3{margin:0;font-size:18px}
+    .banner p{margin:4px 0 0;font-size:15px;display:flex;flex-wrap:wrap;gap:6px}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);font-weight:800;white-space:nowrap}
+    .cta{margin-left:auto;padding:12px 14px;border-radius:14px;background:#fff;color:#000;font-weight:900;text-decoration:none}
 
-    /* 로고 그리드 */
+    /* Logos */
     .logos{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
     @media(min-width:600px){.logos{grid-template-columns:repeat(3,1fr)}}
     @media(min-width:900px){.logos{grid-template-columns:repeat(6,1fr)}}
-    .logo{display:flex;flex-direction:column;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 10px;text-align:center;text-decoration:none;color:inherit;transition:transform .1s ease, box-shadow .1s ease}
-    .logo:hover{transform:translateY(-2px);box-shadow:0 6px 12px rgba(0,0,0,.06)}
+    .logo{display:flex;flex-direction:column;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 10px;text-align:center;text-decoration:none;color:inherit}
     .logo .img{width:56px;height:56px;border-radius:12px;border:1px solid var(--line);background:#f8fafc;display:flex;align-items:center;justify-content:center;overflow:hidden}
     .logo img{width:100%;height:100%;object-fit:contain}
 
-    /* Tip 박스 */
+    /* Tip + 비교표 */
     .tip{background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:14px 16px;color:#1e3a8a}
-
-    /* 비교표 */
     .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-    .table th,.table td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left}
+    .table th,.table td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left}
     .table th{background:#f9fafb}
     .table tr:last-child td{border-bottom:0}
-    .pill{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:700;font-size:12px;border:1px solid #c7d2fe}
+    .pill{display:inline-block;padding:4px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:700;font-size:12px;border:1px solid #c7d2fe}
 
-    /* 다크 모드 */
-    body.is-dark { color-scheme: dark; --bg:#0b1220; --fg:#e2e8f0; --muted:#94a3b8; --line:rgba(255,255,255,.1); }
-    body.is-dark .lead{ color:#94a3b8 }
-    body.is-dark .card{ background:rgba(16,23,42,.75); border-color:rgba(255,255,255,.06) }
-    body.is-dark .result-box{ background:rgba(17,24,39,.6); border-color:rgba(255,255,255,.06) }
-    body.is-dark .table th{ background:#0f172a; color:#e2e8f0 }
-    body.is-dark .table, body.is-dark .logo{ border-color:rgba(255,255,255,.06) }
-    body.is-dark input, body.is-dark select{ background:#0f172a; color:#e2e8f0; border-color:rgba(255,255,255,.12) }
-    body.is-dark .seg button{ background:#0f172a; color:#e2e8f0; border-color:rgba(255,255,255,.12) }
-    body.is-dark .seg button.active{ background:#e2e8f0; color:#0b1220; border-color:#e2e8f0 }
-
-    /* ── Ripple 효과 ───────────────────────── */
-    .ripple-host { position: relative; overflow: hidden; }
-    .ripple {
-      position: absolute; left: 0; top: 0; width: 22px; height: 22px;
-      transform: translate(-50%,-50%) scale(0); border-radius: 50%; pointer-events: none;
-      background: radial-gradient(circle, rgba(255,255,255,.65) 0%, rgba(255,255,255,.45) 30%, rgba(255,255,255,.22) 55%, rgba(255,255,255,0) 70%);
-      mix-blend-mode: screen; filter: blur(.3px); animation: rippleExpand 720ms cubic-bezier(.2,.7,.2,1) forwards;
-    }
-    @keyframes rippleExpand { to { transform: translate(-50%,-50%) scale(18); opacity: 0; } }
-    body.is-dark .ripple{
-      background: radial-gradient(circle, rgba(255,255,255,.85) 0%, rgba(255,255,255,.55) 30%, rgba(255,255,255,.30) 55%, rgba(255,255,255,0) 70%);
-    }
-  
-    /* ── 모바일 최적화 ───────────────────────── */
+    /* Mobile */
     @media(max-width:600px){
-      .banner {
-        flex-direction: column;       /* 가로 → 세로 배치 */
-        align-items: flex-start;
-        padding:14px 16px;
-      }
-      .banner img {
-        width:40px; height:40px;      /* 로고 크기 축소 */
-      }
-      .banner h3 {
-        font-size:16px;               /* 제목 크기 줄임 */
-      }
-      .banner p {
-        font-size:13px;               /* 본문 크기 줄임 */
-      }
-      .banner .cta {
-        margin:10px 0 0;
-        width:100%; text-align:center; /* 버튼은 100% */
-      }
+      .banner{flex-direction:column;align-items:flex-start;padding:14px 16px}
+      .banner img{width:40px;height:40px}
+      .banner h3{font-size:16px}
+      .banner p{font-size:14px}
+      .banner .cta{margin-top:10px;width:100%;text-align:center}
     }
 
-  
-    /* ── 모바일 최적화(강화판) ───────────────────────── */
-    @media (max-width:768px){
-      .wrap{ padding:16px 16px 24px !important; }
-      .card{ padding:14px 16px !important; border-radius:18px !important; }
+    /* Dark */
+    body.is-dark{color-scheme:dark;--bg:#0b1220;--fg:#e2e8f0;--muted:#cbd5e1;--line:rgba(255,255,255,.1)}
+    body.is-dark .card{background:rgba(16,23,42,.75);border-color:rgba(255,255,255,.06)}
+    body.is-dark input,body.is-dark select{background:#0f172a;color:#e2e8f0;border-color:rgba(255,255,255,.12)}
+    body.is-dark .tab-btn{background:#0f172a;color:#e2e8f0;border-color:rgba(255,255,255,.12)}
+    body.is-dark .tab-btn.active{background:#e2e8f0;color:#0b1220;border-color:#e2e8f0}
+    body.is-dark .table th{background:#0f172a}
 
-      /* 배너(가로→세로, 여백/글씨 축소) */
-      .banner{
-        flex-direction:column !important;
-        align-items:flex-start !important;
-        gap:8px !important;
-        padding:14px 16px !important;
-        border-radius:18px !important;
-      }
-      .banner img{ width:36px !important; height:36px !important; padding:4px !important; }
-      .banner h3{ font-size:15px !important; line-height:1.3 !important; margin:0 !important; }
-      .banner p{ font-size:12.5px !important; margin-top:2px !important; }
-      .badge{ font-size:11px !important; padding:3px 7px !important; }
-
-      /* CTA 버튼은 한 줄 아래로 100% */
-      .banner .cta{
-        width:100% !important;
-        margin:8px 0 0 !important;
-        text-align:center !important;
-      }
-
-      /* 로고 그리드 간격 살짝 축소 */
-      .logos{ gap:10px !important; }
-      .logo{ padding:12px 8px !important; }
-
-      /* 표 가독성 */
-      .table th, .table td{ padding:8px 10px !important; font-size:13px !important; }
-      .pill{ font-size:11px !important; padding:2px 6px !important; }
-
-      /* 결과 박스·텍스트 살짝 압축 */
-      .result-box{ padding:10px !important; }
-      .kv{ padding:6px 0 !important; }
+    /* ===== A11Y: 큰 글씨 / 고대비 ===== */
+    body.is-large{ font-size: clamp(18px, 2.25vw, 21px); }
+    body.is-large .section-title{ font-size: clamp(1.2rem, 2.2vw, 1.35rem); }
+    body.is-contrast{
+      --bg:#ffffff; --fg:#0b0f19; --muted:#1f2937; --line:#11182733;
+      background:#ffffff; color:var(--fg);
     }
+    body.is-contrast .card{ background:#ffffff; border-color:#1f293733; }
+    body.is-contrast .tab-btn.active{ background:#0b0f19; color:#fff; border-color:#0b0f19; }
+    body.is-contrast .result-box{ background:#fafafa; border-color:#1f293726; }
+    body.is-dark.is-contrast{ --bg:#000814; --fg:#eef2ff; --muted:#cbd5e1; --line:#ffffff33; }
 
+    /* ===== 가독성 강화: 배너·표 수수료 글씨 ===== */
+    .banner .badge b{
+      font-size:1.05rem;   /* 수수료 숫자 더 큼 */
+      font-weight:900;
+      color:#fff;
+    }
+    body.is-large .banner .badge b{ font-size:1.2rem; }
+
+    /* 비교표에서 지정가/시장가 칸 강조 (2,3번째 열) */
+    .table td:nth-child(2),
+    .table td:nth-child(3){
+      font-weight:800;
+      font-size:1rem;
+      color:#111827;
+    }
+    body.is-large .table td:nth-child(2),
+    body.is-large .table td:nth-child(3){
+      font-size:1.15rem;
+    }
   </style>
 </head>
-
 <body>
 <div class="wrap">
   <div class="topbar">
-    <h1 style="margin-right:8px">코인 수수료 계산기</h1>
+    <h1 style="margin-right:8px">암호화폐 올인원 계산기</h1>
     <div class="spacer"></div>
-    <button id="themeBtn" class="theme-toggle" aria-label="테마 전환">
-      <svg id="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4a1 1 0 0 1 1-1h0a1 1 0 1 1-2 0h0a1 1 0 0 1 1 1Zm0 17a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm9-9a1 1 0 1 1 0 2 1 1 0 0 1 0-2ZM4 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm13.66 6.66a1 1 0 0 1 1.41 1.41 1 1 0 0 1-1.41-1.41ZM4.93 5.64A1 1 0 0 1 3.5 4.22a1 1 0 1 1 1.41 1.42Zm14.14-1.42a1 1 0 0 1-1.41 1.42 1 1 0 1 1 1.41-1.42ZM5.64 19.07a1 1 0 1 1-1.41 1.41 1 1 0 0 1 1.41-1.41ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Z"/></svg>
+
+    <!-- A11Y 토글 버튼 2종 -->
+    <button id="btnLarge" class="theme-toggle" aria-label="글씨 크게" title="글씨 크게" aria-pressed="false">글씨 크게</button>
+    <button id="btnContrast" class="theme-toggle" aria-label="고대비 모드" title="고대비 모드">고대비</button>
+
+    <!-- 기존 라이트/다크 토글 -->
+    <button id="themeBtn" class="theme-toggle" aria-label="테마 전환" title="테마 전환">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4a1 1 0 0 1 1-1h0a1 1 0 1 1-2 0h0a1 1 0 0 1 1 1Zm0 17a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm9-9a1 1 0 1 1 0 2 1 1 0 0 1 0-2ZM4 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm13.66 6.66a1 1 0 0 1 1.41 1.41 1 1 0  0 1-1.41-1.41ZM4.93 5.64A1 1 0 0 1 3.5 4.22a1 1 0 1 1 1.41 1.42Zm14.14-1.42a1 1 0 0 1-1.41 1.42 1 1 0 1 1 1.41-1.42ZM5.64 19.07a1 1 0 1 1-1.41 1.41 1 1 0 0 1 1.41-1.41ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Z"/></svg>
       <span id="themeLabel">라이트</span>
     </button>
   </div>
 
-  <!-- (가독성 향상) 상단 안내에 페이백 구조 한 줄 추가 -->
-  <p class="lead">
-    거래소 수수료와 페이백을 계산해 보세요.
-    <b style="color:#ef4444">※ 예시 수수료율은 참고용이며, 실제 적용은 각 거래소 공식 페이지/VIP 등급/토큰 할인 조건을 확인하세요.</b><br>
-    <b style="color:#ef4444">※ 페이백 적용 거래소는 기본 수수료율을 먼저 납부하고, 이후 해당 비율만큼 환급(캐시백)을 받는 구조입니다.</b>
-  </p>
+  <p class="lead">수수료/페이백(기본 수수료 납부 후 환급), 레버리지 PNL, 평단가, 김프, 환율 변환까지 한 번에.</p>
 
-  <!-- 계산기 + 결과 -->
-  <div class="grid" id="calc-grid">
+  <!-- Tabs -->
+  <div class="tabs" role="tablist" aria-label="계산기 탭">
+    <button class="tab-btn active" data-tab="fee">수수료</button>
+    <button class="tab-btn" data-tab="pnl">수익률/PNL</button>
+    <button class="tab-btn" data-tab="avg">평단가</button>
+    <button class="tab-btn" data-tab="kimchi">김프</button>
+    <button class="tab-btn" data-tab="fx">환율/변환</button>
+  </div>
+
+  <!-- 수수료 계산기 -->
+  <section id="panel-fee" class="tab-panel active" role="tabpanel" aria-labelledby="fee">
     <div class="card">
       <h3 class="section-title">기본 설정</h3>
       <div class="row">
@@ -232,30 +198,34 @@
           </div>
         </div>
       </div>
-      <div id="preset-note" style="font-size:12px;color:#6b7280;margin-top:6px"></div>
+      <div id="preset-note" class="lead" style="font-size:0.95rem"></div>
 
       <div class="row" style="margin-top:8px">
         <div>
-          <label>체결가치 (USDT)</label>
-          <input id="notional" type="number" min="0" value="10000"/>
+          <label>체결가치 입력 방식</label>
+          <div class="seg">
+            <button id="btn-mode-notional" class="active">체결가치 직접</button>
+            <button id="btn-mode-margin">증거금×레버리지</button>
+          </div>
         </div>
-        <div>
-          <label class="hint">커스텀 수수료율 (%) 
-            <span class="t" title="VIP/프로모션으로 본인 수수료가 다를 때 입력하면 프리셋 대신 이 값으로 계산돼요.">ⓘ</span>
-          </label>
-          <input id="customFee" type="number" step="0.0001" min="0" placeholder="프리셋 사용"/>
-        </div>
-        <div>
-          <label class="hint">거래 횟수 (합산) 
-            <span class="t" title="동일 조건으로 여러 번 거래할 경우 총 수수료를 합산해 계산합니다.">ⓘ</span>
-          </label>
-          <input id="trades" type="number" min="1" value="1"/>
-        </div>
-        <div>
-          <label class="hint">사용자 페이백 (%) 
-            <span class="t" title="레퍼럴/이벤트로 돌려받는 비율을 입력하세요. 미입력 시 0%로 계산됩니다.">ⓘ</span>
-          </label>
-          <input id="payback" type="number" step="0.1" min="0" max="100" value="20"/>
+      </div>
+
+      <!-- 체결가치 직접 -->
+      <div class="row" id="row-notional" style="margin-top:8px">
+        <div><label>체결가치 (USDT)</label><input id="notional" type="number" min="0" value="10000"/></div>
+        <div><label>커스텀 수수료율 (%)</label><input id="customFee" type="number" step="0.0001" min="0" placeholder="프리셋 사용"/></div>
+        <div><label>거래 횟수 (합산)</label><input id="trades" type="number" min="1" value="1"/></div>
+        <div><label>사용자 페이백 (%)</label><input id="payback" type="number" step="0.1" min="0" max="100" value="20"/></div>
+      </div>
+
+      <!-- 증거금×레버리지 -->
+      <div class="row hidden" id="row-margin" style="margin-top:8px">
+        <div><label>증거금 (USDT)</label><input id="margin" type="number" min="0" value="500"/></div>
+        <div><label>레버리지 (배)</label><input id="leverage" type="number" min="1" max="200" step="1" value="10"/></div>
+        <div><label>거래 횟수 (합산)</label><input id="trades2" type="number" min="1" value="1"/></div>
+        <div><label>사용자 페이백 (%)</label><input id="payback2" type="number" step="0.1" min="0" max="100" value="20"/></div>
+        <div style="flex-basis:100%">
+          <div class="lead" id="derived-note" style="font-size:0.95rem;display:none">체결가치(자동 계산): <b id="v-notional-derived">—</b></div>
         </div>
       </div>
     </div>
@@ -271,38 +241,120 @@
         <div class="kv"><div class="k">사용자 실부담 수수료</div><div class="v" id="v-net">-</div></div>
         <div class="kv"><div class="k">체감 수수료율(평균)</div><div class="v" id="v-eff">-</div></div>
       </div>
+      <a id="cta" class="cta-main" href="#" target="_blank" rel="noopener">혜택 적용 후 이동</a>
 
-      <a id="cta" class="cta-main ripple-host" href="#" target="_blank" rel="noopener">혜택 적용 후 이동</a>
-
-      <!-- (가독성 향상) 결과 하단 안내에도 페이백 구조 명시 -->
       <div class="trust">
-        <b>안내</b> · 본 계산기는 참고용이며, 실제 혜택은 각 거래소의 정책/VIP 등급 및 토큰 할인에 따라 달라질 수 있습니다.
-        일부 거래소는 제 파트너(공식 파트너/레퍼럴) 전용 혜택 기준이 적용됩니다. 상세 조건은 링크 이동 후 꼭 확인해 주세요.
-        <br>※ <b>페이백 적용 거래소는 기본 수수료율을 먼저 납부</b>하고, 이후 설정한 페이백 비율만큼 <b>환급(캐시백)</b> 받는 구조입니다.
+        <b>안내</b> · 계산은 <b>기본 수수료</b>로 먼저 산출한 뒤, 설정한 페이백 비율을 환급 형태로 차감합니다.<br>
+        ※ <b>페이백 적용 거래소는 기본 수수료율을 먼저 납부</b>하고, 이후 해당 비율만큼 <b>환급(캐시백)</b> 받는 구조입니다.
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- PNL -->
+  <section id="panel-pnl" class="tab-panel" role="tabpanel" aria-labelledby="pnl">
+    <div class="card">
+      <h3 class="section-title">수익률 / PNL (현물·선물)</h3>
+      <div class="row">
+        <div><label>모드</label><div class="seg"><button id="pnl-mode-qty" class="active">수량 직접</button><button id="pnl-mode-margin">증거금×레버리지</button></div></div>
+      </div>
+
+      <div class="row" id="pnl-row-qty" style="margin-top:8px">
+        <div><label>매수가</label><input id="pnl-entry" type="number" min="0" value="100"/></div>
+        <div><label>매도가</label><input id="pnl-exit" type="number" min="0" value="110"/></div>
+        <div><label>수량</label><input id="pnl-qty" type="number" min="0" value="1"/></div>
+      </div>
+
+      <div class="row hidden" id="pnl-row-margin" style="margin-top:8px">
+        <div><label>매수가</label><input id="pnl-entry2" type="number" min="0" value="100"/></div>
+        <div><label>매도가</label><input id="pnl-exit2" type="number" min="0" value="110"/></div>
+        <div><label>증거금 (USDT)</label><input id="pnl-margin" type="number" min="0" value="500"/></div>
+        <div><label>레버리지 (배)</label><input id="pnl-lev" type="number" min="1" max="200" step="1" value="10"/></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 class="section-title">PNL 결과</h3>
+      <div class="result-box">
+        <div class="kv"><div class="k">손익 (USDT)</div><div class="v" id="pnl-pnl">-</div></div>
+        <div class="kv"><div class="k">수익률</div><div class="v" id="pnl-roe">-</div></div>
+        <div class="kv"><div class="k">추정 체결가치</div><div class="v" id="pnl-notional">-</div></div>
+      </div>
+      <div class="lead" style="font-size:0.95rem;margin-top:6px">※ 수수료/펀딩/슬리피지는 미포함. 선물 모드에서 수량은 <b>증거금×레버리지/매수가</b>로 가정합니다.</div>
+    </div>
+  </section>
+
+  <!-- 평단 -->
+  <section id="panel-avg" class="tab-panel" role="tabpanel" aria-labelledby="avg">
+    <div class="card"><h3 class="section-title">평균 매입단가 계산</h3>
+      <div class="row">
+        <div><label>매수가 A</label><input id="avg-a-price" type="number" min="0" value="100"/></div>
+        <div><label>수량 A</label><input id="avg-a-qty" type="number" min="0" value="1"/></div>
+      </div>
+      <div class="row">
+        <div><label>매수가 B</label><input id="avg-b-price" type="number" min="0" value="120"/></div>
+        <div><label>수량 B</label><input id="avg-b-qty" type="number" min="0" value="1"/></div>
+      </div>
+      <div class="row">
+        <div><label>매수가 C (선택)</label><input id="avg-c-price" type="number" min="0" placeholder="선택"/></div>
+        <div><label>수량 C (선택)</label><input id="avg-c-qty" type="number" min="0" placeholder="선택"/></div>
+      </div>
+    </div>
+    <div class="card"><h3 class="section-title">평단가 결과</h3>
+      <div class="result-box">
+        <div class="kv"><div class="k">평단가</div><div class="v" id="avg-price">-</div></div>
+        <div class="kv"><div class="k">총 수량</div><div class="v" id="avg-qty">-</div></div>
+        <div class="kv"><div class="k">총 매입금액</div><div class="v" id="avg-sum">-</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 김프 -->
+  <section id="panel-kimchi" class="tab-panel" role="tabpanel" aria-labelledby="kimchi">
+    <div class="card"><h3 class="section-title">김치 프리미엄 계산</h3>
+      <div class="row">
+        <div><label>해외 USDT 가격</label><input id="kimchi-usd" type="number" min="0" value="100000"/></div>
+        <div><label>국내 KRW 가격</label><input id="kimchi-krw" type="number" min="0" value="138000000"/></div>
+        <div><label>환율 (KRW/USD)</label><input id="kimchi-fx" type="number" min="0" value="1380"/></div>
+      </div>
+    </div>
+    <div class="card"><h3 class="section-title">김프 결과</h3>
+      <div class="result-box">
+        <div class="kv"><div class="k">김치 프리미엄</div><div class="v" id="kimchi-prem">-</div></div>
+        <div class="kv"><div class="k">해외가(원화 환산)</div><div class="v" id="kimchi-over-krw">-</div></div>
+        <div class="kv"><div class="k">국내-해외(원화)</div><div class="v" id="kimchi-diff">-</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 환율 -->
+  <section id="panel-fx" class="tab-panel" role="tabpanel" aria-labelledby="fx">
+    <div class="card"><h3 class="section-title">환율/단순 변환</h3>
+      <div class="row">
+        <div><label>USD → KRW (환율 KRW/USD)</label><input id="fx-rate" type="number" min="0" value="1380"/></div>
+        <div><label>USD 금액</label><input id="fx-usd" type="number" min="0" value="100"/></div>
+        <div><label>KRW 금액</label><input id="fx-krw" type="number" min="0" value="138000"/></div>
+      </div>
+      <div class="lead" style="font-size:0.95rem;margin-top:6px">한쪽을 바꾸면 다른 쪽이 자동 환산됩니다.</div>
+    </div>
+  </section>
 
   <!-- ▼ 거래소 배너 + 로고 ▼ -->
-  <div id="exchanges">
+  <div id="exchanges" class="card">
     <div id="banners"></div>
-
-    <div style="margin-top:18px" class="card">
+    <div style="margin-top:18px">
       <h3 class="section-title">거래소 바로가기</h3>
       <div class="logos" id="logos"></div>
     </div>
   </div>
 
-  <!-- Tip -->
-  <div style="margin-top:18px" class="tip">
+  <!-- 초보자 팁 + 비교표 + FAQ -->
+  <div class="tip" style="margin-top:18px">
     💡 <b>초보자 팁</b> · 처음엔 수수료가 낮고 UI가 쉬운 거래소부터 시작하세요. 선물(퍼프) 거래는 리스크가 크니 반드시 <b>소액</b>으로 연습 후 진입하세요.
     자세한 가이드는 <a href="https://cafe.naver.com/bitupg?iframe_url_utf8=%2FArticleRead.nhn%253Fclubid%3D31418638%2526articleid%3D82%2526menuid%3D2%2526boardtype%3DL" target="_blank" rel="noopener">네이버 카페</a> 참고.
   </div>
 
-  <!-- 비교/설명 섹션 -->
-  <div style="margin-top:18px" class="card">
+  <div class="card">
     <h3 class="section-title">거래소 수수료 비교 · 핵심 요약</h3>
-    <p style="color:var(--muted);margin:6px 0 12px">아래는 예시 기준(혜택 적용 후) 요약입니다. 실제 적용은 등급/이벤트에 따라 다를 수 있습니다.</p>
+    <p class="lead" style="margin:6px 0 12px">아래는 예시 기준(혜택 적용 후) 요약입니다. 실제 적용은 등급/이벤트에 따라 다를 수 있습니다.</p>
     <div style="overflow:auto">
       <table class="table">
         <thead>
@@ -321,268 +373,302 @@
   </div>
 </div>
 
-<!-- ===== 데이터 & 로직 ===== -->
 <script>
-/* 거래소 데이터 (✅ 배너 뱃지에 ‘기본 수수료 납부 후 환급’ 문구 반영) */
+/* ========= 프로모 / 프리셋 ========= */
 const PROMOS = [
-  {
-    name:'Bitget',
-    logo:'https://logo.clearbit.com/bitget.com',
-    grad:['#22d3ee','#2563eb'],
-    before:{maker:0.04,taker:0.06},
-    after:{maker:0.016,taker:0.032},
-    payback:'20%',
-    note:'페이백 20% (기본 수수료 납부 후 환급)',
-    link:'https://partner.bitget.com/bg/Jihoon7',
-    cta:'🎁 지금 가입하고 수수료 50%↓ + 페이백 20% 받기'
-  },
-  {
-    name:'Bybit',
-    logo:'https://logo.clearbit.com/bybit.com',
-    grad:['#f59e0b','#d97706'],
-    before:{maker:0.02,taker:0.055},
-    after:{maker:0.02,taker:0.055},
-    payback:'20%',
-    note:'페이백 20% (기본 수수료 납부 후 환급)',
-    link:'https://partner.bybit.com/b/JIHOON',
-    cta:'🚀 Bybit 신규 혜택 받고 거래 시작'
-  },
-  {
-    name:'OKX',
-    logo:'https://logo.clearbit.com/okx.com',
-    grad:['#111111','#000000'],
-    before:{maker:0.02,taker:0.05},
-    after:{maker:0.02,taker:0.045},
-    payback:'20%',
-    note:'페이백 20% (기본 수수료 납부 후 환급)',
-    link:'https://www.okx.com/join/KANGJIHOON',
-    cta:'✅ OKX 혜택 적용 후 바로 이동'
-  },
-  {
-    name:'MEXC',
-    logo:'https://logo.clearbit.com/mexc.com',
-    grad:['#10b981','#059669'],
-    before:{maker:0.0,taker:0.02},
-    after:{maker:0.0,taker:0.018},
-    payback:'20%',
-    note:'페이백 20% (기본 수수료 납부 후 환급)',
-    link:'https://www.mexc.com/ko-KR/acquisition/custom-sign-up?shareCode=mexc-Jihoon',
-    cta:'🎯 MEXC 0% / 0.018% 혜택 받고 시작'
-  },
-  {
-    name:'Binance',
-    logo:'https://logo.clearbit.com/binance.com',
-    grad:['#f59e0b','#f59e0b'],
-    before:{maker:0.02,taker:0.04},
-    after:{maker:0.018,taker:0.038},
-    payback:'—',
-    note:'수수료 할인 10%',
-    link:'https://accounts.binance.com/register?ref=ME5CYRHB',
-    cta:'💡 Binance 수수료 할인 적용 후 이동'
-  },
-  {
-    name:'BingX',
-    logo:'https://logo.clearbit.com/bingx.com',
-    grad:['#0ea5e9','#1d4ed8'],
-    before:{maker:0.02,taker:0.05},
-    after:{maker:0.011,taker:0.0275},
-    payback:'42~45%',
-    note:'페이백 42~45% (기본 수수료 납부 후 환급)',
-    link:'https://bingx.com/invite/2N30XH/',
-    cta:'🔥 BingX 최대 45% 페이백 받고 시작'
-  },
+  { name:'Bitget',  logo:'https://logo.clearbit.com/bitget.com',  grad:['#22d3ee','#2563eb'],
+    before:{maker:0.02,taker:0.04}, after:{maker:0.016,taker:0.032},
+    payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://partner.bitget.com/bg/Jihoon7',
+    cta:'🎁 지금 가입하고 수수료 50%↓ + 페이백 20% 받기' },
+  { name:'Bybit',   logo:'https://logo.clearbit.com/bybit.com',  grad:['#f59e0b','#d97706'],
+    before:{maker:0.02,taker:0.055}, after:{maker:0.016,taker:0.049},
+    payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://partner.bybit.com/b/JIHOON',
+    cta:'🚀 Bybit 신규 혜택 받고 거래 시작' },
+  { name:'OKX',     logo:'https://logo.clearbit.com/okx.com',    grad:['#111111','#000000'],
+    before:{maker:0.02,taker:0.05},  after:{maker:0.016,taker:0.05},
+    payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://www.okx.com/join/KANGJIHOON',
+    cta:'✅ OKX 혜택 적용 후 바로 이동' },
+  { name:'MEXC',    logo:'https://logo.clearbit.com/mexc.com',   grad:['#10b981','#059669'],
+    before:{maker:0.0,taker:0.02},   after:{maker:0.0,taker:0.02},
+    payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://www.mexc.com/ko-KR/acquisition/custom-sign-up?shareCode=mexc-Jihoon',
+    cta:'🎯 MEXC 혜택 받고 시작' },
+  { name:'Binance', logo:'https://logo.clearbit.com/binance.com',grad:['#f59e0b','#f59e0b'],
+    before:{maker:0.02,taker:0.04},  after:{maker:0.02,taker:0.04},
+    payback:'—',   note:'수수료 할인 10%', link:'https://accounts.binance.com/register?ref=ME5CYRHB',
+    cta:'💡 Binance 수수료 할인 적용 후 이동' },
+  { name:'BingX',   logo:'https://logo.clearbit.com/bingx.com',  grad:['#0ea5e9','#1d4ed8'],
+    before:{maker:0.02,taker:0.05},  after:{maker:0.02,taker:0.05},
+    payback:'42~45%', note:'페이백 42~45% (기본 수수료 납부 후 환급)', link:'https://bingx.com/invite/2N30XH/',
+    cta:'🔥 BingX 최대 45% 페이백 받고 시작' },
 ];
 
-/* 계산 프리셋 (UI는 ‘적용 후’ 프리셋을 보여주되, 실제 청구는 각 거래소 정책에 따름) */
-const PRESETS = {};
-PROMOS.forEach(p=>{
-  const eff = p.after;
-  PRESETS[p.name] = {
-    spot: { maker: p.name==='MEXC'?0:0.001, taker: p.name==='MEXC'?0.00018:0.001, note: p.name==='MEXC'?'스팟 적용 후: 지정가 0.0% / 시장가 0.018%':'스팟 예시(간단화)' },
-    perp: { maker: eff.maker/100, taker: eff.taker/100, note: `적용 후: 지정가 ${p.after.maker}% / 시장가 ${p.after.taker}%` }
+const PRESETS = {
+  "Bitget": { spot:{ maker:0.0002,  taker:0.0004,  note:"기본 수수료 · 스팟: 지정가 0.02% / 시장가 0.04%" },
+              perp:{ maker:0.0002,  taker:0.0004,  note:"기본 수수료 · 선물: 지정가 0.02% / 시장가 0.04%" } },
+  "Bybit":  { spot:{ maker:0.00016, taker:0.00049, note:"기본 수수료 · 스팟: 지정가 0.016% / 시장가 0.049%" },
+              perp:{ maker:0.00016, taker:0.00049, note:"기본 수수료 · 선물: 지정가 0.016% / 시장가 0.049%" } },
+  "OKX":    { spot:{ maker:0.00016, taker:0.00050, note:"기본 수수료 · 스팟: 지정가 0.016% / 시장가 0.05%" },
+              perp:{ maker:0.00016, taker:0.00050, note:"기본 수수료 · 선물: 지정가 0.016% / 시장가 0.05%" } },
+  "MEXC":   { spot:{ maker:0.0,     taker:0.00020, note:"기본 수수료 · 스팟: 지정가 0% / 시장가 0.02%" },
+              perp:{ maker:0.0,     taker:0.00020, note:"기본 수수료 · 선물: 지정가 0% / 시장가 0.02%" } },
+  "Binance":{ spot:{ maker:0.00020, taker:0.00040, note:"기본 수수료 · 스팟: 지정가 0.02% / 시장가 0.04%" },
+              perp:{ maker:0.00020, taker:0.00040, note:"기본 수수료 · 선물: 지정가 0.02% / 시장가 0.04%" } },
+  "BingX":  { spot:{ maker:0.00020, taker:0.00050, note:"기본 수수료 · 스팟: 지정가 0.02% / 시장가 0.05%" },
+              perp:{ maker:0.00020, taker:0.00050, note:"기본 수수료 · 선물: 지정가 0.02% / 시장가 0.05%" } }
+};
+
+/* ========= 전부 DOMContentLoaded 안에서 실행 ========= */
+document.addEventListener('DOMContentLoaded', () => {
+  const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+  const nf=x=>(Math.round((+x||0)*1e8)/1e8).toLocaleString();
+  const toPerc=x=>((+x||0)*100).toFixed(6).replace(/0+$/,'').replace(/\.$/,'')+'%';
+  const animateNumber=(el,target,fmt=(x)=>x,duration=350)=>{
+    if(!el) return;
+    const startVal=el.dataset.v?parseFloat(el.dataset.v):0;
+    const start=performance.now(); const diff=target-startVal;
+    const step=t=>{const p=Math.min(1,(t-start)/duration); const val=startVal+diff*p; el.textContent=fmt(val); el.dataset.v=val; if(p<1) requestAnimationFrame(step)};
+    requestAnimationFrame(step);
   };
-});
+  const toggle=(on,off)=>{ on?.classList.add('active'); off?.classList.remove('active'); };
 
-/* 엘리먼트 */
-const elExchange=document.getElementById('exchange');
-const elSpot=document.getElementById('btn-spot');
-const elPerp=document.getElementById('btn-perp');
-const elMaker=document.getElementById('btn-maker');
-const elTaker=document.getElementById('btn-taker');
-const elNotional=document.getElementById('notional');
-const elCustom=document.getElementById('customFee');
-const elTrades=document.getElementById('trades');
-const elPayback=document.getElementById('payback');
-const elNote=document.getElementById('preset-note');
-const vRate=document.getElementById('v-rate');
-const vFee1=document.getElementById('v-fee1');
-const vFeeN=document.getElementById('v-feeN');
-const vPB=document.getElementById('v-payback');
-const vNet=document.getElementById('v-net');
-const vEff=document.getElementById('v-eff');
-const elCTA=document.getElementById('cta');
-const themeBtn=document.getElementById('themeBtn');
-const themeLabel=document.getElementById('themeLabel');
+  /* 탭(접근성 속성 포함) */
+  $$('.tab-btn').forEach(btn=>{
+    btn.setAttribute('role','tab');
+    btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+    btn.addEventListener('click',()=>{
+      const id=btn.dataset.tab;
+      $$('.tab-btn').forEach(b=>{b.classList.remove('active'); b.setAttribute('aria-selected','false');});
+      btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+      $$('.tab-panel').forEach(p=>p.classList.remove('active'));
+      $('#panel-'+id).classList.add('active');
+    });
+  });
 
-let state={exchange:'Bitget',market:'perp',order:'taker'};
+  /* 테마 */
+  const themeBtn=$('#themeBtn'), themeLabel=$('#themeLabel');
+  const savedTheme=localStorage.getItem('calc-theme');
+  if(savedTheme==='dark') document.body.classList.add('is-dark');
+  themeLabel.textContent=document.body.classList.contains('is-dark')?'다크':'라이트';
+  themeBtn?.addEventListener('click',()=>{
+    document.body.classList.toggle('is-dark');
+    const dark=document.body.classList.contains('is-dark');
+    themeLabel.textContent=dark?'다크':'라이트';
+    localStorage.setItem('calc-theme',dark?'dark':'light');
+  });
 
-const toggle=(on,off)=>{on.classList.add('active');off.classList.remove('active');};
-const toPerc=x=>(x*100).toFixed(6).replace(/0+$/,'').replace(/\.$/,'')+'%';
-const nf=x=>(Math.round(x*1e8)/1e8).toLocaleString();
+  /* A11Y: 큰 글씨/고대비 토글 (상태 저장 + 라벨 스위칭) */
+  const btnLarge = $('#btnLarge');
+  const btnContrast = $('#btnContrast');
 
-/* 숫자 카운트업 애니메이션 */
-function animateNumber(el, target, fmt=(x)=>x, duration=450){
-  const startVal = el.dataset.v ? parseFloat(el.dataset.v) : 0;
-  const start = performance.now();
-  const diff = target - startVal;
-  function step(t){
-    const p = Math.min(1, (t-start)/duration);
-    const val = startVal + diff*p;
-    el.textContent = fmt(val);
-    el.dataset.v = val;
-    if(p<1) requestAnimationFrame(step);
+  function syncLargeLabel(){
+    const on = document.body.classList.contains('is-large');
+    btnLarge.textContent = on ? '글씨 기본' : '글씨 크게';
+    btnLarge.setAttribute('aria-label', on ? '글씨 기본' : '글씨 크게');
+    btnLarge.setAttribute('title', on ? '글씨 기본' : '글씨 크게');
+    btnLarge.setAttribute('aria-pressed', on ? 'true' : 'false');
   }
-  requestAnimationFrame(step);
-}
+  if(localStorage.getItem('is-large')==='1') document.body.classList.add('is-large');
+  if(localStorage.getItem('is-contrast')==='1') document.body.classList.add('is-contrast');
+  syncLargeLabel();
 
-/* Ripple */
-function spawnRipple(host, x, y) {
-  if (!host.classList.contains('ripple-host')) host.classList.add('ripple-host');
-  const r = document.createElement('span');
-  r.className = 'ripple';
-  r.style.left = x + 'px';
-  r.style.top  = y + 'px';
-  host.appendChild(r);
-  r.addEventListener('animationend', () => r.remove());
-}
+  btnLarge?.addEventListener('click', ()=>{
+    document.body.classList.toggle('is-large');
+    localStorage.setItem('is-large', document.body.classList.contains('is-large')?'1':'0');
+    syncLargeLabel();
+  });
+  btnContrast?.addEventListener('click', ()=>{
+    document.body.classList.toggle('is-contrast');
+    localStorage.setItem('is-contrast', document.body.classList.contains('is-contrast')?'1':'0');
+  });
 
-/* 계산 */
-function update(){
-  const ex=state.exchange, market=state.market, order=state.order;
-  const preset=PRESETS[ex][market][order];
-  const custom=parseFloat(elCustom.value||'');
-  const rate=isNaN(custom)?preset:custom/100;
+  /* 상태 & 엘리먼트 */
+  let state={exchange:'Bitget',market:'perp',order:'taker',mode:'notional'};
 
-  const N=Math.max(0,parseFloat(elNotional.value||'0'));
-  const t=Math.max(1,parseInt(elTrades.value||'1',10));
-  const fee1=N*rate, feeN=fee1*t;
-  const pbRate=Math.max(0,Math.min(1,(parseFloat(elPayback.value)||0)/100));
-  const pb=feeN*pbRate, net=feeN-pb, eff=N>0?net/(N*t):0;
+  const elExchange=$('#exchange');
+  const elSpot=$('#btn-spot'), elPerp=$('#btn-perp');
+  const elMaker=$('#btn-maker'), elTaker=$('#btn-taker');
+  const elModeNotional=$('#btn-mode-notional'), elModeMargin=$('#btn-mode-margin');
+  const rowNotional=$('#row-notional'), rowMargin=$('#row-margin');
+  const elNotional=$('#notional'), elCustom=$('#customFee'), elTrades=$('#trades'), elPayback=$('#payback');
+  const elMargin=$('#margin'), elLev=$('#leverage'), elTrades2=$('#trades2'), elPayback2=$('#payback2');
+  const vDerived=$('#v-notional-derived');
+  const elNote=$('#preset-note'), vRate=$('#v-rate'), vFee1=$('#v-fee1'), vFeeN=$('#v-feeN'), vPB=$('#v-payback'), vNet=$('#v-net'), vEff=$('#v-eff'), elCTA=$('#cta');
 
-  elNote.textContent=`프리셋: ${ex} / ${market==='spot'?'스팟':'선물'} / ${order.toUpperCase()} = ${toPerc(preset)} · ${PRESETS[ex][market].note}`;
-
-  animateNumber(vRate, rate, (x)=>toPerc(x));
-  animateNumber(vFee1, fee1, (x)=>nf(x)+' USDT');
-  animateNumber(vFeeN, feeN, (x)=>nf(x)+' USDT');
-  animateNumber(vPB, pb,   (x)=>nf(x)+' USDT');
-  animateNumber(vNet, net, (x)=>nf(x)+' USDT');
-  animateNumber(vEff, eff, (x)=>toPerc(x));
-
-  const promo=PROMOS.find(p=>p.name===ex);
-  elCTA.href=promo.link;
-  elCTA.style.background=`linear-gradient(90deg, ${promo.grad[0]}, ${promo.grad[1]})`;
-  elCTA.textContent=promo.cta;
-}
-
-/* 초기 렌더링 */
-(function init(){
-  PROMOS.forEach(p=>{
-    const o=document.createElement('option');o.value=p.name;o.textContent=p.name;elExchange.appendChild(o);
+  /* 거래소 옵션 주입 */
+  elExchange.innerHTML='';
+  Object.keys(PRESETS).forEach(n=>{
+    const o=document.createElement('option'); o.value=n; o.textContent=n; elExchange.appendChild(o);
   });
   elExchange.value=state.exchange;
 
-  const banners=document.getElementById('banners');
-  PROMOS.forEach(p=>{
-    const b=document.createElement('div');
-    b.className='banner';
-    b.style.background=`linear-gradient(90deg,${p.grad[0]},${p.grad[1]})`;
-    b.dataset.depth = 6;
-    b.innerHTML=`
-      <img src="${p.logo}" alt="${p.name}">
-      <div style="flex:1">
-        <h3>${p.name} 수수료 안내</h3>
-        <p>
-          <span class="badge">적용 전: 지정가 <b>${p.before.maker}%</b> / 시장가 <b>${p.before.taker}%</b></span>
-          <span class="badge">적용 후: 지정가 <b>${p.after.maker}%</b> / 시장가 <b>${p.after.taker}%</b></span>
-          <span class="badge">${p.note}</span>
-        </p>
-      </div>`;
-    const a=document.createElement('a');
-    a.className='cta ripple-host'; a.textContent=p.cta; a.href=p.link; a.target='_blank'; a.rel='noopener';
-    b.appendChild(a);
-    banners.appendChild(b);
+  function updateFee(){
+    try{
+      const ex=state.exchange, mk=state.market, od=state.order;
+      const presetRate = PRESETS?.[ex]?.[mk]?.[od];
+      const note = PRESETS?.[ex]?.[mk]?.note || '';
+      const custom=parseFloat(elCustom.value||'');
+      const rate=isNaN(custom)?presetRate:custom/100;
 
-    b.addEventListener('mousemove',(e)=>{
-      const r=b.getBoundingClientRect();
-      const x=(e.clientX-r.left)/r.width - 0.5;
-      const y=(e.clientY-r.top)/r.height - 0.5;
-      const d=parseFloat(b.dataset.depth||6);
-      b.style.transform=`translate3d(${x*d}px, ${y*d}px, 0)`;
+      let N=0, t=1, pbRate=0;
+      if(state.mode==='notional'){
+        N=Math.max(0,parseFloat(elNotional.value||'0'));
+        t=Math.max(1,parseInt(elTrades.value||'1',10));
+        pbRate=Math.max(0,Math.min(1,(parseFloat(elPayback.value)||0)/100));
+        $('#derived-note').style.display='none';
+      }else{
+        const m=Math.max(0,parseFloat(elMargin.value||'0'));
+        const lv=Math.max(1,parseFloat(elLev.value||'1'));
+        N=m*lv;
+        vDerived.textContent=nf(N)+' USDT';
+        $('#derived-note').style.display='block';
+        t=Math.max(1,parseInt(elTrades2.value||'1',10));
+        pbRate=Math.max(0,Math.min(1,(parseFloat(elPayback2.value)||0)/100));
+      }
+
+      const fee1=N*rate, feeN=fee1*t;
+      const pb=feeN*pbRate, net=feeN-pb, eff=N>0?net/(N*t):0;
+
+      elNote.textContent=`프리셋: ${ex} / ${mk==='spot'?'스팟':'선물'} / ${od.toUpperCase()} = ${toPerc(presetRate)} · ${note}`;
+      animateNumber(vRate, rate, toPerc);
+      animateNumber(vFee1, fee1, x=>nf(x)+' USDT');
+      animateNumber(vFeeN, feeN, x=>nf(x)+' USDT');
+      animateNumber(vPB, pb,   x=>nf(x)+' USDT');
+      animateNumber(vNet, net, x=>nf(x)+' USDT');
+      animateNumber(vEff, eff, toPerc);
+
+      const promo=PROMOS.find(p=>p.name===ex);
+      if(promo){ elCTA.href=promo.link; elCTA.textContent=promo.cta; }
+    }catch(e){ console.error('updateFee error', e); }
+  }
+
+  /* 수수료 이벤트 */
+  elExchange.addEventListener('change',()=>{state.exchange=elExchange.value;updateFee()});
+  elSpot.addEventListener('click',()=>{state.market='spot';toggle(elSpot,elPerp);updateFee()});
+  elPerp.addEventListener('click',()=>{state.market='perp';toggle(elPerp,elSpot);updateFee()});
+  elMaker.addEventListener('click',()=>{state.order='maker';toggle(elMaker,elTaker);updateFee()});
+  elTaker.addEventListener('click',()=>{state.order='taker';toggle(elTaker,elMaker);updateFee()});
+  [elNotional,elCustom,elTrades,elPayback,elMargin,elLev,elTrades2,elPayback2].forEach(el=>el.addEventListener('input',updateFee));
+
+  /* PNL */
+  const pnlQty=$('#pnl-row-qty'), pnlMargin=$('#pnl-row-margin');
+  const btnQty=$('#pnl-mode-qty'), btnMargin=$('#pnl-mode-margin');
+  const pnl_el={pnl:$('#pnl-pnl'),roe:$('#pnl-roe'),notional:$('#pnl-notional')};
+
+  function setPnlMode(m){
+    if(m==='qty'){ btnQty.classList.add('active'); btnMargin.classList.remove('active'); pnlQty.classList.remove('hidden'); pnlMargin.classList.add('hidden'); }
+    else{ btnMargin.classList.add('active'); btnQty.classList.remove('active'); pnlMargin.classList.remove('hidden'); pnlQty.classList.add('hidden'); }
+    calcPNL();
+  }
+  btnQty.addEventListener('click',()=>setPnlMode('qty'));
+  btnMargin.addEventListener('click',()=>setPnlMode('margin'));
+  ['pnl-entry','pnl-exit','pnl-qty','pnl-entry2','pnl-exit2','pnl-margin','pnl-lev'].forEach(id=>document.getElementById(id).addEventListener('input',calcPNL));
+
+  function calcPNL(){
+    if(pnlMargin.classList.contains('hidden')){
+      const entry=+($('#pnl-entry').value||0), exit=+($('#pnl-exit').value||0), qty=+($('#pnl-qty').value||0);
+      const pnl=(exit-entry)*qty; const notional=entry*qty; const roe=notional>0?pnl/notional:0;
+      animateNumber(pnl_el.pnl,pnl,x=>nf(x)+' USDT'); animateNumber(pnl_el.roe,roe,toPerc); animateNumber(pnl_el.notional,notional,x=>nf(x)+' USDT'); return;
+    }
+    const entry=+($('#pnl-entry2').value||0), exit=+($('#pnl-exit2').value||0), m=+($('#pnl-margin').value||0), lv=Math.max(1,+($('#pnl-lev').value||1));
+    const notional=entry>0?m*lv:0; const qty=entry>0?(m*lv)/entry:0; const pnl=(exit-entry)*qty; const roe=m>0?pnl/m:0;
+    animateNumber(pnl_el.pnl,pnl,x=>nf(x)+' USDT'); animateNumber(pnl_el.roe,roe,toPerc); animateNumber(pnl_el.notional,notional,x=>nf(x)+' USDT');
+  }
+
+  /* 평단 */
+  ['avg-a-price','avg-a-qty','avg-b-price','avg-b-qty','avg-c-price','avg-c-qty'].forEach(id=>document.getElementById(id).addEventListener('input',calcAVG));
+  function calcAVG(){
+    const pA=+($('#avg-a-price').value||0), qA=+($('#avg-a-qty').value||0);
+    const pB=+($('#avg-b-price').value||0), qB=+($('#avg-b-qty').value||0);
+    const pC=+($('#avg-c-price').value||0), qC=+($('#avg-c-qty').value||0);
+    const sum=pA*qA + pB*qB + (pC*qC||0);
+    const qty=qA + qB + (qC||0);
+    const avg=qty>0?sum/qty:0;
+    animateNumber($('#avg-price'),avg,nf);
+    animateNumber($('#avg-qty'),qty,nf);
+    animateNumber($('#avg-sum'),sum,nf);
+  }
+
+  /* 김프 */
+  ['kimchi-usd','kimchi-krw','kimchi-fx'].forEach(id=>document.getElementById(id).addEventListener('input',calcKimchi));
+  function calcKimchi(){
+    const usd=+($('#kimchi-usd').value||0), krw=+($('#kimchi-krw').value||0), fx=+($('#kimchi-fx').value||0);
+    const overKRW=usd*fx;
+    const prem=overKRW>0?(krw/overKRW-1):0;
+    const diff=krw-overKRW;
+    animateNumber($('#kimchi-prem'),prem,toPerc);
+    animateNumber($('#kimchi-over-krw'),overKRW,x=>nf(x)+' 원');
+    animateNumber($('#kimchi-diff'),diff,x=>nf(x)+' 원');
+  }
+
+  /* 환율 */
+  ['fx-rate','fx-usd','fx-krw'].forEach(id=>document.getElementById(id).addEventListener('input',calcFX));
+  let fxLock=false;
+  function calcFX(e){
+    if(fxLock) return; fxLock=true;
+    const rate=+($('#fx-rate').value||0);
+    const usdEl=$('#fx-usd'), krwEl=$('#fx-krw');
+    if(e && e.target===usdEl){
+      const krw=rate*(+usdEl.value||0); krwEl.value=(isFinite(krw)?Math.round(krw*100)/100:0);
+    }else if(e && e.target===krwEl){
+      const usd=rate>0?(+krwEl.value||0)/rate:0; usdEl.value=(isFinite(usd)?Math.round(usd*1000000)/1000000:0);
+    }else{
+      const usd=+usdEl.value||0; krwEl.value=(isFinite(rate*usd)?Math.round(rate*usd*100)/100:0);
+    }
+    fxLock=false;
+  }
+
+  /* 배너/로고/비교표 */
+  function renderExchanges(){
+    const banners=$('#banners'); const logos=$('#logos'); const body=$('#cmp-body');
+    PROMOS.forEach(p=>{
+      const el=document.createElement('div');
+      el.className='banner';
+      el.style.background=`linear-gradient(90deg,${p.grad[0]},${p.grad[1]})`;
+      el.innerHTML=`
+        <img src="${p.logo}" alt="${p.name}">
+        <div style="flex:1;min-width:200px">
+          <h3>${p.name} 수수료 안내</h3>
+          <p>
+            <span class="badge">적용 전: 지정가 <b>${p.before.maker}%</b> / 시장가 <b>${p.before.taker}%</b></span>
+            <span class="badge">적용 후: 지정가 <b>${p.after.maker}%</b> / 시장가 <b>${p.after.taker}%</b></span>
+            <span class="badge">${p.note}</span>
+          </p>
+        </div>
+        <a class="cta" href="${p.link}" target="_blank" rel="noopener">${p.cta}</a>`;
+      banners.appendChild(el);
+
+      const a=document.createElement('a'); a.className='logo'; a.href=p.link; a.target='_blank'; a.rel='noopener';
+      a.innerHTML=`<div class="img"><img src="${p.logo}" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'font-weight:700;font-size:13px\\'>${p.name}</span>';"></div>
+        <div style="font-weight:900">${p.name}</div>
+        <div style="font-size:12px;color:#2563eb;font-weight:800">혜택 페이지 이동</div>`;
+      logos.appendChild(a);
+
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td style="font-weight:800">${p.name}</td>
+        <td>${p.after.maker}%</td><td>${p.after.taker}%</td>
+        <td><span class="pill">${p.payback}</span></td><td>${p.note}</td>`;
+      body.appendChild(tr);
     });
-    b.addEventListener('mouseleave',()=>{ b.style.transform='translate3d(0,0,0)'; });
-    b.addEventListener('mouseenter',(e)=>{ const rect=b.getBoundingClientRect(); spawnRipple(b, e.clientX-rect.left, e.clientY-rect.top); });
-    a.addEventListener('click',(e)=>{ const rect=a.getBoundingClientRect(); spawnRipple(a, e.clientX-rect.left, e.clientY-rect.top); });
-  });
+  }
 
-  const logos=document.getElementById('logos');
-  PROMOS.forEach(p=>{
-    const a=document.createElement('a');a.className='logo ripple-host';a.href=p.link;a.target='_blank';a.rel='noopener';
-    a.innerHTML=`<div class="img"><img src="${p.logo}"
-      onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'font-weight:700;font-size:13px\\'>${p.name}</span>';"></div>
-      <div style="font-weight:900">${p.name}</div>
-      <div style="font-size:12px;color:#2563eb;font-weight:800">혜택 페이지 이동</div>`;
-    logos.appendChild(a);
-    a.addEventListener('click',(e)=>{ const r=a.getBoundingClientRect(); spawnRipple(a, e.clientX-r.left, e.clientY-r.top); });
-  });
-
-  const body=document.getElementById('cmp-body');
-  PROMOS.forEach(p=>{
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td style="font-weight:800">${p.name}</td>
-      <td>${p.after.maker}%</td><td>${p.after.taker}%</td>
-      <td><span class="pill">${p.payback}</span></td><td>${p.note}</td>`;
-    body.appendChild(tr);
-  });
-
-  elExchange.addEventListener('change',()=>{state.exchange=elExchange.value;update()});
-  elSpot.addEventListener('click',()=>{state.market='spot';toggle(elSpot,elPerp);update()});
-  elPerp.addEventListener('click',()=>{state.market='perp';toggle(elPerp,elSpot);update()});
-  elMaker.addEventListener('click',()=>{state.order='maker';toggle(elMaker,elTaker);update()});
-  elTaker.addEventListener('click',()=>{state.order='taker';toggle(elTaker,elMaker);update()});
-  [elNotional,elCustom,elTrades,elPayback].forEach(el=>el.addEventListener('input',update));
-
-  // 테마
-  const saved=localStorage.getItem('calc-theme');
-  if(saved==='dark') document.body.classList.add('is-dark');
-  document.getElementById('themeLabel').textContent = document.body.classList.contains('is-dark') ? '다크' : '라이트';
-  themeBtn.addEventListener('click',()=>{
-    document.body.classList.toggle('is-dark');
-    const dark=document.body.classList.contains('is-dark');
-    document.getElementById('themeLabel').textContent=dark?'다크':'라이트';
-    localStorage.setItem('calc-theme', dark?'dark':'light');
-  });
-
-  update();
-})();
+  /* 초기 실행 */
+  updateFee(); calcPNL(); calcAVG(); calcKimchi(); calcFX(); renderExchanges();
+});
 </script>
 
-<!-- FAQ 구조화 데이터 (SEO) -->
+<!-- FAQ 구조화 데이터 -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [{
     "@type": "Question",
-    "name": "커스텀 수수료율은 언제 쓰나요?",
-    "acceptedAnswer": { "@type": "Answer", "text": "거래소에서 개인 VIP/프로모션 등으로 수수료가 다를 때 직접 입력해 계산합니다." }
+    "name": "왜 기본 수수료로 계산하나요?",
+    "acceptedAnswer": { "@type": "Answer", "text": "거래소는 기본 수수료를 먼저 청구하고, 페이백(레퍼럴/이벤트)은 이후 환급되는 구조이기 때문에 기본 수수료로 계산한 뒤 페이백을 차감합니다." }
   }, {
     "@type": "Question",
-    "name": "페이백은 어디서 확인하나요?",
-    "acceptedAnswer": { "@type": "Answer", "text": "거래소 이벤트/레퍼럴 정책에 따라 변동됩니다. 각 거래소 버튼을 눌러 상세 페이지에서 확인하세요." }
-  }, {
-    "@type": "Question",
-    "name": "계산 결과가 실제와 다른 이유는?",
-    "acceptedAnswer": { "@type": "Answer", "text": "체결 방식, 포인트/토큰 할인, VIP 등급, 이벤트 등이 반영되지 않았을 수 있습니다. 안내 문구의 유의사항을 참고하세요." }
+    "name": "증거금×레버리지 모드는 어떻게 계산하나요?",
+    "acceptedAnswer": { "@type": "Answer", "text": "체결가치는 증거금×레버리지로 계산하고, 선물 PNL 모드에서 수량은 (증거금×레버리지)/매수가로 가정합니다. 수수료/펀딩/슬리피지는 미포함입니다." }
   }]
 }
 </script>
