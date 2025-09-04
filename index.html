@@ -1,122 +1,133 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-  <title>암호화폐 올인원 계산기 | Bitget·Bybit·OKX·MEXC·Binance·BingX</title>
-  <meta name="description" content="거래소별 기본 수수료율 기준으로 수수료·페이백, 레버리지 PNL, 평단가, 김프, 환율 변환까지 한 번에 계산. 모바일 완전 지원.">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
-  <style>
-    :root{ --bg:#f7f7fb; --fg:#111827; --muted:#374151; --line:#e5e7eb; --accent:#2563eb; font-size:17px }
-    html{ -webkit-text-size-adjust:100% }
-    @media (min-width:900px){ :root{ font-size:18px } }
-    *{ box-sizing:border-box }
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>암호화폐 올인원 계산기 | Bitget·Bybit·OKX·MEXC·Binance·BingX</title>
+<meta name="description" content="거래소별 기본 수수료율 기준으로 수수료·페이백, 레버리지 PNL, 평단가, 김프, 환율 변환까지 한 번에 계산. 모바일 완전 지원.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+:root{ --bg:#f7f7fb; --fg:#111827; --muted:#374151; --line:#e5e7eb; --accent:#2563eb; font-size:17px }
+html{ -webkit-text-size-adjust:100% }
+@media (min-width:900px){ :root{ font-size:18px } }
+*{ box-sizing:border-box }
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Pretendard",system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",sans-serif;
+  line-height:1.65;
+  /* 모바일 줄바꿈 보강 */
+  word-break: keep-all; -webkit-hyphens:none; hyphens:none;
+}
+a{ color:var(--accent); text-decoration:none }
+.wrap{ max-width:1120px; margin:0 auto; padding:24px 24px 32px }
+h1{ margin:0 0 8px }
+h1,.btn,.section-title{ white-space:nowrap } /* 제목/버튼/섹션타이틀 깨짐 방지 */
+.lead{ margin:0 0 18px; color:var(--muted); font-size:1rem }
+.topbar{ display:flex; align-items:center; gap:12px; flex-wrap:wrap }
+.spacer{ flex:1 }
 
-    /* ▼ 모바일 줄바꿈 보정 (단어 쪼개짐 방지) */
-    body{
-      margin:0; background:var(--bg); color:var(--fg);
-      font-family:"Pretendard",system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",sans-serif;
-      line-height:1.65;
-      word-break: keep-all;
-      -webkit-hyphens: none; hyphens: none;
-    }
-    /* 한 줄 유지가 필요한 요소 */
-    h1, .btn, .section-title{ white-space:nowrap }
+/* 공통 버튼 */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px;
+  border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer; font-weight:900; min-height:44px }
 
-    a{ color:var(--accent); text-decoration:none }
-    .wrap{ max-width:1120px; margin:0 auto; padding:24px 24px 32px }
-    h1{ margin:0 0 8px }
-    .lead{ margin:0 0 18px; color:var(--muted); font-size:1rem }
-    .topbar{ display:flex; align-items:center; gap:10px } .spacer{ flex:1 }
-    .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 12px; border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer; font-weight:800; min-height:44px }
+/* 카드 */
+.card{ background:#fff; border:1px solid var(--line); border-radius:20px; padding:18px 20px; margin-top:16px }
+.section-title{ margin:0 0 12px; font-weight:900; font-size:1.125rem }
+@media (min-width:900px){ .section-title{ font-size:1.25rem } }
+label{ display:block; font-size:0.95rem; margin:8px 0 6px; font-weight:700 }
+input,select,button{ font-size:1rem }
+input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:14px; background:#fff; min-height:44px }
+.row{ display:flex; gap:10px; flex-wrap:wrap } .row>*{ flex:1 1 200px }
+.hidden{ display:none !important }
 
-    .card{ background:#fff; border:1px solid var(--line); border-radius:20px; padding:18px 20px; margin-top:16px }
-    .section-title{ margin:0 0 12px; font-weight:900; font-size:1.125rem }
-    @media (min-width:900px){ .section-title{ font-size:1.25rem } }
-    label{ display:block; font-size:0.95rem; margin:8px 0 6px; font-weight:700 }
-    input,select,button{ font-size:1rem }
-    input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:14px; background:#fff; min-height:44px }
-    .row{ display:flex; gap:10px; flex-wrap:wrap } .row>*{ flex:1 1 200px }
-    .hidden{ display:none !important }
+/* 탭 */
+.tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-top:16px }
+.tab-btn{ padding:12px 16px; border:1px solid var(--line); border-radius:14px; background:#fff; font-weight:800; cursor:pointer; min-height:44px }
+.tab-btn.active{ background:#111827; color:#fff }
+.tab-panel{ display:none !important } .tab-panel.active{ display:block !important }
 
-    /* Tabs */
-    .tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-top:16px }
-    .tab-btn{ padding:12px 16px; border:1px solid var(--line); border-radius:14px; background:#fff; font-weight:800; cursor:pointer; min-height:44px }
-    .tab-btn.active{ background:#111827; color:#fff }
-    .tab-panel{ display:none !important } .tab-panel.active{ display:block !important }
+/* 세그먼트 */
+.seg{ display:flex; gap:8px }
+.seg button{ flex:1; padding:12px; border:1px solid var(--line); background:#fff; border-radius:14px; cursor:pointer; font-weight:800; min-height:44px }
+.seg button.active{ background:#111827; color:#fff; border-color:#111827 }
 
-    /* Segments */
-    .seg{ display:flex; gap:8px }
-    .seg button{ flex:1; padding:12px; border:1px solid var(--line); background:#fff; border-radius:14px; cursor:pointer; font-weight:800; min-height:44px }
-    .seg button.active{ background:#111827; color:#fff; border-color:#111827 }
+/* 결과 박스 */
+.kv{ display:flex; justify-content:space-between; align-items:center; padding:8px 0 }
+.kv .k{ font-weight:800 } .kv .v{ font-weight:900; font-variant-numeric:tabular-nums }
+.result-box{ border:1px dashed var(--line); border-radius:14px; padding:12px; background:#fafafa }
+.hr{ height:1px; background:var(--line); margin:6px 0 }
 
-    .kv{ display:flex; justify-content:space-between; align-items:center; padding:8px 0 }
-    .kv .k{ font-weight:800 } .kv .v{ font-weight:900; font-variant-numeric:tabular-nums }
-    .result-box{ border:1px dashed var(--line); border-radius:14px; padding:12px; background:#fafafa }
-    .hr{ height:1px; background:var(--line); margin:6px 0 }
-    .cta-main{ display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:14px; padding:14px 16px; font-weight:900; color:#fff; text-decoration:none; width:100%; min-height:48px; background:linear-gradient(90deg,#0ea5e9,#6366f1) }
-    .trust{ font-size:0.95rem; background:#fff7ed; border:1px solid #fde68a; border-radius:14px; padding:10px 12px; margin-top:8px }
+/* CTA(결과 섹션) - 가운데 정렬 */
+.actions-center{ display:flex; justify-content:center; align-items:center; gap:10px; margin-top:10px; flex-wrap:wrap }
+.cta-main{ display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:14px; padding:14px 16px; font-weight:900; color:#fff; text-decoration:none; width:100%; max-width:320px; min-height:48px; background:linear-gradient(90deg,#0ea5e9,#6366f1) }
 
-    /* Exchange banners */
-    .banner{ display:flex; gap:12px; align-items:center; color:#fff; border-radius:18px; padding:18px 20px; margin:0 0 12px; border:1px solid rgba(255,255,255,.12); flex-wrap:wrap; box-shadow:0 10px 22px rgba(2,8,20,.06) }
-    .banner img{ width:44px; height:44px; object-fit:contain; background:rgba(255,255,255,.16); border-radius:12px; padding:6px }
-    .banner h3{ margin:0; font-size:18px }
-    .banner p{ margin:4px 0 0; font-size:15px; display:flex; flex-wrap:wrap; gap:6px }
-    .badge{ display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); font-weight:900; white-space:nowrap }
-    .badge b{ color:#fff; font-weight:900 }
-    .cta-white{ margin-left:auto; padding:11px 14px; border-radius:14px; background:#fff; color:var(--brand); font-weight:900; text-decoration:none; border:1px solid rgba(0,0,0,.06) }
+/* 안내 */
+.trust{ font-size:0.95rem; background:#fff7ed; border:1px solid #fde68a; border-radius:14px; padding:10px 12px; margin-top:8px }
 
-    /* Brand colors for text on white buttons */
-    .ex-Bitget{ --brand:#0ea5e9 }
-    .ex-Bybit{ --brand:#d97706 }
-    .ex-OKX{ --brand:#0b0f19 }
-    .ex-MEXC{ --brand:#10b981 }
-    .ex-Binance{ --brand:#f0b90b }
-    .ex-BingX{ --brand:#2563eb }
+/* 배너(거래소 카드) */
+.banner{ display:flex; flex-direction:column; gap:12px; color:#fff; border-radius:18px; padding:18px 20px; margin:0 0 12px;
+  border:1px solid rgba(255,255,255,.12); box-shadow:0 10px 22px rgba(2,8,20,.06) }
+.banner-header{ display:flex; gap:12px; align-items:center }
+.banner img{ width:44px; height:44px; object-fit:contain; background:rgba(255,255,255,.16); border-radius:12px; padding:6px }
+.banner h3{ margin:0; font-size:18px }
+.banner p{ margin:4px 0 0; font-size:15px; display:flex; flex-wrap:wrap; gap:6px }
+.badge{ display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); font-weight:900; white-space:nowrap }
+.badge b{ color:#fff; font-weight:900 }
+/* 배너 버튼을 가운데 배치 */
+.banner .cta-row{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:6px }
+.cta-white{ padding:11px 14px; border-radius:14px; background:#fff; color:var(--brand); font-weight:900; text-decoration:none; border:1px solid rgba(0,0,0,.06) }
 
-    /* Comparison table */
-    .table{ width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--line); border-radius:12px; overflow:hidden }
-    .table th,.table td{ padding:12px 14px; border-bottom:1px solid var(--line); text-align:left }
-    .table th{ background:#f9fafb; font-weight:900 }
-    .table tr:last-child td{ border-bottom:0 }
-    .pill{ display:inline-block; padding:4px 10px; border-radius:999px; background:#eef2ff; color:#3730a3; font-weight:800; font-size:12px; border:1px solid #c7d2fe }
+/* 브랜드 색 (CTA 글자색) */
+.ex-Bitget{ --brand:#0ea5e9 }
+.ex-Bybit{ --brand:#d97706 }
+.ex-OKX{ --brand:#0b0f19 }
+.ex-MEXC{ --brand:#10b981 }
+.ex-Binance{ --brand:#f0b90b }
+.ex-BingX{ --brand:#2563eb }
 
-    /* Footer benefits grid */
-    .benefit-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px }
-    .benefit-grid a{ display:flex; align-items:center; justify-content:center; border:1px solid var(--line); background:#fff; border-radius:12px; min-height:48px; font-weight:900 }
+/* 비교표 */
+.table{ width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--line); border-radius:12px; overflow:hidden }
+.table th,.table td{ padding:12px 14px; border-bottom:1px solid var(--line); text-align:left }
+.table th{ background:#f9fafb; font-weight:900 }
+.table tr:last-child td{ border-bottom:0 }
+.pill{ display:inline-block; padding:4px 10px; border-radius:999px; background:#eef2ff; color:#3730a3; font-weight:800; font-size:12px; border:1px solid #c7d2fe }
 
-    /* Modal */
-    .modal-backdrop{ position:fixed; inset:0; background:rgba(15,23,42,.58); display:none; align-items:center; justify-content:center; z-index:60 }
-    .modal{ width:min(92vw,600px); background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px }
-    .modal h3{ margin:0 0 6px }
-    .chips{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin:6px 0 8px }
-    .chip{ padding:6px 10px; border-radius:999px; border:1px solid #e2e8f0; background:#f8fafc; font-weight:900; font-size:.92rem }
-    .modal .actions{ display:flex; gap:8px; margin-top:10px }
-    .modal .actions a,.modal .actions button{ flex:1 }
-    .modal-cta{ border:0; border-radius:12px; padding:11px 14px; font-weight:900; color:#fff; text-decoration:none }
-    .modal-close{ border:1px solid var(--line); background:#fff; border-radius:12px; padding:10px 12px; font-weight:900; cursor:pointer }
+/* 혜택 모달 */
+.modal-backdrop{ position:fixed; inset:0; background:rgba(15,23,42,.58); display:none; align-items:center; justify-content:center; z-index:60 }
+.modal{ width:min(92vw,600px); background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px }
+.modal h3{ margin:0 0 6px }
+.chips{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin:6px 0 8px }
+.chip{ padding:6px 10px; border-radius:999px; border:1px solid #e2e8f0; background:#f8fafc; font-weight:900; font-size:.92rem }
+.modal .actions{ display:flex; gap:8px; margin-top:10px; justify-content:center }
+.modal .actions a,.modal .actions button{ flex:1; max-width:260px }
+.modal-cta{ border:0; border-radius:12px; padding:11px 14px; font-weight:900; color:#fff; text-decoration:none; text-align:center }
+.modal-close{ border:1px solid var(--line); background:#fff; border-radius:12px; padding:10px 12px; font-weight:900; cursor:pointer }
 
-    /* Mobile tidy */
-    @media (max-width:480px){
-      :root{ font-size:16.5px }
-      .wrap{ padding:16px 14px 28px }
-      .card{ border-radius:16px; padding:14px 14px }
-      .banner{ border-radius:16px; padding:14px }
-      .banner img{ width:36px; height:36px }
-      .badge{ padding:5px 9px }
-      .cta-white{ width:100%; margin:6px 0 0 }
-      .tabs{ position:sticky; top:0; z-index:20; background:var(--bg); padding:8px 0 10px; margin:6px 0 10px; overflow-x:auto; white-space:nowrap }
-      .tab-btn{ flex:0 0 auto; min-height:40px; padding:10px 12px; border-radius:12px }
-    }
-  </style>
+/* 초보자 팁 버튼(위치/끊김 해결) */
+.tip-link{ margin-left:auto }
+@media (max-width:720px){
+  .tip-link{ width:100%; order:3 } /* 제목/리드 아래로 내려 가운데 폭으로 표시 */
+}
+@media (max-width:480px){
+  :root{ font-size:16.5px }
+  .wrap{ padding:16px 14px 28px }
+  .card{ border-radius:16px; padding:14px 14px }
+  .banner{ border-radius:16px; padding:14px }
+  .banner img{ width:36px; height:36px }
+  .badge{ padding:5px 9px }
+  .tabs{ position:sticky; top:0; z-index:20; background:var(--bg); padding:8px 0 10px; margin:6px 0 10px; overflow-x:auto; white-space:nowrap }
+  .tab-btn{ flex:0 0 auto; min-height:40px; padding:10px 12px; border-radius:12px }
+}
+</style>
 </head>
 <body>
 <div class="wrap">
   <div class="topbar">
     <h1>암호화폐 올인원 계산기</h1>
     <div class="spacer"></div>
-    <a class="btn" href="https://cafe.naver.com/bitupg" target="_blank" rel="noopener">초보자 팁</a>
+    <!-- 초보자 팁: 데스크탑은 오른쪽, 모바일은 제목/리드 아래로 이동 -->
+    <a class="btn tip-link" href="https://cafe.naver.com/bitupg" target="_blank" rel="noopener">초보자 팁</a>
   </div>
 
   <p class="lead">수수료/페이백(기본 수수료 납부 후 환급), 레버리지 PNL, 평단가, 김프, 환율 변환까지 한 번에.</p>
@@ -191,10 +202,13 @@
         <div class="kv"><div class="k">사용자 실부담 수수료</div><div class="v" id="v-net">-</div></div>
         <div class="kv"><div class="k">체감 수수료율(평균)</div><div class="v" id="v-eff">-</div></div>
       </div>
-      <div style="display:flex;justify-content:center;gap:10px;margin-top:10px;flex-wrap:wrap">
-        <a id="cta" class="cta-main" href="#" target="_blank" rel="noopener" style="max-width:320px">혜택 받기</a>
+
+      <!-- 가운데 정렬된 버튼 2개 -->
+      <div class="actions-center">
+        <a id="cta" class="cta-main" href="#" target="_blank" rel="noopener">혜택 받기</a>
         <button id="benefitBtn" class="btn" type="button">혜택 보기</button>
       </div>
+
       <div class="trust">
         <b>안내</b> · 계산은 <b>기본 수수료</b>로 먼저 산출한 뒤, 설정한 페이백 비율을 환급 형태로 차감합니다.<br>
         ※ 페이백 적용 거래소는 기본 수수료율을 먼저 납부하고, 이후 해당 비율만큼 환급(캐시백) 받는 구조입니다.
@@ -276,11 +290,8 @@
         <div class="kv"><div class="k">해외가(원화 환산)</div><div class="v" id="kimchi-over-krw">-</div></div>
         <div class="kv"><div class="k">국내-해외(원화)</div><div class="v" id="kimchi-diff">-</div></div>
       </div>
-      <!-- ▼ 사용법/공식 (보강) -->
-      <div class="lead" style="font-size:12px;margin-top:6px">
-        사용법: <b>해외(USDT)</b>, <b>국내(원)</b>, <b>환율</b>을 입력하면 자동 계산됩니다.<br>
-        공식: (국내 ÷ (해외×환율) − 1) × 100
-      </div>
+      <!-- 사용법(간단) -->
+      <div class="lead" style="font-size:12px;margin-top:6px">사용법: <b>해외(USDT)</b>·<b>국내(원)</b>·<b>환율</b>을 입력하면 자동 계산됩니다. 공식: (국내 ÷ (해외×환율) − 1) × 100.</div>
     </div>
   </section>
 
@@ -293,17 +304,14 @@
         <div><label>USD 금액</label><input id="fx-usd" type="number" min="0" value="100"/></div>
         <div><label>KRW 금액</label><input id="fx-krw" type="number" min="0" value="138000"/></div>
       </div>
-      <!-- ▼ 안내 (보강) -->
-      <div class="lead" style="font-size:12px;margin-top:6px">
-        USD를 입력하면 KRW가 자동 환산되고, KRW를 입력하면 USD가 자동 계산됩니다. (환율 = KRW/USD)
-      </div>
+      <div class="lead" style="font-size:12px;margin-top:6px">USD를 입력하면 KRW가 자동 환산되고, KRW를 입력하면 USD가 자동 계산됩니다. (환율 = KRW/USD)</div>
     </div>
   </section>
 
-  <!-- 거래소 배너 -->
+  <!-- 거래소 배너 목록 -->
   <div id="exchanges" class="card"><div id="banners"></div></div>
 
-  <!-- 비교표 (정갈 버전) -->
+  <!-- 비교표 -->
   <div class="card">
     <h3 class="section-title">거래소 수수료 비교 · 핵심 요약</h3>
     <div style="overflow:auto">
@@ -320,12 +328,6 @@
         <tbody id="cmp-body"></tbody>
       </table>
     </div>
-  </div>
-
-  <!-- 하단 혜택 버튼 칸 -->
-  <div class="card">
-    <h3 class="section-title">거래소 혜택 바로가기</h3>
-    <div id="benefitGrid" class="benefit-grid"></div>
   </div>
 </div>
 
@@ -347,33 +349,27 @@
 const PROMOS = [
   { name:'Bitget',  logo:'https://logo.clearbit.com/bitget.com',  grad:['#22d3ee','#2563eb'], color:'#0ea5e9',
     before:{maker:0.02,taker:0.04}, after:{maker:0.016,taker:0.032},
-    payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://partner.bitget.com/bg/Jihoon7',
-    cta:'🎁 Bitget 혜택 받기' },
+    payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://partner.bitget.com/bg/Jihoon7' },
 
   { name:'Bybit',   logo:'https://logo.clearbit.com/bybit.com',  grad:['#f59e0b','#d97706'], color:'#d97706',
     before:{maker:0.02,taker:0.055}, after:{maker:0.016,taker:0.049},
-    payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://partner.bybit.com/b/JIHOON',
-    cta:'🚀 Bybit 혜택 받기' },
+    payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://partner.bybit.com/b/JIHOON' },
 
   { name:'OKX',     logo:'https://logo.clearbit.com/okx.com',    grad:['#111111','#000000'], color:'#0b0f19',
-    before:{maker:0.02,taker:0.05},  after:{maker:0.016,taker:0.045},  // 적용후 시장가 0.045%
-    payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://www.okx.com/join/KANGJIHOON',
-    cta:'✅ OKX 혜택 받기' },
+    before:{maker:0.02,taker:0.05},  after:{maker:0.016,taker:0.045}, /* 적용후 시장 0.045% */
+    payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://www.okx.com/join/KANGJIHOON' },
 
   { name:'MEXC',    logo:'https://logo.clearbit.com/mexc.com',   grad:['#10b981','#059669'], color:'#10b981',
-    before:{maker:0.0,taker:0.02},   after:{maker:0.0,taker:0.018},   // 적용후 시장가 0.018%
-    payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://www.mexc.com/ko-KR/acquisition/custom-sign-up?shareCode=mexc-Jihoon',
-    cta:'🎯 MEXC 혜택 받기' },
+    before:{maker:0.0,taker:0.02},   after:{maker:0.0,taker:0.018},  /* 적용후 시장 0.018% */
+    payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://www.mexc.com/ko-KR/acquisition/custom-sign-up?shareCode=mexc-Jihoon' },
 
   { name:'Binance', logo:'https://logo.clearbit.com/binance.com',grad:['#f59e0b','#f59e0b'], color:'#f0b90b',
     before:{maker:0.02,taker:0.04},  after:{maker:0.018,taker:0.038},
-    payback:'—',   note:'수수료 할인 10%', link:'https://accounts.binance.com/register?ref=ME5CYRHB',
-    cta:'💡 Binance 혜택 받기' },
+    payback:'—',   note:'수수료 할인 10%', link:'https://accounts.binance.com/register?ref=ME5CYRHB' },
 
   { name:'BingX',   logo:'https://logo.clearbit.com/bingx.com',  grad:['#0ea5e9','#1d4ed8'], color:'#2563eb',
     before:{maker:0.02,taker:0.05},  after:{maker:0.011,taker:0.0275},
-    payback:'42~45%', note:'페이백 42~45% (기본 수수료 납부 후 환급)', link:'https://bingx.com/invite/2N30XH/',
-    cta:'🔥 BingX 혜택 받기' },
+    payback:'42~45%', note:'페이백 42~45% (기본 수수료 납부 후 환급)', link:'https://bingx.com/invite/2N30XH/' },
 ];
 
 const PRESETS = {
@@ -398,7 +394,7 @@ const toPerc=x=>((+x||0)*100).toFixed(6).replace(/0+$/,'').replace(/\.$/,'')+'%'
 const animateNumber=(el,t,fmt=(x)=>x)=>{ if(!el) return; el.textContent=fmt(t); el.dataset.v=t; };
 const toggle=(on,off)=>{ on?.classList.add('active'); off?.classList.remove('active'); };
 
-/* ===== 탭 동작 ===== */
+/* ===== 탭 ===== */
 $$('.tab-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     $$('.tab-btn').forEach(b=>b.classList.remove('active'));
@@ -453,26 +449,30 @@ elMaker.addEventListener('click',()=>{ state.order='maker'; toggle(elMaker,elTak
 elTaker.addEventListener('click',()=>{ state.order='taker'; toggle(elTaker,elMaker); updateFee(); });
 [elNotional,elCustom,elTrades,elPayback,elMargin,elLev,elTrades2,elPayback2].forEach(el=>el.addEventListener('input',updateFee));
 
-/* ===== 배너/비교표/하단 버튼 ===== */
+/* ===== 배너/비교표 ===== */
 function renderExchanges(){
-  const banners=$('#banners'), body=$('#cmp-body'), grid=$('#benefitGrid');
+  const banners=$('#banners'), body=$('#cmp-body');
   PROMOS.forEach(p=>{
     // Banner
     const el=document.createElement('div');
     el.className=`banner ex-${p.name}`;
     el.style.background=`linear-gradient(90deg,${p.grad[0]},${p.grad[1]})`;
     el.innerHTML=`
-      <img src="${p.logo}" alt="${p.name}">
-      <div style="flex:1;min-width:220px">
-        <h3>${p.name} 수수료 안내</h3>
-        <p>
-          <span class="badge">적용 전: <b>${p.before.maker}%</b>/<b>${p.before.taker}%</b></span>
-          <span class="badge">적용 후: <b>${p.after.maker}%</b>/<b>${p.after.taker}%</b></span>
-          <span class="badge">${p.note}</span>
-        </p>
+      <div class="banner-header">
+        <img src="${p.logo}" alt="${p.name}">
+        <div>
+          <h3>${p.name} 수수료 안내</h3>
+          <p>
+            <span class="badge">적용 전: <b>${p.before.maker}%</b>/<b>${p.before.taker}%</b></span>
+            <span class="badge">적용 후: <b>${p.after.maker}%</b>/<b>${p.after.taker}%</b></span>
+            <span class="badge">${p.note}</span>
+          </p>
+        </div>
       </div>
-      <a class="cta-white" style="color:${p.color}" href="${p.link}" target="_blank" rel="noopener">🎁 ${p.name} 혜택 받기</a>
-      <button class="btn" style="margin-left:8px" data-benefit="${p.name}" type="button">혜택 보기</button>`;
+      <div class="cta-row">
+        <a class="cta-white" style="color:${p.color}" href="${p.link}" target="_blank" rel="noopener">🎁 ${p.name} 혜택 받기</a>
+        <button class="btn" data-benefit="${p.name}" type="button">혜택 보기</button>
+      </div>`;
     banners.appendChild(el);
 
     // Table
@@ -483,25 +483,21 @@ function renderExchanges(){
       <td><span class="pill">${p.payback}</span></td>
       <td><a class="btn" href="${p.link}" target="_blank" rel="noopener">혜택 보기</a></td>`;
     body.appendChild(tr);
-
-    // Bottom grid
-    const a=document.createElement('a');
-    a.href=p.link; a.target='_blank'; a.rel='noopener';
-    a.textContent=`${p.name} 혜택 받기`;
-    a.style.borderColor='var(--line)'; a.style.background='#fff'; a.style.color=p.color; a.style.fontWeight='900';
-    grid.appendChild(a);
   });
 
-  // inline banner benefit buttons open modal
   banners.addEventListener('click',(e)=>{ const b=e.target.closest('button[data-benefit]'); if(!b) return; openBenefit(b.dataset.benefit); });
 }
 
 /* ===== 혜택 모달 ===== */
-const backdrop=document.getElementById('benefitBackdrop'), benefitTitle=document.getElementById('benefitTitle');
-const benefitChips=document.getElementById('benefitChips'), benefitList=document.getElementById('benefitList'), benefitCTA=document.getElementById('benefitCTA');
+const backdrop=document.getElementById('benefitBackdrop'),
+      benefitTitle=document.getElementById('benefitTitle'),
+      benefitChips=document.getElementById('benefitChips'),
+      benefitList=document.getElementById('benefitList'),
+      benefitCTA=document.getElementById('benefitCTA');
 document.getElementById('benefitBtn').addEventListener('click',()=>openBenefit(state.exchange));
 document.getElementById('benefitClose').addEventListener('click',()=>backdrop.style.display='none');
 backdrop.addEventListener('click',(e)=>{ if(e.target===backdrop) backdrop.style.display='none'; });
+
 function openBenefit(name){
   const p=PROMOS.find(x=>x.name===name); if(!p) return;
   benefitTitle.textContent=p.name+' 혜택';
@@ -517,10 +513,7 @@ function openBenefit(name){
 }
 
 /* ===== 초기화 ===== */
-(function boot(){
-  renderExchanges();
-  updateFee();
-})();
+(function boot(){ renderExchanges(); updateFee(); })();
 </script>
 </body>
 </html>
