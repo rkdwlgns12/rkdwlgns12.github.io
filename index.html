@@ -12,7 +12,18 @@
     html{ -webkit-text-size-adjust:100% }
     @media (min-width:900px){ :root{ font-size:18px } }
     *{ box-sizing:border-box }
-    body{ margin:0; background:var(--bg); color:var(--fg); font-family:"Pretendard",system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",sans-serif; line-height:1.65 }
+
+    /* ▼ 모바일 줄바꿈 보정 (단어 쪼개짐 방지) */
+    body{
+      margin:0; background:var(--bg); color:var(--fg);
+      font-family:"Pretendard",system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",sans-serif;
+      line-height:1.65;
+      word-break: keep-all;
+      -webkit-hyphens: none; hyphens: none;
+    }
+    /* 한 줄 유지가 필요한 요소 */
+    h1, .btn, .section-title{ white-space:nowrap }
+
     a{ color:var(--accent); text-decoration:none }
     .wrap{ max-width:1120px; margin:0 auto; padding:24px 24px 32px }
     h1{ margin:0 0 8px }
@@ -265,7 +276,11 @@
         <div class="kv"><div class="k">해외가(원화 환산)</div><div class="v" id="kimchi-over-krw">-</div></div>
         <div class="kv"><div class="k">국내-해외(원화)</div><div class="v" id="kimchi-diff">-</div></div>
       </div>
-      <div class="lead" style="font-size:12px;margin-top:6px">사용법: <b>해외(USDT)</b>·<b>국내(원)</b>·<b>환율</b>을 입력하면 자동으로 계산됩니다. 공식: (국내 ÷ (해외×환율) − 1) × 100.</div>
+      <!-- ▼ 사용법/공식 (보강) -->
+      <div class="lead" style="font-size:12px;margin-top:6px">
+        사용법: <b>해외(USDT)</b>, <b>국내(원)</b>, <b>환율</b>을 입력하면 자동 계산됩니다.<br>
+        공식: (국내 ÷ (해외×환율) − 1) × 100
+      </div>
     </div>
   </section>
 
@@ -278,7 +293,10 @@
         <div><label>USD 금액</label><input id="fx-usd" type="number" min="0" value="100"/></div>
         <div><label>KRW 금액</label><input id="fx-krw" type="number" min="0" value="138000"/></div>
       </div>
-      <div class="lead" style="font-size:12px;margin-top:6px">USD를 바꾸면 KRW가, KRW를 바꾸면 USD가 자동 환산됩니다. (환율 = KRW/USD)</div>
+      <!-- ▼ 안내 (보강) -->
+      <div class="lead" style="font-size:12px;margin-top:6px">
+        USD를 입력하면 KRW가 자동 환산되고, KRW를 입력하면 USD가 자동 계산됩니다. (환율 = KRW/USD)
+      </div>
     </div>
   </section>
 
@@ -338,12 +356,12 @@ const PROMOS = [
     cta:'🚀 Bybit 혜택 받기' },
 
   { name:'OKX',     logo:'https://logo.clearbit.com/okx.com',    grad:['#111111','#000000'], color:'#0b0f19',
-    before:{maker:0.02,taker:0.05},  after:{maker:0.016,taker:0.045}, // ⬅ 수정: 적용후 시장가 0.045%
+    before:{maker:0.02,taker:0.05},  after:{maker:0.016,taker:0.045},  // 적용후 시장가 0.045%
     payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://www.okx.com/join/KANGJIHOON',
     cta:'✅ OKX 혜택 받기' },
 
   { name:'MEXC',    logo:'https://logo.clearbit.com/mexc.com',   grad:['#10b981','#059669'], color:'#10b981',
-    before:{maker:0.0,taker:0.02},   after:{maker:0.0,taker:0.018},  // ⬅ 수정: 적용후 시장가 0.018%
+    before:{maker:0.0,taker:0.02},   after:{maker:0.0,taker:0.018},   // 적용후 시장가 0.018%
     payback:'20%', note:'페이백 20% (기본 수수료 납부 후 환급)', link:'https://www.mexc.com/ko-KR/acquisition/custom-sign-up?shareCode=mexc-Jihoon',
     cta:'🎯 MEXC 혜택 받기' },
 
@@ -357,7 +375,6 @@ const PROMOS = [
     payback:'42~45%', note:'페이백 42~45% (기본 수수료 납부 후 환급)', link:'https://bingx.com/invite/2N30XH/',
     cta:'🔥 BingX 혜택 받기' },
 ];
-
 
 const PRESETS = {
   "Bitget": { spot:{ maker:0.0002,  taker:0.0006,  note:"현물 기본: 지정가 0.02% / 시장가 0.06%" },
