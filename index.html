@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>암호화폐 올인원 계산기 | Bitget·Bybit·OKX·MEXC·Binance·BingX</title>
-<meta name="description" content="수수료 직접 입력 + 참고 수수료율 확인, 레버리지 PNL, 평단가, 김프, 환율 변환. 모바일 완전 지원.">
+<meta name="description" content="수수료 직접 입력 + 참고 수수료율 확인, 레버리지 PNL, 평단가. 모바일 완전 지원.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 <style>
@@ -98,8 +98,6 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
     <button class="tab-btn active" data-tab="fee">수수료</button>
     <button class="tab-btn" data-tab="pnl">수익률/PNL</button>
     <button class="tab-btn" data-tab="avg">평단가</button>
-    <button class="tab-btn" data-tab="kimchi">김프</button>
-    <button class="tab-btn" data-tab="fx">환율/변환</button>
   </div>
 
   <!-- 수수료 계산기 -->
@@ -129,17 +127,15 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
       </div>
 
       <div class="col-3" style="margin-top:8px">
-        <!-- 좌측: 체결가치/횟수/페이백/레버리지 -->
+        <!-- 좌측: 체결가치/횟수/페이백 -->
         <div class="card" style="margin:0">
           <h3 class="section-title">체결가치/횟수</h3>
           <div class="row">
             <div><label>체결가치 (USDT)</label><input id="notional" type="number" min="0" value="10000"/></div>
             <div><label>거래 횟수 (합산)</label><input id="trades" type="number" min="1" value="1"/></div>
             <div><label>사용자 페이백 (%)</label><input id="payback" type="number" step="0.1" min="0" max="100" value="0"/></div>
-            <!-- ✅ 추가: 레버리지 -->
-            <div><label>레버리지 (배)</label><input id="leverage" type="number" min="1" max="200" value="1"/></div>
           </div>
-          <div class="small" style="margin-top:4px">※ 레버리지는 총 체결가치 = 입력 체결가치 × 레버리지로 반영됩니다.</div>
+          <div class="small" style="margin-top:4px">※ 페이백은 캐시백/환급형만 입력 (없으면 0).</div>
         </div>
 
         <!-- 가운데: 사용 수수료율 직접 입력 -->
@@ -255,27 +251,6 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
     </div>
   </section>
 
-  <!-- 김프 -->
-  <section id="panel-kimchi" class="tab-panel" role="tabpanel">
-    <div class="card">
-      <h3 class="section-title">김치 프리미엄 계산</h3>
-      <div class="row">
-        <div><label>해외 USDT 가격</label><input id="kimchi-usd" type="number" min="0" value="100000"/></div>
-        <div><label>국내 KRW 가격</label><input id="kimchi-krw" type="number" min="0" value="138000000"/></div>
-        <div><label>환율 (KRW/USD)</label><input id="kimchi-fx" type="number" min="0" value="1380"/></div>
-      </div>
-    </div>
-    <div class="card">
-      <h3 class="section-title">김프 결과</h3>
-      <div class="result-box">
-        <div class="kv"><div class="k">김치 프리미엄</div><div class="v" id="kimchi-prem">-</div></div>
-        <div class="kv"><div class="k">해외가(원화 환산)</div><div class="v" id="kimchi-over-krw">-</div></div>
-        <div class="kv"><div class="k">국내-해외(원화)</div><div class="v" id="kimchi-diff">-</div></div>
-      </div>
-      <div class="small" style="margin-top:6px">공식: (국내 ÷ (해외×환율) − 1) × 100.</div>
-    </div>
-  </section>
-
   <!-- 거래소 배너/표 -->
   <div id="exchanges" class="card"><div id="banners"></div></div>
   <div class="card">
@@ -296,7 +271,7 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
     <h3 id="benefitTitle">거래소 혜택</h3>
     <div id="benefitChips" class="chips"></div>
     <ul id="benefitList" style="margin:8px 0 0;padding-left:18px;line-height:1.6;text-align:left"></ul>
-    <div class="actions" style="display:flex;justify-content:center;">
+    <div class="actions" style="display:flex;justify-content:center">
       <a class="modal-cta" id="benefitCTA" href="#" target="_blank" rel="noopener">🎁 수수료 혜택 받고 가입하기</a>
     </div>
   </div>
@@ -307,9 +282,9 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
 const REF = {
   Bitget: {  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.02, taker: 0.06 } },
   Bybit:  {  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.02, taker: 0.055 } },
-  OKX:    {  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.02, taker: 0.05 } },  // OKX 선물 지정가 0.02%
+  OKX:    {  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.02, taker: 0.05 } },
   MEXC:   {  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.00, taker: 0.02 } },
-  Binance:{  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.02, taker: 0.04 } },  // 바이낸스 선물 0.02/0.04
+  Binance:{  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.02, taker: 0.04 } },
   BingX:  {  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.02, taker: 0.05 } }
 };
 
@@ -318,23 +293,18 @@ const PROMOS = [
   { name:'Bitget',  logo:'https://logo.clearbit.com/bitget.com',  grad:['#22d3ee','#2563eb'], color:'#0ea5e9',
     before:{maker:0.02,taker:0.06}, after:{maker:0.016,taker:0.032},
     payback:'20%', benefits:['수수료 혜택','페이백 20%'], link:'https://partner.bitget.com/bg/Jihoon7' },
-
   { name:'Bybit',   logo:'https://logo.clearbit.com/bybit.com',  grad:['#f59e0b','#d97706'], color:'#d97706',
     before:{maker:0.02,taker:0.055}, after:{maker:0.016,taker:0.049},
     payback:'20%', benefits:['페이백 20%'], link:'https://partner.bybit.com/b/JIHOON' },
-
   { name:'OKX',     logo:'https://logo.clearbit.com/okx.com',    grad:['#111111','#000000'], color:'#0b0f19',
     before:{maker:0.02,taker:0.05},  after:{maker:0.016,taker:0.045},
     payback:'20%', benefits:['페이백 20%'], link:'https://www.okx.com/join/KANGJIHOON' },
-
   { name:'MEXC',    logo:'https://logo.clearbit.com/mexc.com',   grad:['#10b981','#059669'], color:'#10b981',
     before:{maker:0.0,taker:0.02},   after:{maker:0.0,taker:0.018},
     payback:'20%', benefits:['페이백 20%'], link:'https://www.mexc.com/ko-KR/acquisition/custom-sign-up?shareCode=mexc-Jihoon' },
-
   { name:'Binance', logo:'https://logo.clearbit.com/binance.com',grad:['#f59e0b','#f59e0b'], color:'#f0b90b',
     before:{maker:0.02,taker:0.04},  after:{maker:0.018,taker:0.038},
     payback:'—',   benefits:['수수료 10% 할인'], link:'https://accounts.binance.com/register?ref=ME5CYRHB' },
-
   { name:'BingX',   logo:'https://logo.clearbit.com/bingx.com',  grad:['#0ea5e9','#1d4ed8'], color:'#2563eb',
     before:{maker:0.02,taker:0.05},  after:{maker:0.011,taker:0.0275},
     payback:'42~45%', benefits:['페이백 42~45%'], link:'https://bingx.com/invite/2N30XH/' },
@@ -362,7 +332,6 @@ let state={exchange:'Bitget',market:'perp',order:'taker'};
 const elExchange=$('#exchange'), elSpot=$('#btn-spot'), elPerp=$('#btn-perp');
 const elMaker=$('#btn-maker'), elTaker=$('#btn-taker');
 const elNotional=$('#notional'), elTrades=$('#trades'), elPayback=$('#payback');
-const elLeverage=$('#leverage'); // ✅ 추가
 const elRateMaker=$('#rate-maker'), elRateTaker=$('#rate-taker');
 const vRate=$('#v-rate'), vFee1=$('#v-fee1'), vFeeN=$('#v-feeN'), vPB=$('#v-payback'), vNet=$('#v-net'), vEff=$('#v-eff');
 const elCTA=$('#cta');
@@ -432,11 +401,9 @@ function currentRate(){
   return state.order==='maker' ? maker : taker;
 }
 function updateFee(){
-  const lev = +((elLeverage?.value)||1);   // ✅ 레버리지
-  const N0  = +elNotional.value||0;
-  const N   = N0 * (isFinite(lev)&&lev>0?lev:1); // 총 체결가치
-  const t   = Math.max(1,+elTrades.value||1);
   const rate=currentRate();
+  const N=+elNotional.value||0;
+  const t=Math.max(1,+elTrades.value||1);
   const pbRate=(+elPayback.value||0)/100;
 
   const fee1=N*rate, feeN=fee1*t, pb=feeN*pbRate, net=feeN-pb, eff=N>0?net/(N*t):0;
@@ -454,7 +421,7 @@ elSpot.addEventListener('click',()=>{ state.market='spot'; toggle(elSpot,elPerp)
 elPerp.addEventListener('click',()=>{ state.market='perp'; toggle(elPerp,elSpot); refreshRef(); });
 elMaker.addEventListener('click',()=>{ state.order='maker'; toggle(elMaker,elTaker); updateFee(); });
 elTaker.addEventListener('click',()=>{ state.order='taker'; toggle(elTaker,elMaker); updateFee(); });
-[elNotional,elTrades,elPayback,elRateMaker,elRateTaker,elLeverage].forEach(el=>el.addEventListener('input',updateFee));
+[elNotional,elTrades,elPayback,elRateMaker,elRateTaker].forEach(el=>el.addEventListener('input',updateFee));
 
 /* ===== PNL ===== */
 const pnlQty=$('#pnl-row-qty'), pnlMargin=$('#pnl-row-margin');
@@ -478,35 +445,6 @@ function calcPNL(){
   const entry=+($('#pnl-entry2').value||0), exit=+($('#pnl-exit2').value||0), m=+($('#pnl-margin').value||0), lv=Math.max(1,+($('#pnl-lev').value)||1);
   const notional=entry>0?m*lv:0; const qty=entry>0?(m*lv)/entry:0; const pnl=(exit-entry)*qty; const roe=m>0?pnl/m:0;
   pnl_el.pnl.textContent=nf2(pnl)+' USDT'; pnl_el.roe.textContent=toPerc(roe); pnl_el.notional.textContent=nf2(notional)+' USDT';
-}
-
-/* ===== 김프 ===== */
-['kimchi-usd','kimchi-krw','kimchi-fx'].forEach(id=>document.getElementById(id)?.addEventListener('input',calcKimchi));
-function calcKimchi(){
-  const usd=+($('#kimchi-usd').value||0), krw=+($('#kimchi-krw').value||0), fx=+($('#kimchi-fx').value||0);
-  const overKRW=usd*fx;
-  const prem=overKRW>0?(krw/overKRW-1):0;
-  const diff=krw-overKRW;
-  $('#kimchi-prem').textContent=toPerc(prem);
-  $('#kimchi-over-krw').textContent=nf(overKRW)+' 원';
-  $('#kimchi-diff').textContent=nf(diff)+' 원';
-}
-
-/* ===== 환율 ===== */
-['fx-rate','fx-usd','fx-krw'].forEach(id=>document.getElementById(id)?.addEventListener('input',calcFX));
-let fxLock=false;
-function calcFX(e){
-  if(fxLock) return; fxLock=true;
-  const rate=+($('#fx-rate').value||0);
-  const usdEl=$('#fx-usd'), krwEl=$('#fx-krw');
-  if(e && e.target===usdEl){
-    const krw=rate*(+usdEl.value||0); krwEl.value=(isFinite(krw)?Math.round(krw*100)/100:0);
-  }else if(e && e.target===krwEl){
-    const usd=rate>0?(+krwEl.value||0)/rate:0; usdEl.value=(isFinite(usd)?Math.round(usd*1000000)/1000000:0);
-  }else{
-    const usd=+usdEl.value||0; krwEl.value=(isFinite(rate*usd)?Math.round(rate*usd*100)/100:0);
-  }
-  fxLock=false;
 }
 
 /* ===== 배너/비교표 ===== */
@@ -549,9 +487,8 @@ function renderExchanges(){
     body.appendChild(tr);
   });
 
-  // 배너/표의 혜택 보기 버튼: 모달 열기
-  document.addEventListener('click', (e)=>{
-    const b = e.target.closest('.banner-benefit, .table-benefit');
+  document.addEventListener('click',(e)=>{
+    const b=e.target.closest('.banner-benefit, .table-benefit');
     if(!b) return;
     openBenefit(b.dataset.benefit);
   });
@@ -564,8 +501,6 @@ function renderExchanges(){
   applyExchangeTheme(state.exchange);
   updateFee();
   calcPNL();
-  calcKimchi();
-  calcFX();
 })();
 </script>
 </body>
