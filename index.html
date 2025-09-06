@@ -3,25 +3,20 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>암호화폐 올인원 계산기 | Bitget·Bybit·OKX·MEXC·Binance·BingX</title>
-<meta name="description" content="수수료 직접 입력 + 참고 수수료율 확인, 레버리지 PNL, 평단가, 청산가. 모바일 완전 지원.">
-
+<title>암호화폐 올인원 계산기 (모바일 초압축 + 비교표 버튼 이동)</title>
+<meta name="description" content="수수료/PNL/평단/청산가 계산기 + 거래소 혜택 비교. 모바일에선 초압축 레이아웃.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
-
 <style>
 :root{ --bg:#f7f7fb; --fg:#111827; --muted:#374151; --line:#e5e7eb; --accent:#2563eb; font-size:17px }
 @media (min-width:900px){ :root{ font-size:18px } }
-*{ box-sizing:border-box }
-html{ -webkit-text-size-adjust:100% }
+*{ box-sizing:border-box } html{ -webkit-text-size-adjust:100% }
 body{ margin:0; background:var(--bg); color:var(--fg); font-family:"Pretendard",system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",sans-serif; line-height:1.65; word-break:keep-all }
 a{ color:var(--accent); text-decoration:none }
-.wrap{ max-width:1120px; margin:0 auto; padding:24px 24px 32px }
+.wrap{ max-width:1120px; margin:0 auto; padding:24px 24px 96px }
 h1{ margin:0 0 8px } h1,.btn,.section-title{ white-space:nowrap }
 .lead{ margin:0 0 18px; color:var(--muted); font-size:1rem }
-.topbar{ display:flex; align-items:center; gap:12px; flex-wrap:wrap } .spacer{ flex:1 }
-
-/* 버튼/카드 */
+.topbar{ position:sticky; top:0; z-index:40; backdrop-filter:saturate(140%) blur(6px); background:rgba(247,247,251,.9); display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:10px 0 12px; border-bottom:1px solid var(--line) } .spacer{ flex:1 }
 .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer; font-weight:900; min-height:44px }
 .card{ background:#fff; border:1px solid var(--line); border-radius:20px; padding:18px 20px; margin-top:16px }
 .section-title{ margin:0 0 12px; font-weight:900; font-size:1.125rem } @media(min-width:900px){ .section-title{ font-size:1.25rem } }
@@ -32,22 +27,22 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
 .col-3{ display:grid; gap:10px; grid-template-columns:1fr; } @media(min-width:900px){ .col-3{ grid-template-columns:1.15fr 1fr 1fr } }
 .hidden{ display:none !important }
 
-/* 탭/세그먼트 */
-.tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-top:16px }
-.tab-btn{ padding:12px 16px; border:1px solid var(--line); border-radius:14px; background:#fff; font-weight:800; cursor:pointer; min-height:44px }
+/* 탭 */
+.tabs{ position:sticky; top:58px; z-index:30; display:flex; gap:8px; flex-wrap:nowrap; margin:6px 0 0; padding:10px 0; background:rgba(247,247,251,.95); border-bottom:1px solid var(--line); overflow-x:auto }
+.tab-btn{ flex:0 0 auto; padding:10px 14px; border:1px solid var(--line); border-radius:14px; background:#fff; font-weight:800; cursor:pointer; min-height:40px }
 .tab-btn.active{ background:#111827; color:#fff }
-.tab-panel{ display:none } .tab-panel.active{ display:block }
+.tab-panel{ display:none !important } .tab-panel.active{ display:block !important; animation:fadeIn .24s ease }
+.tab-panel.flexcol.active{ display:flex !important; flex-direction:column }
 .seg{ display:flex; gap:8px } .seg button{ flex:1; padding:12px; border:1px solid var(--line); background:#fff; border-radius:14px; cursor:pointer; font-weight:800; min-height:44px } .seg button.active{ background:#111827; color:#fff; border-color:#111827 }
+@keyframes fadeIn{ from{ opacity:0; transform:translateY(6px) } to{ opacity:1; transform:none } }
 
-/* 결과 박스 */
+/* 리스트/표 */
 .kv{ display:flex; justify-content:space-between; align-items:center; padding:8px 0 }
 .kv .k{ font-weight:800 } .kv .v{ font-weight:900; font-variant-numeric:tabular-nums }
 .result-box{ border:1px dashed var(--line); border-radius:14px; padding:12px; background:#fafafa }
 .hr{ height:1px; background:var(--line); margin:6px 0 }
 .actions-center{ display:flex; justify-content:center; align-items:center; gap:10px; margin-top:10px; flex-wrap:wrap }
 .cta-main{ display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:14px; padding:14px 16px; font-weight:900; color:#fff; text-decoration:none; width:100%; max-width:320px; min-height:48px; background:linear-gradient(90deg,#0ea5e9,#6366f1) }
-
-/* 참고 패널 */
 .ref-box{ border:1px solid var(--line); border-radius:14px; padding:12px; background:#fcfcff }
 .ref-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px }
 .small{ color:#6b7280; font-size:.9rem }
@@ -60,9 +55,8 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
 .banner p{ margin:4px 0 0; font-size:15px; display:flex; flex-wrap:wrap; gap:6px }
 .badge{ display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); font-weight:900; white-space:nowrap }
 .banner .cta-row{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:6px }
-.cta-white{ padding:11px 14px; border-radius:14px; background:#fff; color:var(--brand); font-weight:900; text-decoration:none; border:1px solid rgba(0,0,0,.06) }
+.cta-white{ padding:11px 14px; border-radius:14px; background:#fff; color:#var(--brand); font-weight:900; text-decoration:none; border:1px solid rgba(0,0,0,.06) }
 .ex-Bitget{ --brand:#0ea5e9 } .ex-Bybit{ --brand:#d97706 } .ex-OKX{ --brand:#0b0f19 } .ex-MEXC{ --brand:#10b981 } .ex-Binance{ --brand:#f0b90b } .ex-BingX{ --brand:#2563eb }
-
 .table{ width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--line); border-radius:12px; overflow:hidden }
 .table th,.table td{ padding:12px 14px; border-bottom:1px solid var(--line); text-align:left }
 .table th{ background:#f9fafb; font-weight:900 } .table tr:last-child td{ border-bottom:0 }
@@ -72,27 +66,63 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
 .modal-backdrop{ position:fixed; inset:0; background:rgba(15,23,42,.58); display:none; align-items:center; justify-content:center; z-index:60 }
 .modal{ width:min(92vw,600px); background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; position:relative }
 .modal-cta{ border:0; border-radius:12px; padding:11px 14px; font-weight:900; color:#fff; text-decoration:none; text-align:center }
-.modal-close-x{ position:absolute; right:10px; top:10px; border:0; background:transparent; font-size:22px; font-weight:900; cursor:pointer; line-height:1 }
+.modal-close-x{ position:absolute; right:10px; top:10px; border:0; background:#fff; border:1px solid var(--line); border-radius:8px; font-size:18px; font-weight:900; cursor:pointer; line-height:1; width:32px; height:32px }
 .chips{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin:6px 0 8px }
 .chip{ padding:6px 10px; border-radius:999px; border:1px solid #e2e8f0; background:#f8fafc; font-weight:900; font-size:.92rem }
 
-/* 레버리지 스테퍼 */
-.stepper{ display:flex; align-items:center; gap:8px }
-.stepper .step{
-  min-width:44px; min-height:44px;
-  border:1px solid var(--line); border-radius:12px;
-  background:#fff; font-weight:900; cursor:pointer;
-}
-.stepper input{ flex:1 }
+/* 모바일 초압축 모드 */
 
 @media (max-width:480px){
-  :root{ font-size:16.5px }
-  .wrap{ padding:16px 14px 28px }
-  .card{ border-radius:16px; padding:14px 14px }
-  .banner{ border-radius:16px; padding:14px }
-  .tabs{ position:sticky; top:0; z-index:20; background:var(--bg); padding:8px 0 10px; margin:6px 0 10px; overflow-x:auto; white-space:nowrap }
-  .tab-btn{ flex:0 0 auto; min-height:40px; padding:10px 12px; border-radius:12px }
+  :root{ font-size:14px }
+  .wrap{ padding:10px 8px 84px }
+  .card{ border-radius:12px; padding:8px 10px; margin-top:8px }
+  .row{ gap:4px }
+  input,select{ min-height:34px; padding:6px 8px; font-size:.9rem }
+  .seg button{ min-height:34px; padding:6px 8px; font-size:.9rem }
+  .tab-btn{ min-height:36px; padding:8px 10px; font-size:.9rem }
+  .section-title{ font-size:1rem }
+  .ref-box{ padding:8px }
+  .result-box{ padding:8px }
+  .kv{ font-size:.9rem }
+  /* 기본설정 첫줄 2열 배치 */
+  #fee-config .row>div{ flex:1 1 48% }
+  /* 체결가치/수수료율/참고 수수료 2열 그리드 */
+  .col-3{ grid-template-columns:1fr 1fr; gap:8px }
 }
+
+  .card{ border-radius:14px; padding:12px 12px; margin-top:10px }
+  .row{ gap:6px }
+  input,select{ min-height:36px; padding:8px 10px }
+  .seg button{ min-height:36px; padding:8px 10px }
+  .section-title{ font-size:1.05rem }
+  .ref-box{ padding:10px }
+  .result-box{ padding:10px }
+  #fee-config .card{ padding:10px }
+  .col-3{ gap:8px }
+}
+
+/* 하단 네비(4개) */
+.mobile-dock{ position:fixed; bottom:12px; left:50%; transform:translateX(-50%); z-index:50; width:min(94vw,620px); display:grid; grid-template-columns:repeat(4,1fr); gap:8px; background:rgba(255,255,255,.9); border:1px solid var(--line); border-radius:14px; padding:8px; box-shadow:0 8px 30px rgba(0,0,0,.08) }
+.mobile-dock .dock-btn{ border:1px solid var(--line); background:#fff; border-radius:12px; padding:10px 8px; font-weight:900; text-align:center; cursor:pointer }
+@media (min-width:901px){ .mobile-dock{ display:none } }
+
+@media (max-width:480px){
+  :root{ font-size:14px }
+  .wrap{ padding:10px 8px 84px }
+  .card{ border-radius:12px; padding:8px 10px; margin-top:8px }
+  .row{ gap:6px }
+  input,select{ min-height:34px; padding:6px 8px; font-size:.9rem }
+  .seg button{ min-height:34px; padding:6px 8px; font-size:.9rem }
+  .tab-btn{ min-height:36px; padding:8px 10px; font-size:.9rem }
+  .section-title{ font-size:1rem }
+  .ref-box{ padding:8px }
+  .result-box{ padding:8px }
+  .kv{ font-size:.9rem }
+
+  /* 모바일에서는 안전하게 1열 (잘림 방지) */
+  .col-3{ grid-template-columns:1fr; gap:8px }
+}
+
 </style>
 </head>
 <body>
@@ -103,18 +133,18 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
     <a class="btn tip-link" href="https://cafe.naver.com/bitupg" target="_blank" rel="noopener">초보자 팁</a>
   </div>
 
-  <p class="lead">수수료율을 직접 입력하고, 참고 수수료율로 빠르게 채워 보세요.</p>
+  <p class="lead">수수료/PNL/평단/청산가 계산기와 거래소 혜택 비교를 한 번에.</p>
 
-  <div class="tabs" role="tablist" aria-label="계산기 탭">
+  <div class="tabs" role="tablist" aria-label="탭 네비게이션">
     <button class="tab-btn active" data-tab="fee">수수료</button>
     <button class="tab-btn" data-tab="pnl">수익률/PNL</button>
     <button class="tab-btn" data-tab="avg">평단가</button>
     <button class="tab-btn" data-tab="liq">청산가</button>
   </div>
 
-  <!-- 수수료 계산기 -->
-  <section id="panel-fee" class="tab-panel active" role="tabpanel">
-    <div class="card">
+  <!-- 수수료 -->
+  <section id="panel-fee" class="tab-panel flexcol active" role="tabpanel">
+    <div id="fee-config" class="card order-1">
       <h3 class="section-title">기본 설정</h3>
       <div class="row">
         <div>
@@ -139,18 +169,12 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
       </div>
 
       <div class="col-3" style="margin-top:8px">
-        <!-- 좌: 체결가치/횟수/페이백 -->
         <div class="card" style="margin:0">
           <h3 class="section-title">체결가치/횟수</h3>
-          <div class="row">
-            <div><label>체결가치 (USDT)</label><input id="notional" type="number" min="0" value="10000"/></div>
-            <div><label>거래 횟수 (합산)</label><input id="trades" type="number" min="1" value="1"/></div>
-            <div><label>사용자 페이백 (%)</label><input id="payback" type="number" step="0.1" min="0" max="100" value="0"/></div>
-          </div>
-          <div class="small" style="margin-top:4px">※ 페이백은 캐시백/환급형만 입력 (없으면 0).</div>
+<div class="row"><div><label>체결가치 (USDT)</label><input id="notional" type="number" min="0" value="10000"/></div><div><label>거래 횟수 (합산)</label><input id="trades" type="number" min="1" value="1"/></div><div><label>레버리지 (배)</label><input id="fee-lev" type="number" min="1" max="200" step="1" value="10"/></div><div><label>사용자 페이백 (%)</label><input id="payback" type="number" step="0.1" min="0" max="100" value="0"/></div></div>
+          <div class="small" style="margin-top:4px">※ 페이백은 캐시백/환급형만 입력 (없으면 0). 레버리지는 표시용이며 수수료 계산은 '체결가치' 기준입니다.</div>
         </div>
 
-        <!-- 중: 수수료율 직접 입력 -->
         <div class="card" style="margin:0">
           <h3 class="section-title">수수료율 직접 입력</h3>
           <div class="row">
@@ -160,7 +184,6 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
           <div class="small" style="margin-top:4px">※ 계산엔 위 두 값이 그대로 사용됩니다. (주문 유형에 따라 자동 선택)</div>
         </div>
 
-        <!-- 우: 참고 수수료율 -->
         <div class="card" style="margin:0">
           <h3 class="section-title">참고 수수료율</h3>
           <div class="ref-box">
@@ -186,8 +209,7 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
       </div>
     </div>
 
-    <!-- 결과 + CTA/혜택 버튼 -->
-    <div class="card">
+    <div id="fee-results" class="card order-2">
       <h3 class="section-title">결과</h3>
       <div class="result-box">
         <div class="kv"><div class="k">사용 수수료율</div><div class="v" id="v-rate">-</div></div>
@@ -198,7 +220,6 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
         <div class="kv"><div class="k">사용자 실부담 수수료</div><div class="v" id="v-net">-</div></div>
         <div class="kv"><div class="k">체감 수수료율(평균)</div><div class="v" id="v-eff">-</div></div>
       </div>
-
       <div class="actions-center">
         <a id="cta" class="cta-main" href="#" target="_blank" rel="noopener">🎁 수수료 혜택 받고 가입하기</a>
         <button id="benefitBtn" class="btn" type="button">혜택 보기</button>
@@ -263,7 +284,7 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
     </div>
   </section>
 
-  <!-- 청산가 (확장) -->
+  <!-- 청산가 -->
   <section id="panel-liq" class="tab-panel" role="tabpanel">
     <div class="row" style="gap:16px">
       <div class="card" style="flex:1 1 560px">
@@ -275,17 +296,16 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
         <input id="liq-lev-range" type="range" min="1" max="125" step="1" value="10" style="width:100%">
         <div class="row" style="margin-top:12px">
           <div><label>진입 가격</label><input id="liq-entry" type="number" min="0" value="100"/></div>
-          <div><label>레버리지 (배)</label><div class="stepper"><button id="liq-lev-dec" type="button" class="step">−</button><input id="liq-lev" type="number" min="1" max="200" step="1" value="10"/><button id="liq-lev-inc" type="button" class="step">+</button></div></div>
+          <div><label>레버리지 (배)</label><input id="liq-lev" type="number" min="1" max="125" step="1" value="10"/></div>
         </div>
-        <!-- 현재가 입력 (손익/ROE 계산용) -->
         <div class="row" style="margin-top:10px">
-  <div><label>현재/종가</label><input id="liq-price" type="number" min="0" value="110"/></div>
-  <div><label>증거금 (USDT, 선택)</label><input id="liq-margin" type="number" min="0" placeholder="선택 입력"/></div>
-</div>
-<div class="row" style="margin-top:10px">
-  <div><label>청산 가격 (자동)</label><input id="liq-base" type="text" value="-" readonly/></div>
-  <div></div>
-</div>
+          <div><label>현재/종가</label><input id="liq-price" type="number" min="0" value="110"/></div>
+          <div><label>증거금 (USDT, 선택)</label><input id="liq-margin" type="number" min="0" placeholder="선택 입력"/></div>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <div><label>청산 가격 (자동)</label><input id="liq-base" type="text" value="-" readonly/></div>
+          <div></div>
+        </div>
       </div>
       <div class="card" style="flex:1 1 420px">
         <h3 class="section-title" style="margin-bottom:6px">결과</h3>
@@ -298,22 +318,37 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
           <div class="kv"><div class="k">손익</div><div class="v" id="r-pnl">-</div></div>
           <div class="kv"><div class="k">자기자본 이익률</div><div class="v" id="r-roe">-</div></div>
         </div>
-        <div class="small" style="margin-top:8px">※ 간단 근사식(수수료/펀딩 제외). 롱: <code>E×(1−1/L)</code>, 숏: <code>E×(1+1/L)</code><br>증거금 입력 시 수량 = <code>증거금×레버리지 ÷ 진입가</code>로 표시합니다.</div>
+        <div class="small" style="margin-top:8px">※ 간단 근사식(수수료/펀딩 제외). 롱: <code>E×(1−1/L)</code>, 숏: <code>E×(1+1/L)</code>. 증거금 입력 시 수량 = <code>증거금×레버리지 ÷ 진입가</code>.</div>
       </div>
     </div>
   </section>
 
   <!-- 거래소 배너/표 -->
-  <div id="exchanges" class="card"><div id="banners"></div></div>
+  <div id="exchanges" class="card">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px">
+      <h3 class="section-title" style="margin:0">거래소 혜택</h3>
+      <button id="show-all-ex" class="btn" type="button">다른 거래소 보기</button>
+    </div>
+    <div id="banners"></div>
+  </div>
+
   <div class="card">
     <h3 class="section-title">거래소 수수료 비교 · 핵심 요약</h3>
     <div style="overflow:auto">
       <table class="table">
-        <thead><tr><th>거래소</th><th>적용 전 (지정/시장)</th><th>적용 후 (지정/시장)</th><th>페이백</th><th>혜택</th></tr></thead>
+        <thead><tr><th>거래소</th><th>적용 전 (지정/시장)</th><th>적용 후 (지정/시장)</th><th>페이백/할인</th><th>혜택</th></tr></thead>
         <tbody id="cmp-body"></tbody>
       </table>
     </div>
   </div>
+</div>
+
+<!-- 하단 네비 -->
+<div class="mobile-dock" role="navigation" aria-label="빠른 이동">
+  <button class="dock-btn" data-tab="fee">수수료</button>
+  <button class="dock-btn" data-tab="pnl">PNL</button>
+  <button class="dock-btn" data-tab="avg">평단</button>
+  <button class="dock-btn" data-tab="liq">청산가</button>
 </div>
 
 <!-- 혜택 모달 -->
@@ -330,58 +365,37 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
 </div>
 
 <script>
-/* ===== 참고 수수료율 (표시용) ===== */
-const REF = {
-  Bitget: {  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.02, taker: 0.06 } },
-  Bybit:  {  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.02, taker: 0.055 } },
-  OKX:    {  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.02, taker: 0.05 } },
-  MEXC:   {  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.00, taker: 0.02 } },
-  Binance:{  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.02, taker: 0.04 } },
-  BingX:  {  spot: { maker: 0.10, taker: 0.10 },  perp: { maker: 0.02, taker: 0.05 } }
-};
-
-/* ===== 프로모션 데이터 ===== */
-const PROMOS = [
-  { name:'Bitget',  logo:'https://logo.clearbit.com/bitget.com',  grad:['#22d3ee','#2563eb'], color:'#0ea5e9',
-    before:{maker:0.02,taker:0.06}, after:{maker:0.016,taker:0.032},
-    payback:'수수료 할인 + 페이백 20%', benefits:['수수료 할인 + 페이백 20%','시장가 실질 0.04% 가능'], link:'https://partner.bitget.com/bg/Jihoon7' },
-  { name:'Bybit',   logo:'https://logo.clearbit.com/bybit.com',  grad:['#f59e0b','#d97706'], color:'#d97706',
-    before:{maker:0.02,taker:0.055}, after:{maker:0.016,taker:0.049},
-    payback:'20%', benefits:['페이백 20%'], link:'https://partner.bybit.com/b/JIHOON' },
-  { name:'OKX',     logo:'https://logo.clearbit.com/okx.com',    grad:['#111111','#000000'], color:'#0b0f19',
-    before:{maker:0.02,taker:0.05},  after:{maker:0.016,taker:0.045},
-    payback:'20%', benefits:['페이백 20%'], link:'https://www.okx.com/join/KANGJIHOON' },
-  { name:'MEXC',    logo:'https://logo.clearbit.com/mexc.com',   grad:['#10b981','#059669'], color:'#10b981',
-    before:{maker:0.0,taker:0.02},   after:{maker:0.0,taker:0.018},
-    payback:'20%', benefits:['페이백 20%'], link:'https://www.mexc.com/ko-KR/acquisition/custom-sign-up?shareCode=mexc-Jihoon' },
-  { name:'Binance', logo:'https://logo.clearbit.com/binance.com',grad:['#f59e0b','#f59e0b'], color:'#f0b90b',
-    before:{maker:0.02,taker:0.04},  after:{maker:0.018,taker:0.038},
-    payback:'—',   benefits:['수수료 10% 할인'], link:'https://accounts.binance.com/register?ref=ME5CYRHB' },
-  { name:'BingX',   logo:'https://logo.clearbit.com/bingx.com',  grad:['#0ea5e9','#1d4ed8'], color:'#2563eb',
-    before:{maker:0.02,taker:0.05},  after:{maker:0.011,taker:0.0275},
-    payback:'42~45%', benefits:['페이백 42~45%'], link:'https://bingx.com/invite/2N30XH/' },
-];
-
-/* ===== 유틸 ===== */
+/* 유틸 */
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 const nf=x=>(Math.round((+x||0)*1e8)/1e8).toLocaleString();
 const toPerc=x=>((+x||0)*100).toFixed(6).replace(/0+$/,'').replace(/\.$/,'')+'%';
 const animateNumber=(el,t,fmt=(x)=>x)=>{ if(!el) return; el.textContent=fmt(t); el.dataset.v=t; };
 const toggle=(on,off)=>{ on?.classList.add('active'); off?.classList.remove('active'); };
 
-/* ===== 탭 ===== */
+/* 탭 + 도크 */
 (function setupTabs(){
-  const btns=$$('.tab-btn');
-  const panels=$$('.tab-panel');
-  btns.forEach(btn=>btn.addEventListener('click',()=>{
-    btns.forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    panels.forEach(p=>p.classList.remove('active'));
-    $('#panel-'+btn.dataset.tab)?.classList.add('active');
-  }));
+  const btns=$$('.tab-btn'); const panels=$$('.tab-panel');
+  function activate(tab){
+    btns.forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+    panels.forEach(p=>p.classList.toggle('active', p.id==='panel-'+tab));
+    document.querySelector('.topbar')?.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  btns.forEach(btn=>btn.addEventListener('click',()=>activate(btn.dataset.tab)));
+  $$('.mobile-dock .dock-btn').forEach(d=>d.addEventListener('click',()=>activate(d.dataset.tab)));
 })();
 
-/* ===== 상태/요소 ===== */
+/* 수수료/참고/혜택 데이터 */
+const REF = { Bitget:{spot:{maker:0.10,taker:0.10},perp:{maker:0.02,taker:0.06}}, Bybit:{spot:{maker:0.10,taker:0.10},perp:{maker:0.02,taker:0.055}}, OKX:{spot:{maker:0.10,taker:0.10},perp:{maker:0.02,taker:0.05}}, MEXC:{spot:{maker:0.10,taker:0.10},perp:{maker:0.00,taker:0.02}}, Binance:{spot:{maker:0.10,taker:0.10},perp:{maker:0.02,taker:0.04}}, BingX:{spot:{maker:0.10,taker:0.10},perp:{maker:0.02,taker:0.05}} };
+const PROMOS = [
+  { name:'Bitget',  logo:'https://logo.clearbit.com/bitget.com',  grad:['#22d3ee','#2563eb'], color:'#0ea5e9', before:{maker:0.02,taker:0.06},  after:{maker:0.016,taker:0.032}, payback:'수수료 할인 + 페이백 20%', benefits:['수수료 할인 + 페이백 20%','시장가 실질 0.04% 가능'], link:'https://partner.bitget.com/bg/Jihoon7' },
+  { name:'Bybit',   logo:'https://logo.clearbit.com/bybit.com',  grad:['#f59e0b','#d97706'], color:'#d97706', before:{maker:0.02,taker:0.055}, after:{maker:0.016,taker:0.049}, payback:'페이백 20%',         benefits:['수수료 페이백 20%'], link:'https://partner.bybit.com/b/JIHOON' },
+  { name:'OKX',     logo:'https://logo.clearbit.com/okx.com',    grad:['#111111','#000000'], color:'#0b0f19', before:{maker:0.02,taker:0.05},  after:{maker:0.016,taker:0.045}, payback:'페이백 20%',         benefits:['수수료 페이백 20%'], link:'https://www.okx.com/join/KANGJIHOON' },
+  { name:'MEXC',    logo:'https://logo.clearbit.com/mexc.com',   grad:['#10b981','#059669'], color:'#10b981', before:{maker:0.0,taker:0.02},   after:{maker:0.0,taker:0.018},  payback:'페이백 20%',         benefits:['수수료 페이백 20%'], link:'https://www.mexc.com/ko-KR/acquisition/custom-sign-up?shareCode=mexc-Jihoon' },
+  { name:'Binance', logo:'https://logo.clearbit.com/binance.com',grad:['#f59e0b','#f59e0b'], color:'#f0b90b', before:{maker:0.02,taker:0.04},  after:{maker:0.018,taker:0.038}, payback:'10% 할인',         benefits:['수수료 10% 할인'], link:'https://accounts.binance.com/register?ref=ME5CYRHB' },
+  { name:'BingX',   logo:'https://logo.clearbit.com/bingx.com',  grad:['#0ea5e9','#1d4ed8'], color:'#2563eb', before:{maker:0.02,taker:0.05},  after:{maker:0.011,taker:0.0275}, payback:'42~45% 페이백',   benefits:['수수료 페이백 42~45%'], link:'https://bingx.com/invite/2N30XH/' },
+];
+
+/* 수수료 계산 */
 let state={exchange:'Bitget',market:'perp',order:'taker'};
 const elExchange=$('#exchange'), elSpot=$('#btn-spot'), elPerp=$('#btn-perp');
 const elMaker=$('#btn-maker'), elTaker=$('#btn-taker');
@@ -389,117 +403,35 @@ const elNotional=$('#notional'), elTrades=$('#trades'), elPayback=$('#payback');
 const elRateMaker=$('#rate-maker'), elRateTaker=$('#rate-taker');
 const vRate=$('#v-rate'), vFee1=$('#v-fee1'), vFeeN=$('#v-feeN'), vPB=$('#v-payback'), vNet=$('#v-net'), vEff=$('#v-eff');
 const elCTA=$('#cta');
-
-/* ===== 참고 패널 ===== */
 const refSpotM=$('#ref-spot-maker'), refSpotT=$('#ref-spot-taker');
 const refPerpM=$('#ref-perp-maker'), refPerpT=$('#ref-perp-taker');
 const refLink=$('#refLink'), btnApplyRef=$('#applyRef');
+function refreshRef(){ const ex=state.exchange; const s=REF[ex]?.spot||{maker:0,taker:0}, p=REF[ex]?.perp||{maker:0,taker:0}; refSpotM.textContent=s.maker.toFixed(3)+'%'; refSpotT.textContent=s.taker.toFixed(3)+'%'; refPerpM.textContent=p.maker.toFixed(3)+'%'; refPerpT.textContent=p.taker.toFixed(3)+'%'; refLink.href="https://coinmarketcap.com/ko/rankings/exchanges/derivatives/"; }
+btnApplyRef?.addEventListener('click',()=>{ const src=REF[state.exchange]?.[state.market]; if(!src) return; elRateMaker.value=src.maker; elRateTaker.value=src.taker; updateFee(); });
+function applyExchangeTheme(name){ const p=PROMOS.find(x=>x.name===name); if(!p) return; elCTA.style.background=`linear-gradient(90deg,${p.grad[0]},${p.grad[1]})`; elCTA.href=p.link; }
+function currentRate(){ const maker=(+elRateMaker.value||0)/100; const taker=(+elRateTaker.value||0)/100; return state.order==='maker' ? maker : taker; }
+function updateFee(){ const rate=currentRate(); const N=+elNotional.value||0; const t=Math.max(1,+elTrades.value||1); const pbRate=(+elPayback.value||0)/100; const fee1=N*rate, feeN=fee1*t, pb=feeN*pbRate, net=feeN-pb, eff=N>0?net/(N*t):0; animateNumber(vRate, rate, toPerc); animateNumber(vFee1, fee1, x=>nf(x)+' USDT'); animateNumber(vFeeN, feeN, x=>nf(x)+' USDT'); animateNumber(vPB, pb, x=>nf(x)+' USDT'); animateNumber(vNet, net, x=>nf(x)+' USDT'); animateNumber(vEff, eff, toPerc); }
 
-function refreshRef(){
-  const ex=state.exchange;
-  const s=REF[ex]?.spot||{maker:0,taker:0}, p=REF[ex]?.perp||{maker:0,taker:0};
-  refSpotM.textContent=s.maker.toFixed(3)+'%'; refSpotT.textContent=s.taker.toFixed(3)+'%';
-  refPerpM.textContent=p.maker.toFixed(3)+'%'; refPerpT.textContent=p.taker.toFixed(3)+'%';
-  refLink.href="https://coinmarketcap.com/ko/rankings/exchanges/derivatives/";
-}
-btnApplyRef.addEventListener('click',()=>{
-  const ex=state.exchange, mk=state.market;
-  const src=REF[ex]?.[mk];
-  if(!src) return;
-  elRateMaker.value=src.maker; elRateTaker.value=src.taker;
-  updateFee();
-});
+elExchange?.addEventListener('change',()=>{ state.exchange=elExchange.value; refreshRef(); applyExchangeTheme(state.exchange); });
+elSpot?.addEventListener('click',()=>{ state.market='spot'; toggle(elSpot,elPerp); refreshRef(); });
+elPerp?.addEventListener('click',()=>{ state.market='perp'; toggle(elPerp,elSpot); refreshRef(); });
+elMaker?.addEventListener('click',()=>{ state.order='maker'; toggle(elMaker,elTaker); updateFee(); });
+elTaker?.addEventListener('click',()=>{ state.order='taker'; toggle(elTaker,elMaker); updateFee(); });
+[elNotional,elTrades,elPayback,elRateMaker,elRateTaker].forEach(el=>el?.addEventListener('input',updateFee));
 
-/* ===== CTA(결과 밑) 업데이트 ===== */
-function applyExchangeTheme(name){
-  const p = PROMOS.find(x=>x.name===name);
-  if(!p) return;
-  elCTA.style.background=`linear-gradient(90deg,${p.grad[0]},${p.grad[1]})`;
-  elCTA.href=p.link;
-}
-applyExchangeTheme(state.exchange);
-
-/* ===== 혜택 모달 ===== */
-const backdrop=$('#benefitBackdrop'), benefitTitle=$('#benefitTitle');
-const benefitList=$('#benefitList'), benefitCTA=$('#benefitCTA');
-$('#benefitBtn').addEventListener('click',()=>openBenefit(state.exchange));
-$('#benefitCloseX').addEventListener('click',()=>backdrop.style.display='none');
-backdrop.addEventListener('click',(e)=>{ if(e.target===backdrop) backdrop.style.display='none'; });
-
-function openBenefit(name){
-  const p=PROMOS.find(x=>x.name===name);
-  if(!p) return;
-  benefitTitle.textContent=`${p.name} 혜택`;
-  const chips=$('#benefitChips');
-  chips.innerHTML='';
-  const chip = (text)=>{ const s=document.createElement('span'); s.className='chip'; s.textContent=text; return s; };
-  chips.appendChild(chip(`적용 전 ${p.before.maker}% / ${p.before.taker}%`));
-  chips.appendChild(chip(`적용 후 ${p.after.maker}% / ${p.after.taker}%`));
-  if(p.payback) chips.appendChild(chip(p.payback));
-  benefitList.innerHTML='';
-  p.benefits.forEach(b=>{ const li=document.createElement('li'); li.textContent=b; benefitList.appendChild(li); });
-  benefitCTA.href=p.link;
-  benefitCTA.style.background=`linear-gradient(90deg,${p.grad[0]},${p.grad[1]})`;
-  benefitCTA.textContent='🎁 수수료 혜택 받고 가입하기';
-  backdrop.style.display='flex';
-}
-
-/* ===== 수수료 계산 ===== */
-function currentRate(){
-  const maker=(+elRateMaker.value||0)/100;
-  const taker=(+elRateTaker.value||0)/100;
-  return state.order==='maker' ? maker : taker;
-}
-function updateFee(){
-  const rate=currentRate();
-  const N=+elNotional.value||0;
-  const t=Math.max(1,+elTrades.value||1);
-  const pbRate=(+elPayback.value||0)/100;
-
-  const fee1=N*rate, feeN=fee1*t, pb=feeN*pbRate, net=feeN-pb, eff=N>0?net/(N*t):0;
-  animateNumber(vRate, rate, toPerc);
-  animateNumber(vFee1, fee1, x=>nf(x)+' USDT');
-  animateNumber(vFeeN, feeN, x=>nf(x)+' USDT');
-  animateNumber(vPB, pb, x=>nf(x)+' USDT');
-  animateNumber(vNet, net, x=>nf(x)+' USDT');
-  animateNumber(vEff, eff, toPerc);
-}
-
-/* 이벤트 */
-elExchange.addEventListener('change',()=>{ state.exchange=elExchange.value; refreshRef(); applyExchangeTheme(state.exchange); });
-elSpot.addEventListener('click',()=>{ state.market='spot'; toggle(elSpot,elPerp); refreshRef(); });
-elPerp.addEventListener('click',()=>{ state.market='perp'; toggle(elPerp,elSpot); refreshRef(); });
-elMaker.addEventListener('click',()=>{ state.order='maker'; toggle(elMaker,elTaker); updateFee(); });
-elTaker.addEventListener('click',()=>{ state.order='taker'; toggle(elTaker,elMaker); updateFee(); });
-[elNotional,elTrades,elPayback,elRateMaker,elRateTaker].forEach(el=>el.addEventListener('input',updateFee));
-
-/* ===== PNL ===== */
+/* PNL */
 const pnlQty=$('#pnl-row-qty'), pnlMargin=$('#pnl-row-margin');
 const btnQty=$('#pnl-mode-qty'), btnMargin=$('#pnl-mode-margin');
 const pnl_el={pnl:$('#pnl-pnl'),roe:$('#pnl-roe'),notional:$('#pnl-notional')};
-function setPnlMode(m){
-  if(m==='qty'){ btnQty.classList.add('active'); btnMargin.classList.remove('active'); pnlQty.classList.remove('hidden'); pnlMargin.classList.add('hidden'); }
-  else{ btnMargin.classList.add('active'); btnQty.classList.remove('active'); pnlMargin.classList.remove('hidden'); pnlQty.classList.add('hidden'); }
-  calcPNL();
-}
-btnQty.addEventListener('click',()=>setPnlMode('qty'));
-btnMargin.addEventListener('click',()=>setPnlMode('margin'));
-['pnl-entry','pnl-exit','pnl-qty','pnl-entry2','pnl-exit2','pnl-margin','pnl-lev'].forEach(id=>document.getElementById(id)?.addEventListener('input',calcPNL));
+function setPnlMode(m){ if(m==='qty'){ btnQty.classList.add('active'); btnMargin.classList.remove('active'); pnlQty.classList.remove('hidden'); pnlMargin.classList.add('hidden'); } else { btnMargin.classList.add('active'); btnQty.classList.remove('active'); pnlMargin.classList.remove('hidden'); pnlQty.classList.add('hidden'); } calcPNL(); }
+btnQty?.addEventListener('click',()=>setPnlMode('qty')); btnMargin?.addEventListener('click',()=>setPnlMode('margin'));
+;['pnl-entry','pnl-exit','pnl-qty','pnl-entry2','pnl-exit2','pnl-margin','pnl-lev'].forEach(id=>document.getElementById(id)?.addEventListener('input',calcPNL));
 function nf2(x){return (Math.round(x*1e8)/1e8).toLocaleString();}
-function calcPNL(){
-  if(pnlMargin.classList.contains('hidden')){
-    const entry=+( $('#pnl-entry').value||0 ), exit=+( $('#pnl-exit').value||0 ), qty=+( $('#pnl-qty').value||0 );
-    const pnl=(exit-entry)*qty; const notional=entry*qty; const roe=notional>0?pnl/notional:0;
-    pnl_el.pnl.textContent=nf2(pnl)+' USDT'; pnl_el.roe.textContent=toPerc(roe); pnl_el.notional.textContent=nf2(notional)+' USDT'; return;
-  }
-  const entry=+( $('#pnl-entry2').value||0 ), exit=+( $('#pnl-exit2').value||0 ), m=+( $('#pnl-margin').value||0 ), lv=Math.max(1,+( $('#pnl-lev').value||1 ));
-  const notional=entry>0?m*lv:0; const qty=entry>0?(m*lv)/entry:0; const pnl=(exit-entry)*qty; const roe=m>0?pnl/m:0;
-  pnl_el.pnl.textContent=nf2(pnl)+' USDT'; pnl_el.roe.textContent=toPerc(roe); pnl_el.notional.textContent=nf2(notional)+' USDT';
-}
+function calcPNL(){ if(pnlMargin.classList.contains('hidden')){ const entry=+( document.getElementById('pnl-entry').value||0 ), exit=+( document.getElementById('pnl-exit').value||0 ), qty=+( document.getElementById('pnl-qty').value||0 ); const pnl=(exit-entry)*qty; const notional=entry*qty; const roe=notional>0?pnl/notional:0; pnl_el.pnl.textContent=nf2(pnl)+' USDT'; pnl_el.roe.textContent=toPerc(roe); pnl_el.notional.textContent=nf2(notional)+' USDT'; return; } const entry=+( document.getElementById('pnl-entry2').value||0 ), exit=+( document.getElementById('pnl-exit2').value||0 ), m=+( document.getElementById('pnl-margin').value||0 ), lv=Math.max(1,+( document.getElementById('pnl-lev').value||1 )); const notional=entry>0?m*lv:0; const qty=entry>0?(m*lv)/entry:0; const pnl=(exit-entry)*qty; const roe=m>0?pnl/m:0; pnl_el.pnl.textContent=nf2(pnl)+' USDT'; pnl_el.roe.textContent=toPerc(roe); pnl_el.notional.textContent=nf2(notional)+' USDT'; }
 
-/* ===== 청산가 확장 로직 (MMR=0 간단식 + 손익/ROE) ===== */
-let liqPro = { side: 'long' };
-const elL = {
+/* 청산가 계산 (+/-, range, 입력 모두 반응) */
+let liqSide = 'long';
+const L = {
   longBtn: document.getElementById('liq-long'),
   shortBtn: document.getElementById('liq-short'),
   entry: document.getElementById('liq-entry'),
@@ -517,67 +449,67 @@ const elL = {
   r_pnl: document.getElementById('r-pnl'),
   r_roe: document.getElementById('r-roe'),
 };
-function fmt(x){ return (Math.round((+x||0)*1e8)/1e8).toLocaleString(); }
-function syncLevFromRange(){ if(!elL.levRange) return; elL.lev.value = elL.levRange.value; calcLiqPro(); }
-function syncRangeFromLev(){ if(!elL.lev) return; const v = Math.max(1, Math.min(125, +elL.lev.value||1)); elL.lev.value = v; if(elL.levRange) elL.levRange.value = v; calcLiqPro(); }
-elL.levRange?.addEventListener('input', syncLevFromRange);
-['input','change'].forEach(ev=> elL.lev?.addEventListener(ev, syncRangeFromLev));
-document.getElementById('liq-lev-dec')?.addEventListener('click', ()=>{ elL.lev.value = Math.max(1, (+elL.lev.value||1) - 1); syncRangeFromLev(); });
-document.getElementById('liq-lev-inc')?.addEventListener('click', ()=>{ elL.lev.value = Math.min(200, (+elL.lev.value||1) + 1); syncRangeFromLev(); });
-if(elL.longBtn && elL.shortBtn){
-  elL.longBtn.addEventListener('click', ()=>{ liqPro.side='long'; elL.longBtn.classList.add('active'); elL.shortBtn.classList.remove('active'); calcLiqPro(); });
-  elL.shortBtn.addEventListener('click', ()=>{ liqPro.side='short'; elL.shortBtn.classList.add('active'); elL.longBtn.classList.remove('active'); calcLiqPro(); });
-}
-['liq-entry','liq-margin','liq-price'].forEach(id=> document.getElementById(id)?.addEventListener('input', calcLiqPro));
-function calcLiqPro(){
-  if(!elL.entry || !elL.lev) return;
-  const entry = +(elL.entry.value||0);
-  const lev = Math.max(1, +(elL.lev.value||1));
-  if(elL.levx) elL.levx.textContent = lev;
-  if(elL.r_levx) elL.r_levx.textContent = lev;
-  if(entry<=0){
-    if(elL.base) elL.base.value='-';
-    if(elL.r_entry) elL.r_entry.textContent='-';
-    if(elL.r_liq) elL.r_liq.textContent='-';
-    if(elL.r_qty) elL.r_qty.textContent='-';
-    if(elL.r_margin) elL.r_margin.textContent='-';
-    if(elL.r_pnl) elL.r_pnl.textContent='-';
-    if(elL.r_roe) elL.r_roe.textContent='-';
+function fmtNum(x){ return (Math.round((+x||0)*1e8)/1e8).toLocaleString(); }
+function calcLiq(){
+  const entry = +(L.entry?.value||0);
+  const lev = Math.max(1, +(L.lev?.value||1));
+  if (L.levx) L.levx.textContent = lev;
+  if (L.r_levx) L.r_levx.textContent = lev;
+  if (entry<=0){
+    if (L.base) L.base.value='-';
+    if (L.r_entry) L.r_entry.textContent='-';
+    if (L.r_liq) L.r_liq.textContent='-';
+    if (L.r_qty) L.r_qty.textContent='-';
+    if (L.r_margin) L.r_margin.textContent='-';
+    if (L.r_pnl) L.r_pnl.textContent='-';
+    if (L.r_roe) L.r_roe.textContent='-';
     return;
   }
-  const liq = (liqPro.side==='long') ? entry*(1-1/lev) : entry*(1+1/lev);
-  if(elL.base) elL.base.value = fmt(liq);
-  if(elL.r_entry) elL.r_entry.textContent = fmt(entry) + ' USDT';
-  if(elL.r_liq) elL.r_liq.textContent = fmt(liq) + ' USDT';
-  const margin = +(elL.margin?.value||0);
-  if(margin>0){
-    const qty = (margin*lev)/entry;
-    if(elL.r_qty) elL.r_qty.textContent = fmt(qty);
-    if(elL.r_margin) elL.r_margin.textContent = fmt(margin) + ' USDT';
-  }else{
-    if(elL.r_qty) elL.r_qty.textContent = '-';
-    if(elL.r_margin) elL.r_margin.textContent = '-';
-  }
-  // PnL / ROE 계산 (현재가 입력 시)
-  const px = +(document.getElementById('liq-price')?.value || 0);
-  if (px > 0 && margin > 0) {
-    const qty2 = (margin*lev)/entry; // 증거금 입력 시 산출
-    const dir = (liqPro.side === 'long') ? 1 : -1;
-    const pnl = dir * (px - entry) * qty2;
-    const roe = (pnl / margin) * 100;
-    if (elL.r_pnl) elL.r_pnl.textContent = fmt(pnl) + ' USDT';
-    if (elL.r_roe) elL.r_roe.textContent = (Math.round(roe*100)/100).toLocaleString() + '%';
+  const liq = liqSide==='long' ? entry*(1-1/lev) : entry*(1+1/lev);
+  if (L.base) L.base.value = fmtNum(liq);
+  if (L.r_entry) L.r_entry.textContent = fmtNum(entry) + ' USDT';
+  if (L.r_liq) L.r_liq.textContent = fmtNum(liq) + ' USDT';
+
+  const m = +(L.margin?.value||0);
+  if (m>0){
+    const qty=(m*lev)/entry;
+    if (L.r_qty) L.r_qty.textContent=fmtNum(qty);
+    if (L.r_margin) L.r_margin.textContent=fmtNum(m)+' USDT';
   } else {
-    if (elL.r_pnl) elL.r_pnl.textContent = '-';
-    if (elL.r_roe) elL.r_roe.textContent = '-';
+    if (L.r_qty) L.r_qty.textContent='-';
+    if (L.r_margin) L.r_margin.textContent='-';
+  }
+
+  const px = +(L.price?.value||0);
+  if (px>0 && m>0){
+    const qty2=(m*lev)/entry;
+    const dir = (liqSide==='long') ? 1 : -1;
+    const pnl = dir * (px - entry) * qty2;
+    const roe = (pnl / m) * 100;
+    if (L.r_pnl) L.r_pnl.textContent = fmtNum(pnl)+' USDT';
+    if (L.r_roe) L.r_roe.textContent = (Math.round(roe*100)/100).toLocaleString()+'%';
+  } else {
+    if (L.r_pnl) L.r_pnl.textContent='-';
+    if (L.r_roe) L.r_roe.textContent='-';
   }
 }
-calcLiqPro();
+function clampLev(){ const v=Math.max(1, Math.min(125, +(L.lev?.value||1))); if(L.lev) L.lev.value=v; if(L.levRange) L.levRange.value=v; calcLiq(); }
+L.levRange?.addEventListener('input', ()=>{ if(L.lev) L.lev.value=L.levRange.value; calcLiq(); });
+['input','change'].forEach(ev=> L.lev?.addEventListener(ev, clampLev));
+document.getElementById('liq-lev-dec')?.addEventListener('click', ()=>{ if(!L.lev) return; L.lev.value = Math.max(1, (+L.lev.value||1)-1); clampLev(); });
+document.getElementById('liq-lev-inc')?.addEventListener('click', ()=>{ if(!L.lev) return; L.lev.value = Math.min(125, (+L.lev.value||1)+1); clampLev(); });
+L.longBtn?.addEventListener('click', ()=>{ liqSide='long'; L.longBtn.classList.add('active'); L.shortBtn?.classList.remove('active'); calcLiq(); });
+L.shortBtn?.addEventListener('click', ()=>{ liqSide='short'; L.shortBtn.classList.add('active'); L.longBtn?.classList.remove('active'); calcLiq(); });
+['liq-entry','liq-margin','liq-price'].forEach(id=> document.getElementById(id)?.addEventListener('input', calcLiq));
 
-/* ===== 거래소 렌더 ===== */
-function renderExchanges(){
-  const banners=$('#banners'), body=$('#cmp-body');
-  PROMOS.forEach(p=>{
+/* 거래소 배너/표 렌더 */
+let extraRendered=false;
+function renderExchanges(initialOnly=true){
+  const banners=document.getElementById('banners');
+  const body=document.getElementById('cmp-body');
+  banners.innerHTML=''; body.innerHTML='';
+  const list = initialOnly? PROMOS.filter(p=>p.name==='Bitget') : PROMOS;
+  list.forEach(p=>{
     const el=document.createElement('div');
     el.className=`banner ex-${p.name}`;
     el.style.background=`linear-gradient(90deg,${p.grad[0]},${p.grad[1]})`;
@@ -613,22 +545,41 @@ function renderExchanges(){
       </td>`;
     body.appendChild(tr);
   });
+}
+document.getElementById('show-all-ex')?.addEventListener('click',()=>{
+  if(!extraRendered){ renderExchanges(false); extraRendered=true; document.getElementById('show-all-ex').textContent='접기'; }
+  else{ renderExchanges(true); extraRendered=false; document.getElementById('show-all-ex').textContent='다른 거래소 보기'; }
+});
+document.addEventListener('click',(e)=>{
+  const b=e.target.closest('.banner-benefit, .table-benefit');
+  if(!b) return;
+  openBenefit(b.dataset.benefit);
+});
 
-  document.addEventListener('click',(e)=>{
-    const b=e.target.closest('.banner-benefit, .table-benefit');
-    if(!b) return;
-    openBenefit(b.dataset.benefit);
-  });
+/* 혜택 모달 */
+const backdrop=document.getElementById('benefitBackdrop'), benefitTitle=document.getElementById('benefitTitle');
+const benefitList=document.getElementById('benefitList'), benefitCTA=document.getElementById('benefitCTA');
+document.getElementById('benefitBtn')?.addEventListener('click',()=>openBenefit(state.exchange));
+document.getElementById('benefitCloseX')?.addEventListener('click',()=>backdrop.style.display='none');
+backdrop?.addEventListener('click',(e)=>{ if(e.target===backdrop) backdrop.style.display='none'; });
+function openBenefit(name){
+  const p=PROMOS.find(x=>x.name===name); if(!p) return;
+  benefitTitle.textContent=`${p.name} 혜택`;
+  const chips=document.getElementById('benefitChips'); chips.innerHTML='';
+  const chip=(t)=>{ const s=document.createElement('span'); s.className='chip'; s.textContent=t; return s; };
+  chips.appendChild(chip(`적용 전 ${p.before.maker}% / ${p.before.taker}%`));
+  chips.appendChild(chip(`적용 후 ${p.after.maker}% / ${p.after.taker}%`));
+  if(p.payback) chips.appendChild(chip(p.payback));
+  benefitList.innerHTML='';
+  p.benefits.forEach(b=>{ const li=document.createElement('li'); li.textContent=b; benefitList.appendChild(li); });
+  benefitCTA.href=p.link;
+  benefitCTA.style.background=`linear-gradient(90deg,${p.grad[0]},${p.grad[1]})`;
+  benefitCTA.textContent='🎁 수수료 혜택 받고 가입하기';
+  backdrop.style.display='flex';
 }
 
-/* ===== 부트 ===== */
-(function boot(){
-  renderExchanges();
-  refreshRef();
-  applyExchangeTheme(state.exchange);
-  updateFee();
-  calcPNL();
-})();
+/* 초기화 */
+(function boot(){ renderExchanges(true); refreshRef(); applyExchangeTheme(state.exchange); updateFee(); calcPNL(); clampLev(); calcLiq(); })();
 </script>
 </body>
 </html>
