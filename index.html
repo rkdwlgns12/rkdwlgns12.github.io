@@ -1,35 +1,14 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<!-- Favicon & Social Preview (Embedded Base64) -->
-<link rel="shortcut icon" type="image/png" href="data:image/png;base64,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">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="암호화폐 올인원 계산기">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="암호화폐 올인원 계산기">
-<meta name="twitter:description" content="수수료 직접 입력 + 참고 수수료율 확인, 레버리지 PNL, 평단가. 모바일 완전 지원.">
-
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>암호화폐 올인원 계산기 | Bitget·Bybit·OKX·MEXC·Binance·BingX</title>
+<meta name="description" content="수수료 직접 입력 + 참고 수수료율 확인, 레버리지 PNL, 평단가, 청산가. 모바일 완전 지원.">
 
-<meta property="og:title" content="코인 수수료 계산기">
-<meta property="og:description" content="거래소별 수수료/페이백 계산, 혜택 적용 CTA, 비교/FAQ 제공">
-
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://rkdwlgns12.github.io/">
-<meta property="og:site_name" content="암호화폐 올인원 계산기">
-<meta name="twitter:card" content="summary_large_image">
-
-
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-
-<meta name="description" content="수수료 직접 입력 + 참고 수수료율 확인, 레버리지 PNL, 평단가. 모바일 완전 지원.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+
 <style>
 :root{ --bg:#f7f7fb; --fg:#111827; --muted:#374151; --line:#e5e7eb; --accent:#2563eb; font-size:17px }
 @media (min-width:900px){ :root{ font-size:18px } }
@@ -57,7 +36,7 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
 .tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-top:16px }
 .tab-btn{ padding:12px 16px; border:1px solid var(--line); border-radius:14px; background:#fff; font-weight:800; cursor:pointer; min-height:44px }
 .tab-btn.active{ background:#111827; color:#fff }
-.tab-panel{ display:none !important } .tab-panel.active{ display:block !important }
+.tab-panel{ display:none } .tab-panel.active{ display:block }
 .seg{ display:flex; gap:8px } .seg button{ flex:1; padding:12px; border:1px solid var(--line); background:#fff; border-radius:14px; cursor:pointer; font-weight:800; min-height:44px } .seg button.active{ background:#111827; color:#fff; border-color:#111827 }
 
 /* 결과 박스 */
@@ -97,6 +76,15 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
 .chips{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin:6px 0 8px }
 .chip{ padding:6px 10px; border-radius:999px; border:1px solid #e2e8f0; background:#f8fafc; font-weight:900; font-size:.92rem }
 
+/* 레버리지 스테퍼 */
+.stepper{ display:flex; align-items:center; gap:8px }
+.stepper .step{
+  min-width:44px; min-height:44px;
+  border:1px solid var(--line); border-radius:12px;
+  background:#fff; font-weight:900; cursor:pointer;
+}
+.stepper input{ flex:1 }
+
 @media (max-width:480px){
   :root{ font-size:16.5px }
   .wrap{ padding:16px 14px 28px }
@@ -121,6 +109,7 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
     <button class="tab-btn active" data-tab="fee">수수료</button>
     <button class="tab-btn" data-tab="pnl">수익률/PNL</button>
     <button class="tab-btn" data-tab="avg">평단가</button>
+    <button class="tab-btn" data-tab="liq">청산가</button>
   </div>
 
   <!-- 수수료 계산기 -->
@@ -150,22 +139,18 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
       </div>
 
       <div class="col-3" style="margin-top:8px">
-        <!-- 좌측: 체결가치/횟수/페이백 -->
+        <!-- 좌: 체결가치/횟수/페이백 -->
         <div class="card" style="margin:0">
           <h3 class="section-title">체결가치/횟수</h3>
           <div class="row">
-            <div><label>체결가치 (USDT)</label><input id="notional" type="number" min="0" value="10000"/></div><div><label>증거금 (USDT, 선택)</label><input id="margin-fee" type="number" min="0" value="0"/></div>
+            <div><label>체결가치 (USDT)</label><input id="notional" type="number" min="0" value="10000"/></div>
             <div><label>거래 횟수 (합산)</label><input id="trades" type="number" min="1" value="1"/></div>
             <div><label>사용자 페이백 (%)</label><input id="payback" type="number" step="0.1" min="0" max="100" value="0"/></div>
           </div>
-<div class="row">
-  <div><label>레버리지 (배)</label><input id="lev-fee" type="number" min="1" max="200" step="1" value="10"/></div>
-  <div style="flex:2; display:flex; align-items:flex-end"><div id="lev-hint" class="small" style="margin:0 0 4px 8px; white-space:nowrap; min-width:220px; text-align:right; font-variant-numeric: tabular-nums; display:block"></div></div>
-</div>
-          <div class="small" style="margin-top:4px">※ 페이백은 캐시백/환급형만 입력 (없으면 0).<br>※ 증거금 입력 시 선물(perp)에서는 <b>체결가치 = 증거금 × 레버리지</b>로 자동 계산됩니다.</div>
+          <div class="small" style="margin-top:4px">※ 페이백은 캐시백/환급형만 입력 (없으면 0).</div>
         </div>
 
-        <!-- 가운데: 사용 수수료율 직접 입력 -->
+        <!-- 중: 수수료율 직접 입력 -->
         <div class="card" style="margin:0">
           <h3 class="section-title">수수료율 직접 입력</h3>
           <div class="row">
@@ -175,7 +160,7 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
           <div class="small" style="margin-top:4px">※ 계산엔 위 두 값이 그대로 사용됩니다. (주문 유형에 따라 자동 선택)</div>
         </div>
 
-        <!-- 우측: 참고 수수료율 -->
+        <!-- 우: 참고 수수료율 -->
         <div class="card" style="margin:0">
           <h3 class="section-title">참고 수수료율</h3>
           <div class="ref-box">
@@ -193,7 +178,7 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
             </div>
             <div class="actions-center">
               <button id="applyRef" class="btn" type="button">참고값 적용</button>
-              <a id="refLink" class="btn" href="#" target="_blank" rel="noopener">코인마켓캡 열기</a>
+              <a id="refLink" class="btn" href="https://coinmarketcap.com/ko/rankings/exchanges/derivatives/" target="_blank" rel="noopener">코인마켓캡 열기</a>
             </div>
             <div class="small">※ 참고치이며, 실제 수수료는 등급/프로모션/보유코인 등에 따라 달라질 수 있어요.</div>
           </div>
@@ -226,14 +211,14 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
     <div class="card">
       <h3 class="section-title">수익률 / PNL (현물·선물)</h3>
       <div class="row">
-        <div><label>모드</label><div class="seg"><button id="pnl-mode-qty" type="button">수량 직접</button><button id="pnl-mode-margin" type="button" class="active">증거금×레버리지</button></div></div>
+        <div><label>모드</label><div class="seg"><button id="pnl-mode-qty" type="button" class="active">수량 직접</button><button id="pnl-mode-margin" type="button">증거금×레버리지</button></div></div>
       </div>
-      <div class="row" id="pnl-row-qty" class="hidden" style="margin-top:8px">
+      <div class="row" id="pnl-row-qty" style="margin-top:8px">
         <div><label>매수가</label><input id="pnl-entry" type="number" min="0" value="100"/></div>
         <div><label>매도가</label><input id="pnl-exit" type="number" min="0" value="110"/></div>
         <div><label>수량</label><input id="pnl-qty" type="number" min="0" value="1"/></div>
       </div>
-      <div class="row" id="pnl-row-margin" style="margin-top:8px">
+      <div class="row hidden" id="pnl-row-margin" style="margin-top:8px">
         <div><label>매수가</label><input id="pnl-entry2" type="number" min="0" value="100"/></div>
         <div><label>매도가</label><input id="pnl-exit2" type="number" min="0" value="110"/></div>
         <div><label>증거금 (USDT)</label><input id="pnl-margin" type="number" min="0" value="500"/></div>
@@ -274,6 +259,46 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
         <div class="kv"><div class="k">평단가</div><div class="v" id="avg-price">-</div></div>
         <div class="kv"><div class="k">총 수량</div><div class="v" id="avg-qty">-</div></div>
         <div class="kv"><div class="k">총 매입금액</div><div class="v" id="avg-sum">-</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 청산가 (확장) -->
+  <section id="panel-liq" class="tab-panel" role="tabpanel">
+    <div class="row" style="gap:16px">
+      <div class="card" style="flex:1 1 560px">
+        <div class="seg" style="max-width:360px; margin-bottom:12px">
+          <button id="liq-long" type="button" class="active">롱 / Long</button>
+          <button id="liq-short" type="button">숏 / Short</button>
+        </div>
+        <div style="margin:8px 0 6px; font-weight:800">레버리지: <span id="liq-levx">10</span>X</div>
+        <input id="liq-lev-range" type="range" min="1" max="125" step="1" value="10" style="width:100%">
+        <div class="row" style="margin-top:12px">
+          <div><label>진입 가격</label><input id="liq-entry" type="number" min="0" value="100"/></div>
+          <div><label>레버리지 (배)</label><div class="stepper"><button id="liq-lev-dec" type="button" class="step">−</button><input id="liq-lev" type="number" min="1" max="200" step="1" value="10"/><button id="liq-lev-inc" type="button" class="step">+</button></div></div>
+        </div>
+        <!-- 현재가 입력 (손익/ROE 계산용) -->
+        <div class="row" style="margin-top:10px">
+  <div><label>현재/종가</label><input id="liq-price" type="number" min="0" value="110"/></div>
+  <div><label>증거금 (USDT, 선택)</label><input id="liq-margin" type="number" min="0" placeholder="선택 입력"/></div>
+</div>
+<div class="row" style="margin-top:10px">
+  <div><label>청산 가격 (자동)</label><input id="liq-base" type="text" value="-" readonly/></div>
+  <div></div>
+</div>
+      </div>
+      <div class="card" style="flex:1 1 420px">
+        <h3 class="section-title" style="margin-bottom:6px">결과</h3>
+        <div class="result-box">
+          <div class="kv"><div class="k">레버리지</div><div class="v"><span id="r-levx">10</span>X</div></div>
+          <div class="kv"><div class="k">진입 가격</div><div class="v" id="r-entry">-</div></div>
+          <div class="kv"><div class="k">청산 가격</div><div class="v" id="r-liq">-</div></div>
+          <div class="kv"><div class="k">수량</div><div class="v" id="r-qty">-</div></div>
+          <div class="kv"><div class="k">초기 마진</div><div class="v" id="r-margin">-</div></div>
+          <div class="kv"><div class="k">손익</div><div class="v" id="r-pnl">-</div></div>
+          <div class="kv"><div class="k">자기자본 이익률</div><div class="v" id="r-roe">-</div></div>
+        </div>
+        <div class="small" style="margin-top:8px">※ 간단 근사식(수수료/펀딩 제외). 롱: <code>E×(1−1/L)</code>, 숏: <code>E×(1+1/L)</code><br>증거금 입력 시 수량 = <code>증거금×레버리지 ÷ 진입가</code>로 표시합니다.</div>
       </div>
     </div>
   </section>
@@ -319,7 +344,7 @@ const REF = {
 const PROMOS = [
   { name:'Bitget',  logo:'https://logo.clearbit.com/bitget.com',  grad:['#22d3ee','#2563eb'], color:'#0ea5e9',
     before:{maker:0.02,taker:0.06}, after:{maker:0.016,taker:0.032},
-    payback:'20%', benefits:['수수료 혜택','페이백 20%'], link:'https://partner.bitget.com/bg/Jihoon7' },
+    payback:'수수료 할인 + 페이백 20%', benefits:['수수료 할인 + 페이백 20%','시장가 실질 0.04% 가능'], link:'https://partner.bitget.com/bg/Jihoon7' },
   { name:'Bybit',   logo:'https://logo.clearbit.com/bybit.com',  grad:['#f59e0b','#d97706'], color:'#d97706',
     before:{maker:0.02,taker:0.055}, after:{maker:0.016,taker:0.049},
     payback:'20%', benefits:['페이백 20%'], link:'https://partner.bybit.com/b/JIHOON' },
@@ -345,22 +370,22 @@ const animateNumber=(el,t,fmt=(x)=>x)=>{ if(!el) return; el.textContent=fmt(t); 
 const toggle=(on,off)=>{ on?.classList.add('active'); off?.classList.remove('active'); };
 
 /* ===== 탭 ===== */
-$$('.tab-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    $$('.tab-btn').forEach(b=>b.classList.remove('active'));
+(function setupTabs(){
+  const btns=$$('.tab-btn');
+  const panels=$$('.tab-panel');
+  btns.forEach(btn=>btn.addEventListener('click',()=>{
+    btns.forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    $$('.tab-panel').forEach(p=>p.classList.remove('active'));
-    $('#panel-'+btn.dataset.tab).classList.add('active');
-  });
-});
+    panels.forEach(p=>p.classList.remove('active'));
+    $('#panel-'+btn.dataset.tab)?.classList.add('active');
+  }));
+})();
 
 /* ===== 상태/요소 ===== */
 let state={exchange:'Bitget',market:'perp',order:'taker'};
 const elExchange=$('#exchange'), elSpot=$('#btn-spot'), elPerp=$('#btn-perp');
 const elMaker=$('#btn-maker'), elTaker=$('#btn-taker');
 const elNotional=$('#notional'), elTrades=$('#trades'), elPayback=$('#payback');
-const elMarginFee=$('#margin-fee');
-const elLevFee=$('#lev-fee'); const elLevHint=$('#lev-hint');
 const elRateMaker=$('#rate-maker'), elRateTaker=$('#rate-taker');
 const vRate=$('#v-rate'), vFee1=$('#v-fee1'), vFeeN=$('#v-feeN'), vPB=$('#v-payback'), vNet=$('#v-net'), vEff=$('#v-eff');
 const elCTA=$('#cta');
@@ -370,15 +395,12 @@ const refSpotM=$('#ref-spot-maker'), refSpotT=$('#ref-spot-taker');
 const refPerpM=$('#ref-perp-maker'), refPerpT=$('#ref-perp-taker');
 const refLink=$('#refLink'), btnApplyRef=$('#applyRef');
 
-function buildCmcLink(name){
-  return "https://coinmarketcap.com/ko/rankings/exchanges/derivatives/";
-}
 function refreshRef(){
   const ex=state.exchange;
   const s=REF[ex]?.spot||{maker:0,taker:0}, p=REF[ex]?.perp||{maker:0,taker:0};
   refSpotM.textContent=s.maker.toFixed(3)+'%'; refSpotT.textContent=s.taker.toFixed(3)+'%';
   refPerpM.textContent=p.maker.toFixed(3)+'%'; refPerpT.textContent=p.taker.toFixed(3)+'%';
-  refLink.href=buildCmcLink(ex);
+  refLink.href="https://coinmarketcap.com/ko/rankings/exchanges/derivatives/";
 }
 btnApplyRef.addEventListener('click',()=>{
   const ex=state.exchange, mk=state.market;
@@ -413,7 +435,7 @@ function openBenefit(name){
   const chip = (text)=>{ const s=document.createElement('span'); s.className='chip'; s.textContent=text; return s; };
   chips.appendChild(chip(`적용 전 ${p.before.maker}% / ${p.before.taker}%`));
   chips.appendChild(chip(`적용 후 ${p.after.maker}% / ${p.after.taker}%`));
-  if(p.payback) chips.appendChild(chip(p.payback==='—'?'할인/등급':'페이백 '+p.payback));
+  if(p.payback) chips.appendChild(chip(p.payback));
   benefitList.innerHTML='';
   p.benefits.forEach(b=>{ const li=document.createElement('li'); li.textContent=b; benefitList.appendChild(li); });
   benefitCTA.href=p.link;
@@ -428,25 +450,7 @@ function currentRate(){
   const taker=(+elRateTaker.value||0)/100;
   return state.order==='maker' ? maker : taker;
 }
-
-function recomputeNotionalFromMargin(){
-  const lev = Math.max(1, +(document.querySelector('#lev-fee')?.value||0));
-  const m = +(document.querySelector('#margin-fee')?.value||0);
-  if(!elNotional) return;
-  const useAuto = m>0 && state.market==='perp';
-  if(useAuto){
-    const N = m*lev;
-    elNotional.value = String(N);
-    elNotional.setAttribute('readonly','readonly');
-    elNotional.style.background = '#f9fafb';
-  }else{
-    elNotional.removeAttribute('readonly');
-    elNotional.style.background = '#fff';
-  }
-}
-
 function updateFee(){
-  recomputeNotionalFromMargin();
   const rate=currentRate();
   const N=+elNotional.value||0;
   const t=Math.max(1,+elTrades.value||1);
@@ -459,24 +463,15 @@ function updateFee(){
   animateNumber(vPB, pb, x=>nf(x)+' USDT');
   animateNumber(vNet, net, x=>nf(x)+' USDT');
   animateNumber(vEff, eff, toPerc);
-  // 레버리지 힌트 (선물일 때만)
-  if(elLevHint){
-    if(state.market==='perp'){
-      const lev=Math.max(1, +(elLevFee?.value||0));
-      const margin = lev>0 ? N/lev : 0;
-      elLevHint.textContent = `추정 증거금: ${nf(margin)} USDT (체결가치 ÷ 레버리지)`;
-      elLevHint.style.display='block';
-    }else{ elLevHint.textContent=''; elLevHint.style.display='none'; }
-  }
 }
 
 /* 이벤트 */
 elExchange.addEventListener('change',()=>{ state.exchange=elExchange.value; refreshRef(); applyExchangeTheme(state.exchange); });
-elSpot.addEventListener('click',()=>{ state.market='spot'; toggle(elSpot,elPerp); refreshRef(); updateFee(); });
-elPerp.addEventListener('click',()=>{ state.market='perp'; toggle(elPerp,elSpot); refreshRef(); updateFee(); });
+elSpot.addEventListener('click',()=>{ state.market='spot'; toggle(elSpot,elPerp); refreshRef(); });
+elPerp.addEventListener('click',()=>{ state.market='perp'; toggle(elPerp,elSpot); refreshRef(); });
 elMaker.addEventListener('click',()=>{ state.order='maker'; toggle(elMaker,elTaker); updateFee(); });
 elTaker.addEventListener('click',()=>{ state.order='taker'; toggle(elTaker,elMaker); updateFee(); });
-[elNotional,elTrades,elPayback,elRateMaker,elRateTaker,elLevFee,elMarginFee].forEach(el=>el?.addEventListener('input',updateFee));
+[elNotional,elTrades,elPayback,elRateMaker,elRateTaker].forEach(el=>el.addEventListener('input',updateFee));
 
 /* ===== PNL ===== */
 const pnlQty=$('#pnl-row-qty'), pnlMargin=$('#pnl-row-margin');
@@ -493,16 +488,93 @@ btnMargin.addEventListener('click',()=>setPnlMode('margin'));
 function nf2(x){return (Math.round(x*1e8)/1e8).toLocaleString();}
 function calcPNL(){
   if(pnlMargin.classList.contains('hidden')){
-    const entry=+($('#pnl-entry').value||0), exit=+($('#pnl-exit').value||0), qty=+($('#pnl-qty').value||0);
+    const entry=+( $('#pnl-entry').value||0 ), exit=+( $('#pnl-exit').value||0 ), qty=+( $('#pnl-qty').value||0 );
     const pnl=(exit-entry)*qty; const notional=entry*qty; const roe=notional>0?pnl/notional:0;
     pnl_el.pnl.textContent=nf2(pnl)+' USDT'; pnl_el.roe.textContent=toPerc(roe); pnl_el.notional.textContent=nf2(notional)+' USDT'; return;
   }
-  const entry=+($('#pnl-entry2').value||0), exit=+($('#pnl-exit2').value||0), m=+($('#pnl-margin').value||0), lv=Math.max(1,+($('#pnl-lev').value)||1);
+  const entry=+( $('#pnl-entry2').value||0 ), exit=+( $('#pnl-exit2').value||0 ), m=+( $('#pnl-margin').value||0 ), lv=Math.max(1,+( $('#pnl-lev').value||1 ));
   const notional=entry>0?m*lv:0; const qty=entry>0?(m*lv)/entry:0; const pnl=(exit-entry)*qty; const roe=m>0?pnl/m:0;
   pnl_el.pnl.textContent=nf2(pnl)+' USDT'; pnl_el.roe.textContent=toPerc(roe); pnl_el.notional.textContent=nf2(notional)+' USDT';
 }
 
-/* ===== 배너/비교표 ===== */
+/* ===== 청산가 확장 로직 (MMR=0 간단식 + 손익/ROE) ===== */
+let liqPro = { side: 'long' };
+const elL = {
+  longBtn: document.getElementById('liq-long'),
+  shortBtn: document.getElementById('liq-short'),
+  entry: document.getElementById('liq-entry'),
+  lev: document.getElementById('liq-lev'),
+  levRange: document.getElementById('liq-lev-range'),
+  levx: document.getElementById('liq-levx'),
+  base: document.getElementById('liq-base'),
+  price: document.getElementById('liq-price'),
+  margin: document.getElementById('liq-margin'),
+  r_levx: document.getElementById('r-levx'),
+  r_entry: document.getElementById('r-entry'),
+  r_liq: document.getElementById('r-liq'),
+  r_qty: document.getElementById('r-qty'),
+  r_margin: document.getElementById('r-margin'),
+  r_pnl: document.getElementById('r-pnl'),
+  r_roe: document.getElementById('r-roe'),
+};
+function fmt(x){ return (Math.round((+x||0)*1e8)/1e8).toLocaleString(); }
+function syncLevFromRange(){ if(!elL.levRange) return; elL.lev.value = elL.levRange.value; calcLiqPro(); }
+function syncRangeFromLev(){ if(!elL.lev) return; const v = Math.max(1, Math.min(125, +elL.lev.value||1)); elL.lev.value = v; if(elL.levRange) elL.levRange.value = v; calcLiqPro(); }
+elL.levRange?.addEventListener('input', syncLevFromRange);
+['input','change'].forEach(ev=> elL.lev?.addEventListener(ev, syncRangeFromLev));
+document.getElementById('liq-lev-dec')?.addEventListener('click', ()=>{ elL.lev.value = Math.max(1, (+elL.lev.value||1) - 1); syncRangeFromLev(); });
+document.getElementById('liq-lev-inc')?.addEventListener('click', ()=>{ elL.lev.value = Math.min(200, (+elL.lev.value||1) + 1); syncRangeFromLev(); });
+if(elL.longBtn && elL.shortBtn){
+  elL.longBtn.addEventListener('click', ()=>{ liqPro.side='long'; elL.longBtn.classList.add('active'); elL.shortBtn.classList.remove('active'); calcLiqPro(); });
+  elL.shortBtn.addEventListener('click', ()=>{ liqPro.side='short'; elL.shortBtn.classList.add('active'); elL.longBtn.classList.remove('active'); calcLiqPro(); });
+}
+['liq-entry','liq-margin','liq-price'].forEach(id=> document.getElementById(id)?.addEventListener('input', calcLiqPro));
+function calcLiqPro(){
+  if(!elL.entry || !elL.lev) return;
+  const entry = +(elL.entry.value||0);
+  const lev = Math.max(1, +(elL.lev.value||1));
+  if(elL.levx) elL.levx.textContent = lev;
+  if(elL.r_levx) elL.r_levx.textContent = lev;
+  if(entry<=0){
+    if(elL.base) elL.base.value='-';
+    if(elL.r_entry) elL.r_entry.textContent='-';
+    if(elL.r_liq) elL.r_liq.textContent='-';
+    if(elL.r_qty) elL.r_qty.textContent='-';
+    if(elL.r_margin) elL.r_margin.textContent='-';
+    if(elL.r_pnl) elL.r_pnl.textContent='-';
+    if(elL.r_roe) elL.r_roe.textContent='-';
+    return;
+  }
+  const liq = (liqPro.side==='long') ? entry*(1-1/lev) : entry*(1+1/lev);
+  if(elL.base) elL.base.value = fmt(liq);
+  if(elL.r_entry) elL.r_entry.textContent = fmt(entry) + ' USDT';
+  if(elL.r_liq) elL.r_liq.textContent = fmt(liq) + ' USDT';
+  const margin = +(elL.margin?.value||0);
+  if(margin>0){
+    const qty = (margin*lev)/entry;
+    if(elL.r_qty) elL.r_qty.textContent = fmt(qty);
+    if(elL.r_margin) elL.r_margin.textContent = fmt(margin) + ' USDT';
+  }else{
+    if(elL.r_qty) elL.r_qty.textContent = '-';
+    if(elL.r_margin) elL.r_margin.textContent = '-';
+  }
+  // PnL / ROE 계산 (현재가 입력 시)
+  const px = +(document.getElementById('liq-price')?.value || 0);
+  if (px > 0 && margin > 0) {
+    const qty2 = (margin*lev)/entry; // 증거금 입력 시 산출
+    const dir = (liqPro.side === 'long') ? 1 : -1;
+    const pnl = dir * (px - entry) * qty2;
+    const roe = (pnl / margin) * 100;
+    if (elL.r_pnl) elL.r_pnl.textContent = fmt(pnl) + ' USDT';
+    if (elL.r_roe) elL.r_roe.textContent = (Math.round(roe*100)/100).toLocaleString() + '%';
+  } else {
+    if (elL.r_pnl) elL.r_pnl.textContent = '-';
+    if (elL.r_roe) elL.r_roe.textContent = '-';
+  }
+}
+calcLiqPro();
+
+/* ===== 거래소 렌더 ===== */
 function renderExchanges(){
   const banners=$('#banners'), body=$('#cmp-body');
   PROMOS.forEach(p=>{
@@ -517,7 +589,7 @@ function renderExchanges(){
           <p>
             <span class="badge">적용 전: ${p.before.maker}%/${p.before.taker}%</span>
             <span class="badge">적용 후: ${p.after.maker}%/${p.after.taker}%</span>
-            <span class="badge">${p.payback==='—'?'할인/등급':'페이백 '+p.payback}</span>
+            <span class="badge">${p.payback}</span>
           </p>
         </div>
       </div>
