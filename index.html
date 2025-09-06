@@ -296,7 +296,7 @@ input,select{ width:100%; padding:12px 14px; border:1px solid var(--line); borde
         <input id="liq-lev-range" type="range" min="1" max="125" step="1" value="10" style="width:100%">
         <div class="row" style="margin-top:12px">
           <div><label>진입 가격</label><input id="liq-entry" type="number" min="0" value="100"/></div>
-          <div><label>레버리지 (배)</label><input id="liq-lev" type="number" min="1" max="125" step="1" value="10"/></div>
+          <div><label>레버리지 (배)</label><input id="liq-lev" type="text" inputmode="numeric" pattern="[0-9]*" value="10"/></div>
         </div>
         <div class="row" style="margin-top:10px">
           <div><label>현재/종가</label><input id="liq-price" type="number" min="0" value="110"/></div>
@@ -495,7 +495,7 @@ function calcLiq(){
 }
 function clampLev(){ const v=Math.max(1, Math.min(125, +(L.lev?.value||1))); if(L.lev) L.lev.value=v; if(L.levRange) L.levRange.value=v; calcLiq(); }
 L.levRange?.addEventListener('input', ()=>{ if(L.lev) L.lev.value=L.levRange.value; calcLiq(); });
-['input','change'].forEach(ev=> L.lev?.addEventListener(ev, clampLev));
+L.lev?.addEventListener('input', ()=>{   const val = L.lev.value;   if(val === '' || !/^[0-9]+$/.test(val)) return;   if (L.levRange) L.levRange.value = val;   calcLiq(); }); L.lev?.addEventListener('change', ()=>{ clampLev(); });
 document.getElementById('liq-lev-dec')?.addEventListener('click', ()=>{ if(!L.lev) return; L.lev.value = Math.max(1, (+L.lev.value||1)-1); clampLev(); });
 document.getElementById('liq-lev-inc')?.addEventListener('click', ()=>{ if(!L.lev) return; L.lev.value = Math.min(125, (+L.lev.value||1)+1); clampLev(); });
 L.longBtn?.addEventListener('click', ()=>{ liqSide='long'; L.longBtn.classList.add('active'); L.shortBtn?.classList.remove('active'); calcLiq(); });
@@ -578,8 +578,32 @@ function openBenefit(name){
   backdrop.style.display='flex';
 }
 
+
+/* ===== 평단가 계산 ===== */
+function calcAvg(){
+  const aP = +(document.getElementById('avg-a-price')?.value || 0);
+  const aQ = +(document.getElementById('avg-a-qty')?.value || 0);
+  const bP = +(document.getElementById('avg-b-price')?.value || 0);
+  const bQ = +(document.getElementById('avg-b-qty')?.value || 0);
+  const cP = +(document.getElementById('avg-c-price')?.value || 0);
+  const cQ = +(document.getElementById('avg-c-qty')?.value || 0);
+  const sum = aP*aQ + bP*bQ + (cP>0 && cQ>0 ? cP*cQ : 0);
+  const qty = aQ + bQ + (cP>0 && cQ>0 ? cQ : 0);
+  const avg = qty>0 ? sum/qty : 0;
+  const vPrice = document.getElementById('avg-price');
+  const vQty   = document.getElementById('avg-qty');
+  const vSum   = document.getElementById('avg-sum');
+  if(vPrice) vPrice.textContent = (Math.round(avg*1e8)/1e8).toLocaleString();
+  if(vQty)   vQty.textContent   = (Math.round(qty*1e8)/1e8).toLocaleString();
+  if(vSum)   vSum.textContent   = (Math.round(sum*1e8)/1e8).toLocaleString() + ' USDT';
+}
+;['avg-a-price','avg-a-qty','avg-b-price','avg-b-qty','avg-c-price','avg-c-qty'].forEach(id=>{
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('input', calcAvg);
+});
+
 /* 초기화 */
-(function boot(){ renderExchanges(true); refreshRef(); applyExchangeTheme(state.exchange); updateFee(); calcPNL(); clampLev(); calcLiq(); })();
+(function boot(){ renderExchanges(true); refreshRef(); applyExchangeTheme(state.exchange); updateFee(); calcPNL(); clampLev(); calcLiq();  calcAvg();})();
 </script>
 </body>
 </html>
