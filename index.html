@@ -623,5 +623,21 @@ function calcAvg(){
 /* 초기화 */
 (function boot(){ renderExchanges(true); refreshRef(); applyExchangeTheme(state.exchange); updateFee(); calcPNL(); clampLev(); calcLiq();  calcAvg();})();
 </script>
+
+<script>
+  // GA 클릭 이벤트 추적
+  document.addEventListener("DOMContentLoaded", function() {
+    const ctaBtn = document.getElementById("cta");
+    if (ctaBtn) {
+      ctaBtn.addEventListener("click", function() {
+        gtag('event', 'cta_click', {
+          'event_category': 'engagement',
+          'event_label': '수수료 혜택 가입 버튼'
+        });
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
